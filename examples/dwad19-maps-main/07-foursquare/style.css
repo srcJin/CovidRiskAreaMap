@@ -1,0 +1,48 @@
+#map {
+    height: 100vh;
+}
+
+#map-container {
+    /* usee position:relative so that we can absolutely
+      position the search container by coordinates inside div#map-container */
+    position: relative;
+}
+
+#search-results {
+    overflow-y: scroll;
+    max-height: 400px;
+}
+
+.search-result-entry {
+    padding: 5px;
+    margin-top:5px;
+    margin-bottom:5px;
+}
+
+#search-container {
+    position: absolute;
+    top: 25px;
+    left:60px;
+    z-index: 314159;
+    background-color: rgba(255,255,255, 0.5);
+    padding: 20px;
+    display: none;  /* don't show, hide */
+}
+
+#toggle-search-btn {
+    position: absolute;
+    left: 50px;
+    top: 10px;
+    z-index: 314159;
+}
+
+@media (min-width: 767px) {
+    /*  for devices which width is 767 px and larger */
+    #search-container {
+        display: block;
+    }
+
+    #toggle-search-btn {
+        display:none;
+    }
+}

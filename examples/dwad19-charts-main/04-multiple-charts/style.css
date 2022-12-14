@@ -1,0 +1,18 @@
+#graph-container {
+    display: flex;
+    flex-direction: column;
+}
+
+@media (min-width:767px) {
+
+    #graph-container {
+        flex-direction: row;
+    }
+
+    .chart {
+        flex-basis: 100%;
+        flex: 1;
+    }
+    
+}
+

@@ -1,0 +1,545 @@
+body {
+  font-size: 16px;
+  font-family: "Roboto", sans-serif;
+}
+
+#aboveMozImage {
+  height: 1px;
+}
+
+/* Start of Navbar */
+.navbar {
+  background: #fde3e3;
+}
+
+.moz-brand {
+  margin: 0 15px;
+  width: 40px;
+  height: 40px;
+}
+
+.navbar-nav a {
+  font-family: "Rubik", sans-serif;
+  color: #333333;
+  font-weight: bolder;
+  font-size: 1.1rem;
+  text-align: center;
+  margin-left: 25px;
+}
+
+.navbar-nav a:hover {
+  color: #af0000;
+}
+
+.hamburger {
+  position: relative;
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  right: 25px;
+}
+
+.hamburger span {
+  margin: 0 auto;
+  position: relative;
+  top: 8px;
+  right: 13px;
+}
+
+.hamburger span:before,
+.hamburger span:after {
+  position: absolute;
+  content: "";
+}
+
+.hamburger span,
+.hamburger span:before,
+.hamburger span:after {
+  width: 30px;
+  height: 3px;
+  background-color: #000;
+  display: block;
+}
+
+.hamburger span:before {
+  margin-top: -12px;
+}
+
+.hamburger span:after {
+  margin-top: 12px;
+}
+
+.hamburger-animation {
+  -webkit-transform: rotate(0deg);
+  transform: rotate(0deg);
+  -webkit-transition: 0.2s ease;
+  transition: 0.2s ease;
+}
+
+.hamburger-animation:hover {
+  -webkit-transform: rotate(90deg);
+  transform: rotate(90deg);
+}
+/* End of Navbar */
+
+/* Jumbletron image */
+.mozzie-wipeout img {
+  width: 90%;
+  display: block;
+  margin: 100px auto;
+  margin-bottom: 0;
+}
+
+#aboveAboutDengue {
+  height: 70px;
+}
+
+/* Start of Dengue box */
+.about-dengue {
+  border: 2px dotted #af0000;
+  padding: 15px 10px;
+  margin-bottom: 20px;
+}
+
+.about-dengue h4 {
+  text-align: center;
+  font-family: "Rubik", sans-serif;
+  font-weight: bold;
+}
+
+.about-dengue ul {
+  line-height: 30px;
+  padding-left: 20px;
+}
+
+.about-dengue a {
+  color: #af0000;
+  font-style: italic;
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+
+.about-dengue a:hover {
+  color: #900000;
+  text-decoration: none;
+  font-weight: bold;
+}
+/* End of Dengue box */
+
+/* Start of Dengue cases box */
+.dengue-cases {
+  border: 2px dotted #af0000;
+  padding: 15px 10px;
+  margin-bottom: 20px;
+}
+.dengue-cases h4 {
+  font-family: "Rubik", sans-serif;
+  font-weight: bold;
+  text-align: center;
+}
+
+.mosq-div {
+  text-align: center;
+}
+
+.mosq-icon {
+  width: 120px;
+  height: 100px;
+}
+
+.cases-div {
+  text-align: center;
+}
+
+.reported-cases {
+  font-size: 2.2rem;
+  font-weight: bold;
+  color: #af0000;
+}
+/* End of Dengue cases box */
+
+/* Start of Dengue symptoms box */
+.dengue-symptoms {
+  border: 2px dotted #af0000;
+  padding: 15px 10px;
+  margin-bottom: 20px;
+}
+
+.dengue-symptoms h4 {
+  text-align: center;
+  font-family: "Rubik", sans-serif;
+  font-weight: bold;
+}
+
+.dengue-symptoms ul {
+  line-height: 30px;
+  padding-left: 20px;
+}
+/* End of Dengue symptoms box */
+
+/* Start of Dengue treatment box */
+.dengue-treatment {
+  border: 2px dotted #af0000;
+  padding: 15px 10px;
+  margin-bottom: 20px;
+}
+
+.dengue-treatment h4 {
+  text-align: center;
+  font-family: "Rubik", sans-serif;
+  font-weight: bold;
+}
+
+.dengue-treatment a {
+  color: #af0000;
+  font-style: italic;
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+
+.dengue-treatment a:hover {
+  color: #900000;
+  text-decoration: none;
+  font-weight: bold;
+}
+/* End of Dengue treatment box */
+
+/* Start of More Information box */
+.more-information {
+  border: 2px dotted #af0000;
+  padding: 15px 10px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.more-information h4 {
+  text-align: center;
+  font-family: "Rubik", sans-serif;
+  font-weight: bold;
+}
+
+.more-information a {
+  color: #af0000;
+  font-style: italic;
+  font-weight: bold;
+}
+
+.more-information a:hover {
+  color: #900000;
+  text-decoration: none;
+  font-weight: bold;
+}
+/* End of More Information box */
+
+#aboveZones {
+  height: 40px;
+}
+
+/* Random mosquito 1 */
+.small-mosquito1 {
+  width: 40px;
+  height: 30px;
+  position: relative;
+  top: 4vw;
+  left: 60vw;
+}
+
+.small-mosquito1:hover {
+  animation: shake 0.5s cubic-bezier(0.36, 0.3, 0.24, 0.47) both;
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+/* Start of Select zones section */
+.select-zone h3 {
+  font-family: "Rubik", sans-serif;
+  font-weight: bold;
+  font-size: 1.5rem;
+  margin-top: 25px;
+  margin-bottom: 0;
+}
+
+.select-zone span {
+  font-size: 1.1rem;
+}
+
+.select-zone small a {
+  color: #af0000;
+}
+
+.select-zone small a:hover {
+  color: #900000;
+  text-decoration: none;
+}
+
+.zonebtns {
+  margin-top: 10px;
+}
+
+.zonebtns .north-east {
+  margin: 5px 0;
+  font-weight: bold;
+  box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.3);
+  color: #af0000;
+  background: #fcf6f6;
+  border: 1px solid #900000;
+}
+
+.zonebtns .north-east:hover {
+  background: #fae5e5;
+  color: #900000;
+}
+
+.zonebtns .central {
+  margin: 5px 0;
+  font-weight: bold;
+  box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.3);
+  color: #af0000;
+  background: #fcf6f6;
+  border: 1px solid #900000;
+}
+
+.zonebtns .central:hover {
+  background: #fae5e5;
+  color: #900000;
+}
+
+.zonebtns .south-east {
+  margin: 5px 0;
+  font-weight: bold;
+  box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.3);
+  color: #af0000;
+  background: #fcf6f6;
+  border: 1px solid #900000;
+}
+
+.zonebtns .south-east:hover {
+  background: #fae5e5;
+  color: #900000;
+}
+
+.zonebtns .south-west {
+  margin: 5px 0;
+  font-weight: bold;
+  box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.3);
+  color: #af0000;
+  background: #fcf6f6;
+  border: 1px solid #900000;
+}
+
+.zonebtns .south-west:hover {
+  background: #fae5e5;
+  color: #900000;
+}
+
+.zonebtns .singapore {
+  margin: 5px 0;
+  font-weight: bold;
+  box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.3);
+  color: #af0000;
+  background: #fcf6f6;
+  border: 1px solid #900000;
+}
+
+.zonebtns .singapore:hover {
+  background: #fae5e5;
+  color: #900000;
+}
+/* End of Select zones section */
+
+/* Goodle map */
+#map {
+  width: 100%;
+  height: 500px;
+  margin: 30px auto;
+}
+
+/* Random mosquito 2 */
+.small-mosquito2 {
+  width: 40px;
+  height: 30px;
+  position: relative;
+  top: 2vw;
+  left: 20vw;
+}
+
+.small-mosquito2:hover {
+  animation: shake 0.5s cubic-bezier(0.46, 0.2, 0.64, 0.2) both;
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+/* Styling for clusters' infowindows */
+#cluster-infobox {
+  line-height: 23px;
+}
+
+/* Styling for amenities' infowindows */
+.infoWindow-header {
+  font-family: "Rubik", sans-serif;
+  margin-bottom: -8px;
+  color: #af0000;
+  font-weight: bold;
+}
+
+.infoWindow-content {
+  background: #fcf6f6;
+  margin-bottom: 5px;
+  font-size: 0.9rem;
+}
+
+#aboveAmenities {
+  height: 60px;
+}
+
+/* Start of Amenities card */
+.amenitiesCard {
+  border: 2px dotted #af0000;
+  margin-bottom: 20px;
+}
+
+.amenitiesCard h4 {
+  font-family: "Rubik", sans-serif;
+  font-weight: bold;
+}
+
+.amenitiesCard i {
+  margin-right: 8px;
+  font-size: 1.3rem;
+  text-align: left;
+}
+
+.amenitiesCard a {
+  color: #af0000;
+  font-style: italic;
+  text-align: left;
+  line-height: 32px;
+  font-family: "Rubik", sans-serif;
+}
+
+.amenitiesCard a:hover {
+  color: #900000;
+}
+/* End of Amenities card */
+
+/* Start of Amenities' result table */
+.results-table {
+  margin-bottom: 50px;
+}
+
+thead .table-header {
+  background: #fcf1f1;
+}
+
+tr:nth-child(even) {
+  background: #fcf6f6;
+}
+/* End of Amenities' result table */
+
+/* Start of Footer */
+.footer-div {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.footer {
+  background: #fde3e3;
+  color: #333333;
+  font-family: "Rubik", sans-serif;
+  font-weight: bold;
+  font-size: 1.1rem;
+  text-align: center;
+}
+
+.footer-icons i {
+  color: #333333;
+  font-size: 1.7rem;
+  margin: 30px 5px 0 10px;
+}
+
+.footer-icons i:hover {
+  color: #af0000;
+}
+
+.footer p {
+  padding-top: 10px;
+  margin-bottom: 0;
+}
+
+.small-mosq {
+  width: 40px;
+}
+
+.small-mosq:hover {
+  animation: shake 1s cubic-bezier(0.36, 0.37, 0.89, 0.47) both;
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+@keyframes shake {
+  10%,
+  90% {
+    transform: translate3d(-1px, -2px, 0);
+  }
+
+  20%,
+  80% {
+    transform: translate3d(0, 3px, 0);
+  }
+
+  30%,
+  50%,
+  70% {
+    transform: translate3d(2px, 0, 0);
+  }
+
+  40%,
+  60% {
+    transform: translate3d(-1px, -4px, 0);
+  }
+}
+
+.footer small {
+  display: block;
+  margin-bottom: 10px;
+}
+/* End of Footer */
+
+@media (max-width: 767.98px) {
+  .navbar-nav a:first-child {
+    margin-top: 10px;
+  }
+  .navbar-nav a:last-child {
+    margin-bottom: 20px;
+  }
+  .mozzie-wipeout img {
+    width: 100%;
+  }
+}
+
+@media (min-width: 992px) {
+  .dengue-cases {
+    height: 296px;
+  }
+  .mosq-icon {
+    width: 140px;
+    height: 120px;
+    margin-top: 15px;
+  }
+  .dengue-symptoms {
+    height: 355px;
+  }
+
+  .table-sm {
+    margin: 0 auto;
+  }
+}
+
+@media (min-width: 1200px) {
+  .dengue-treatment {
+    height: 355px;
+  }
+}
