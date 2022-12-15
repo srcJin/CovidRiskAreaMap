@@ -47,6 +47,9 @@
       crossorigin=""
     ></script>
 
+    <!-- import charts js -->
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    
     <!-- import axios -->
     <script
       src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.1.3/axios.min.js"
@@ -72,16 +75,25 @@
     </div>
     <div w3-include-html="slider.html"></div>
     <div w3-include-html="charts.html"></div>
+
+    <div class="container-md">
+    <div style="height:80vh">
+      <div id="chart"></div>
+    </div>
+    </div>
+    <div w3-include-html="timeline.html"></div>
     <div w3-include-html="info.html"></div>
     <div w3-include-html="foot.html"></div>
 
 
     <script> includeHTML(); </script>
     
-     <!-- execute map script -->
+    <!-- execute map script -->
+    <script src="dataTransform.js"></script>
     <script src="map.js"></script>
+    <script src="slider.js"></script>
+    <script src="charts.js"></script>
     <script src="script.js"></script>
-
     <!--  end of content section -->
 
 
