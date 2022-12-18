@@ -1,0 +1,12 @@
+/* Bootstrap 5 CSS and icons included */
+/* vanillajs-datepicker 1.1.4 CSS included */
+main h2{
+  font-size: 16px;
+  margin: 15px 0;
+}
+
+/* Adapts a floating label for use with a left-handed input group icon */
+.form-floating > .bi-calendar-date + .datepicker_input + label {
+padding-left: 3.5rem;
+z-index: 3;
+}

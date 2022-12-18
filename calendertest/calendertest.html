@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+  <link rel="stylesheet" href="calendertest.css">
+
+</head>
+
+<body>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+    crossorigin="anonymous"></script>
+
+    <!-- start of date picker -->
+    <!-- ref: https://mymth.github.io/vanillajs-datepicker/#/ -->
+
+    <!-- Vanilla Datepicker JS -->
+    <script src="https://cdn.jsdelivr.net/npm/vanillajs-datepicker@1.1.4/dist/js/datepicker-full.js"></script>
+
+
+    <h2>Please select a date:<h2>
+    <div class="mx-auto" style="width: 300px">
+      <div class="input-group mt-4">
+        <i class="bi bi-calendar-date input-group-text"></i>
+        <input
+          type="text"
+          class="datepicker_input form-control"
+          placeholder="select a date..."
+          required
+          aria-label="Date input 3 (using aria-label)"
+        />
+      </div>
+    </div>
+    <!-- end of date picker -->
+
+
+  <script>
+    /* Bootstrap 5 JS included */
+    /* vanillajs-datepicker 1.1.4 JS included */
+
+    const getDatePickerTitle = (elem) => {
+      // From the label or the aria-label
+      const label = elem.nextElementSibling;
+      let titleText = "";
+      if (label && label.tagName === "LABEL") {
+        titleText = label.textContent;
+      } else {
+        titleText = elem.getAttribute("aria-label") || "";
+      }
+      return titleText;
+    };
+
+    const elems = document.querySelectorAll(".datepicker_input");
+    for (const elem of elems) {
+      const datepicker = new Datepicker(elem, {
+        format: "dd/mm/yyyy", // UK format
+        title: getDatePickerTitle(elem),
+      });
+    }
+    
+  </script>
+
+
+<!-- https://flatpickr.js.org/ -->
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
+
+<navigation></navigation>
+<div class = "container py-5">
+  <h1>
+    flatpickr
+  </h1>
+
+  <div class="row py-3">
+    <form>
+      <div class="input-group">
+        <input type="text" name="date" class="flacpickr js-flatpickr-dateTime" placeholder="select date/time">
+        <div class="input-group-append">
+          <button type="submit" class="btn btn-info"> submit </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+</body>
+
+</html>
