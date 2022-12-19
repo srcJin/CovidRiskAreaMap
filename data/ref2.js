@@ -9,6 +9,8 @@
 // as a JSON object.
 
 
+
+
 async function getJsonData(url) {
   const response = await fetch(url);
   return await response.json();
