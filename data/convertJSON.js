@@ -6,7 +6,6 @@ let folderName = "sample";
 // const axios = require('axios').default;
 // const fetch = require("node-fetch");
 
-
 // Geocoding API ref : https://lbs.amap.com/api/webservice/guide/api/georegeo
 // https://restapi.amap.com/v3/geocode/geo?address=北京市朝阳区阜通东大街6号&output=JSON&key=63445beea63ec64452a205ae10914e16
 
@@ -36,120 +35,153 @@ let folderName = "sample";
 const fs = require("fs");
 
 function readJSON(filename) {
-    let rawdata = fs.readFileSync(filename + ".json");
-    let content = JSON.parse(rawdata);
-    // console.log(content);
-    return content;
+  let rawdata = fs.readFileSync(filename + ".json");
+  let content = JSON.parse(rawdata);
+  console.log("readJSON", content);
+  return content;
 }
 
 function generateGeoJSON(filename, riskLevel) {
-    let rawdata = fs.readFileSync(filename + ".json");
-    let content = JSON.parse(rawdata);
-    // console.log("content", content);
-    // console.log("content.data.mcount", content.data.mcount);
+  let rawdata = fs.readFileSync(filename + ".json");
+  let content = JSON.parse(rawdata);
+  // console.log("content", content);
+  // console.log("content.data.mcount", content.data.mcount);
 
-    // Create a GeoJSON FeatureCollection with the feature
-    const geoJSONData = {
-        type: "FeatureCollection",
-        features: [],
-    };
+  // Create a GeoJSON FeatureCollection with the feature
+  let geoJSONData = {
+    type: "FeatureCollection",
+    features: [],
+  };
 
-    // const geocodedRecord = {
-    //     full_address: [],
-    //     coordinates:[] 
-    //     };
+  let geocoded = {
+    full_address: [],
+    coordinates: [],
+  };
 
-    if (riskLevel == "h") {
-        targetList = content.data.highlist
+  // read the risk area list
+  if (riskLevel == "h") {
+    targetList = content.data.highlist;
+  } else if (riskLevel == "m") {
+    targetList = content.data.middlelist;
+  }
+
+  // iterate through each community and save to geoJSON
+  for (let record in targetList) {
+    for (let eachCommunity in targetList[record].communitys) {
+      // console.log("record = ", content.data.middlelist[record]);
+      let province;
+      let city;
+      let county;
+      let community;
+      let full_address;
+      let coordinates = [100, 150];
+      province = targetList[record].province;
+      city = targetList[record].city;
+      county = targetList[record].county;
+      community = targetList[record].communitys[eachCommunity];
+      full_address = province + city + county + community;
+
+      // test if the address is already in the record
+      testDupAndRecord(full_address)
+
+      // create a new geoJSONData
+      geoJSONData.features.push({
+        type: "Feature",
+        geometry: {
+          type: "Point",
+          coordinates: coordinates,
+        },
+        properties: {
+          province: province,
+          city: city,
+          county: county,
+          community: community,
+          full_address: full_address,
+        },
+      });
+
+      geocoded.full_address.push[full_address];
+      geocoded.coordinates.push[coordinates];
+      console.log("geocoded=", geocoded);
+      // writeRecord("geocodedRecord",geocoded)
     }
-    else if (riskLevel == "m") {
-        targetList = content.data.middlelist
+  }
+
+  writeGeoJSON(filename, riskLevel);
+  
+  function testDupAndRecord(addressForAPI) {
+    let results;
+
+    if (fs.existsSync("geocodedRecord.json")) {
+      // The file exists, so read its contents
+      const data = fs.readFileSync("geocodedRecord.json");
+      results = JSON.parse(data);
+      //   console.log("results=", results);
+    } else {
+      // The file doesn't exist, so create an empty array
+      console.log("geocodedRecord.json doesn't exist");
+      results = { full_address: [], coordination: [] };
     }
 
-    for (let record in targetList) {
-        for (let eachCommunity in targetList[record].communitys) {
-            // console.log("record = ", content.data.middlelist[record]);
-            let province
-            let city
-            let county
-            let community
-            let full_address
-            let coordinates = [100,150]
-            province = targetList[record].province
-            city = targetList[record].city
-            county = targetList[record].county
-            community = targetList[record].communitys[eachCommunity]
-            full_address = province + city + county + community
+    // get the api address
+    addressForAPI = "上海市";
 
-            // test if the address is already in the record
-            // record = readJSON("geocodedRecord")
-            // if (record.address.has(address)) 
-
-            geoJSONData.features.push({
-                type: "Feature",
-                geometry: {
-                    type: "Point",
-                    coordinates: coordinates,
-                },
-                properties: {
-                    province: province,
-                    city: city,
-                    county: county,
-                    community: community,
-                    full_address: full_address,
-                },
-            })
-
-            // geocodedRecord.full_address.push[full_address];
-            // geocodedRecord.coordinates.push[coordinates];
-
-
-        }
+    // Check if the fetched content is already in the results
+    console.log("results.full_address", results.full_address);
+    const foundResult = results.full_address.includes(addressForAPI);
+    if (!foundResult) {
+      // The fetched content is not in the results, so make a request to the API and add the result to the array
+      console.log("no same result, do API geocoding");
+      results.full_address.push("上海市");
+      results.coordination.push(coordination);
+      // save file
+      fs.writeFileSync("results.json", JSON.stringify(results));
+      console.log("new address saved");
+    } else {
+      console.log("found duplicated address, skip");
     }
+  }
 
 
-function writeGeoJSON(filename, riskLevel) {
+  function writeGeoJSON(filename, riskLevel) {
     // write JSON string to a file
     fs.writeFile(
-        filename + "_" + riskLevel + ".geojson",
-        JSON.stringify(geoJSONData),
-        (err) => {
-            if (err) {
-                throw err;
-            }
-            console.log(`${filename}_ ${riskLevel}.geojson is saved.`);
+      filename + "_" + riskLevel + ".geojson",
+      JSON.stringify(geoJSONData),
+      (err) => {
+        if (err) {
+          throw err;
         }
+        console.log(`${filename}_ ${riskLevel}.geojson is saved.`);
+      }
     );
-}
+  }
 
-function writeRecord(filename) {
+  function writeRecord(filename, input) {
     // write JSON string to a file
     fs.writeFile(
-        filename + ".json",
-        JSON.stringify(geocodedRecord),
-        {'flag':'a'}, // that means to append to the file
-        (err) => {
-            if (err) {
-                throw err;
-            }
-            console.log(`geocodedRecord is saved.`);
+      filename + ".json",
+      JSON.stringify(input),
+      // {'flag':'a'}, // that means to append to the file
+      (err) => {
+        if (err) {
+          throw err;
         }
+        console.log(`geocodedRecord is saved.`);
+      }
     );
-}
+  }
 
-writeGeoJSON(filename, riskLevel)
-// writeRecord("geocodedRecord")
 
-    // return geoJSONData
+
+  // return geoJSONData
 }
 
 // end of editJSON
 
-
 // readJSON("20220421");
 // generateGeoJSON("20220422", "h");
 generateGeoJSON("20220422", "m");
-
 
 // async function readJSONFile(filename) {
 //     const response = await fetch('sample/20220422.json');
