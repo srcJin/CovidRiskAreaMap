@@ -123,8 +123,6 @@ function generateGeoJSON(filename, riskLevel) {
       results = { full_address: [], coordination: [] };
     }
 
-    // get the api address
-    addressForAPI = "上海市";
 
     // Check if the fetched content is already in the results
     console.log("results.full_address", results.full_address);
