@@ -36,14 +36,14 @@ let folderName = "sample";
 const fs = require("fs");
 
 function readJSON(filename) {
-    let rawdata = fs.readFileSync("sample/" + filename + ".json");
+    let rawdata = fs.readFileSync(filename + ".json");
     let content = JSON.parse(rawdata);
     // console.log(content);
     return content;
 }
 
 function generateGeoJSON(filename, riskLevel) {
-    let rawdata = fs.readFileSync("sample/" + filename + ".json");
+    let rawdata = fs.readFileSync(filename + ".json");
     let content = JSON.parse(rawdata);
     // console.log("content", content);
     // console.log("content.data.mcount", content.data.mcount);
@@ -54,7 +54,10 @@ function generateGeoJSON(filename, riskLevel) {
         features: [],
     };
 
-    const geocodedRecord = { records: [] };
+    // const geocodedRecord = {
+    //     full_address: [],
+    //     coordinates:[] 
+    //     };
 
     if (riskLevel == "h") {
         targetList = content.data.highlist
@@ -66,13 +69,12 @@ function generateGeoJSON(filename, riskLevel) {
     for (let record in targetList) {
         for (let eachCommunity in targetList[record].communitys) {
             // console.log("record = ", content.data.middlelist[record]);
-            province = ""
-            city = ""
-            county = ""
-            community = ""
-            full_address = ""
-            coordinates = []
-
+            let province
+            let city
+            let county
+            let community
+            let full_address
+            let coordinates = [100,150]
             province = targetList[record].province
             city = targetList[record].city
             county = targetList[record].county
@@ -82,13 +84,12 @@ function generateGeoJSON(filename, riskLevel) {
             // test if the address is already in the record
             // record = readJSON("geocodedRecord")
             // if (record.address.has(address)) 
-            // coordinates = []
 
             geoJSONData.features.push({
                 type: "Feature",
                 geometry: {
                     type: "Point",
-                    coordinates: [],
+                    coordinates: coordinates,
                 },
                 properties: {
                     province: province,
@@ -99,10 +100,10 @@ function generateGeoJSON(filename, riskLevel) {
                 },
             })
 
-            geocodedRecord.records.push({
-                full_address: full_address,
-                coordinates: coordinates
-            })
+            // geocodedRecord.full_address.push[full_address];
+            // geocodedRecord.coordinates.push[coordinates];
+
+
         }
     }
 
@@ -137,7 +138,7 @@ function writeRecord(filename) {
 }
 
 writeGeoJSON(filename, riskLevel)
-writeRecord("geocodedRecord")
+// writeRecord("geocodedRecord")
 
     // return geoJSONData
 }
@@ -146,8 +147,8 @@ writeRecord("geocodedRecord")
 
 
 // readJSON("20220421");
-generateGeoJSON("20220421", "h");
-generateGeoJSON("20220421", "m");
+// generateGeoJSON("20220422", "h");
+generateGeoJSON("20220422", "m");
 
 
 // async function readJSONFile(filename) {
