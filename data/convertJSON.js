@@ -33,6 +33,7 @@ let folderName = "sample";
 
 // Read local JSON file
 const fs = require("fs");
+const axios = require("axios");
 
 function readJSON(filename) {
   let rawdata = fs.readFileSync(filename + ".json");
@@ -82,8 +83,10 @@ function generateGeoJSON(filename, riskLevel) {
       full_address = province + city + county + community;
 
       // test if the address is already in the record
-      testDupAndRecord(full_address)
+      //   coordinate = testDupAndRecord(full_address)
+      coordinate = testDupAndRecord("北京市");
 
+      console.log("coordinate", coordinate);
       // create a new geoJSONData
       geoJSONData.features.push({
         type: "Feature",
@@ -100,15 +103,12 @@ function generateGeoJSON(filename, riskLevel) {
         },
       });
 
-      geocoded.full_address.push[full_address];
-      geocoded.coordinates.push[coordinates];
-      console.log("geocoded=", geocoded);
       // writeRecord("geocodedRecord",geocoded)
     }
   }
 
   writeGeoJSON(filename, riskLevel);
-  
+
   function testDupAndRecord(addressForAPI) {
     let results;
 
@@ -120,26 +120,39 @@ function generateGeoJSON(filename, riskLevel) {
     } else {
       // The file doesn't exist, so create an empty array
       console.log("geocodedRecord.json doesn't exist");
-      results = { full_address: [], coordination: [] };
+      results = { full_address: [], coordinates: [] };
     }
-
 
     // Check if the fetched content is already in the results
     console.log("results.full_address", results.full_address);
     const foundResult = results.full_address.includes(addressForAPI);
+    let coordinate = [100, 200];
+
     if (!foundResult) {
       // The fetched content is not in the results, so make a request to the API and add the result to the array
       console.log("no same result, do API geocoding");
-      results.full_address.push("上海市");
-      results.coordination.push(coordination);
+
+      // api endpoints
+
+      // Call API here, get coordinate
+
+      // await api
+
+      // make this function async
+      // failure mechanism
+      // try -- catch
+
+      results.full_address.push(addressForAPI);
+      results.coordinates.push(coordinate);
       // save file
       fs.writeFileSync("results.json", JSON.stringify(results));
       console.log("new address saved");
     } else {
       console.log("found duplicated address, skip");
     }
+    return coordinate;
+    // return results.coordinates[addressForAPI]
   }
-
 
   function writeGeoJSON(filename, riskLevel) {
     // write JSON string to a file
@@ -169,8 +182,6 @@ function generateGeoJSON(filename, riskLevel) {
       }
     );
   }
-
-
 
   // return geoJSONData
 }
