@@ -57,12 +57,17 @@ async function geocodeAxios(address) {
     );
     console.log(response.data);
 
-    // how to use the data
     
     const data = fs.readFileSync("recordRaw.json");
     let results = JSON.parse(data);
-    
+
+    // manually insert a full_address attribute for further process
+    response.data.full_address = address;
+
     results.records.push(response.data)
+  
+    results.full_address.push(address)
+
     fs.writeFileSync("recordRaw.json", JSON.stringify(results));
 
     return results

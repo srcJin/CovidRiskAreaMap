@@ -75,7 +75,7 @@ function generateGeoJSON(filename, riskLevel) {
       let county;
       let community;
       let full_address;
-      let coordinates = [100, 150];
+      let coordinates;
       province = targetList[record].province;
       city = targetList[record].city;
       county = targetList[record].county;
@@ -83,10 +83,9 @@ function generateGeoJSON(filename, riskLevel) {
       full_address = province + city + county + community;
 
       // test if the address is already in the record
-      //   coordinate = testDupAndRecord(full_address)
-      coordinate = testDupAndRecord("北京市");
-
-      console.log("coordinate", coordinate);
+      coordinates = testDupAndRecord(full_address);
+      console.log("coordinates=",coordinates)
+      // console.log("coordinate", coordinate);
       // create a new geoJSONData
       geoJSONData.features.push({
         type: "Feature",
@@ -103,49 +102,97 @@ function generateGeoJSON(filename, riskLevel) {
         },
       });
 
-      // writeRecord("geocodedRecord",geocoded)
+      writeRecord("recordPair",geocoded)
     }
   }
 
+
+
   writeGeoJSON(filename, riskLevel);
+
+
 
   function testDupAndRecord(addressForAPI) {
     let results;
 
-    if (fs.existsSync("geocodedRecord.json")) {
+    if (fs.existsSync("recordPair.json")) {
       // The file exists, so read its contents
-      const data = fs.readFileSync("geocodedRecord.json");
+      const data = fs.readFileSync("recordPair.json");
       results = JSON.parse(data);
       //   console.log("results=", results);
     } else {
       // The file doesn't exist, so create an empty array
-      console.log("geocodedRecord.json doesn't exist");
+      console.log("recordPair.json doesn't exist");
       results = { full_address: [], coordinates: [] };
     }
 
     // Check if the fetched content is already in the results
     console.log("results.full_address", results.full_address);
-    const foundResult = results.full_address.includes(addressForAPI);
-    let coordinate = [100, 200];
+    let hasRecord = results.full_address.includes(addressForAPI);
+    // let coordinate = [100, 200];
+    let coordinate
 
-    if (!foundResult) {
+    // if it is a new address, call the API, save the raw data, and save the coordinate to the recordPair.json and recordRaw.json
+    if (!hasRecord) {
       // The fetched content is not in the results, so make a request to the API and add the result to the array
       console.log("no same result, do API geocoding");
 
-      // api endpoints
 
       // Call API here, get coordinate
-
       // await api
-
       // make this function async
       // failure mechanism
       // try -- catch
 
+      // testAPI start
+
+      // async function geocodeAxios(address) {
+      //   try {
+      
+      //     const response = await axios.get(
+      //       `https://restapi.amap.com/v3/geocode/geo?address=${encodeURIComponent(
+      //         address
+      //       )}&output=JSON&key=63445beea63ec64452a205ae10914e16`
+      //     );
+      //     console.log("geocodeAxios,response.data = ", response.data);
+
+      //     const data = fs.readFileSync("recordRaw.json");
+      //     let results = JSON.parse(data);
+      
+      //     // manually insert a full_address attribute for further process
+      //     response.data.full_address = address;
+      //     // push the raw response into the records attribute
+      //     results.records.push(response.data)
+      //     // create a separate list for geocoded addresses
+      //     results.full_address.push(address)
+      
+      //     fs.writeFileSync("recordRaw.json", JSON.stringify(results));
+      
+      //     return results
+          
+      //   } catch (error) {
+      //     console.error(error);
+      //   }
+      // }
+      
+      // // when using async function
+      // // await before the async function
+      // // await the promise
+      
+      // async function geocodeAxiosDelay(address) {
+      //     // Pause for 2 second before next API call
+      //     result = setTimeout(async () => {
+      //       console.log("geocodeAxios(address)",await geocodeAxios(address));
+      //     }, 2000);
+      //     return result
+      // }
+      
+      // console.log("geocodeAxiosDelay(addressForAPI)=",geocodeAxiosDelay(addressForAPI));
+
       results.full_address.push(addressForAPI);
       results.coordinates.push(coordinate);
       // save file
-      fs.writeFileSync("results.json", JSON.stringify(results));
+      fs.writeFileSync("recordPair.json", JSON.stringify(results));
       console.log("new address saved");
     } else {
       console.log("found duplicated address, skip");
@@ -178,7 +225,7 @@ function generateGeoJSON(filename, riskLevel) {
         if (err) {
           throw err;
         }
-        console.log(`geocodedRecord is saved.`);
+        console.log(`recordPair is saved.`);
       }
     );
   }
