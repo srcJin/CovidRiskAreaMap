@@ -101,13 +101,13 @@ L.control
   })
   .addTo(map);
 
-async function plotRiskPoints(timestamp) {
+async function plotRiskPoints(date) {
   console.log("plotRiskPoints!");
 
   // Define the custom marker icon
   var iconHigh = L.icon({
-    iconUrl: "iconHigh.png",
-    iconSize: [32, 32],
+    iconUrl: "./images/high.png",
+    iconSize: [24, 24],
     iconAnchor: [16, 16],
     popupAnchor: [0, -16],
     // shadowUrl: "my-icon-shadow.png",
@@ -116,8 +116,8 @@ async function plotRiskPoints(timestamp) {
   });
 
   var iconMiddle = L.icon({
-    iconUrl: "iconMiddle.png",
-    iconSize: [24, 24],
+    iconUrl: "./images/middle.png",
+    iconSize: [18, 18],
     iconAnchor: [12, 12],
     popupAnchor: [0, -12],
     // shadowUrl: "my-icon-shadow.png",
@@ -183,11 +183,8 @@ async function plotRiskPoints(timestamp) {
   );
 
   // Define the custom marker icon
-  date = timestamp
-  let pathH = "data/" + date + "_h.geojson"
-  let pathM = "data/" + date + "_h.geojson"
-  const highRiskPoints = await axios.get("data/20220702_h.geojson");
-  const middleRiskPoints = await axios.get("data/20220702_m.geojson");
+  const highRiskPoints = await axios.get("pointsData/20220702_h.geojson");
+  const middleRiskPoints = await axios.get("pointsData/20220702_m.geojson");
 
   // console.log("highRiskPoints =", highRiskPoints);
 
@@ -246,11 +243,131 @@ async function plotRiskPoints(timestamp) {
     "Middle Risk Area": markerClusterLayerMiddle,
   };
 
-  L.control.layers(null,layerName).addTo(map);
+  L.control.layers(null, layerName).addTo(map);
 }
+
+
+async function plotCase() {
+  // data source: https://github.com/HaoyuA/D3.js-Data-Visualization
+  // ref : https://leafletjs.com/examples/choropleth/
+
+  let provinceGeoJSON = await axios.get("./data/chinaprovince.geojson");
+
+  // console.log("provinceGeoJSON", provinceGeoJSON.data);
+
+  // L.geoJson(provinceGeoJSON.data).addTo(map);
+
+  // control that shows state info on hover
+  const info = L.control();
+
+  info.onAdd = function (map) {
+    this._div = L.DomUtil.create('div', 'info');
+    this.update();
+    return this._div;
+  };
+
+  info.update = function (props) {
+    const contents = props ? `<b>${props.name}</b><br /> size = ${props.size} ` : 'Hover over a province';
+
+    this._div.innerHTML = `<h4></h4>${contents}`;
+  };
+
+  info.addTo(map);
+
+
+  // get color depending on population density value
+  function getColor(d) {
+    return d > 1000 ? '#800026' :
+      d > 500 ? '#BD0026' :
+        d > 200 ? '#E31A1C' :
+          d > 100 ? '#FC4E2A' :
+            d > 50 ? '#FD8D3C' :
+              d > 20 ? '#FEB24C' :
+                d > 10 ? '#FED976' : '#FFEDA0';
+  }
+
+  function style(feature) {
+    // console.log(feature.properties)
+    return {
+      weight: 1,
+      opacity: 1,
+      color: 'white',
+      // dashArray: '3',
+      fillOpacity: 0.7,
+      fillColor: getColor(feature.properties.size)
+    };
+  }
+
+  function highlightFeature(e) {
+    const layer = e.target;
+
+    layer.setStyle({
+      weight: 2,
+      color: '#fff',
+      dashArray: '',
+      fillOpacity: 0.7
+    });
+
+    layer.bringToFront();
+
+    info.update(layer.feature.properties);
+  }
+
+  /* global provinceGeoJSON */
+  const geojson = L.geoJson(provinceGeoJSON.data, {
+    style,
+    onEachFeature
+  }).addTo(map);
+
+  function resetHighlight(e) {
+    geojson.resetStyle(e.target);
+    info.update();
+  }
+
+  function zoomToFeature(e) {
+    map.fitBounds(e.target.getBounds());
+  }
+
+  function onEachFeature(feature, layer) {
+    layer.on({
+      mouseover: highlightFeature,
+      mouseout: resetHighlight,
+      click: zoomToFeature
+    });
+  }
+
+  map.attributionControl.addAttribution('Data Source <a href="https://github.com/CSSEGISandData">CSSE at Johns Hopkins University</a>');
+
+
+  const legend = L.control({ position: 'bottomright' });
+
+  legend.onAdd = function (map) {
+
+    const div = L.DomUtil.create('div', 'info legend');
+    const grades = [0, 10, 20, 50, 100, 200, 500, 1000];
+    const labels = [];
+    let from, to;
+
+    for (let i = 0; i < grades.length; i++) {
+      from = grades[i];
+      to = grades[i + 1];
+
+      labels.push(`<i style="background:${getColor(from + 1)}"></i> ${from}${to ? `&ndash;${to}` : '+'}`);
+    }
+
+    div.innerHTML = labels.join('<br>');
+    return div;
+  };
+
+  legend.addTo(map);
+
+
+}
+
 
 
 console.log("Map is running");
 
 plotRiskPoints();
 
+plotCase()

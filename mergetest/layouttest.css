@@ -5,6 +5,9 @@ h4 {
     margin-bottom: 2rem;
     margin-top: 3rem;
 }
+
+
+/* panel for layout test, can delete later */
 .panel {
     border-radius: 0.3rem;
     padding: 1rem;
@@ -13,7 +16,7 @@ h4 {
 .panel.panel-blue {
     border: 1px solid #0087ff;
     background-color: #ddedff;
-    color: #0087ff;
+    color: #000000;
 }
 .panel.panel-yellow {
     border: 1px solid #ffbd00;
@@ -31,14 +34,6 @@ h4 {
     color: #7f51f4;
 }
 
-/* Navbar */
-.navbar-icon {
-    margin: 0 15px;
-    width: 40px;
-    height: 40px;
-  }
-  
-
 /* header */
 .dropdown-toggle::after {
     display: none;
@@ -46,10 +41,17 @@ h4 {
 .text-decoration-none{
   text-decoration: none!important;
 }
+
 /* Font Awesome Icons have variable width. Added fixed width to fix that.*/
 .icon-width { width: 2rem;}
 
 /* navbar */
+.navbar-icon {
+  margin: 0 15px;
+  width: 40px;
+  height: 40px;
+}
+
 .dropdown-toggle::after {
     display: none;
   }
@@ -77,3 +79,5 @@ h4 {
     /* gradient */
     background: linear-gradient(#ffe3e5,#ffffff);
   }
+
+  

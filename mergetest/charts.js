@@ -7,9 +7,10 @@
 
 //   var chart1 = new ApexCharts(document.querySelector("#chart-area"), options1);
 
-axios({
+async function loadData() {
+  axios({
   method: "GET",
-  url: "statistics_preprocessed.json",
+  url: "./data/statistics_preprocessed.json",
 }).then(function (response) {
   // console.log(response.data)
   chart2.updateSeries([
@@ -36,15 +37,15 @@ axios({
     { name: "HeBei", data: response.data.HeBei },
     { name: "HeiLongJiang", data: response.data.HeiLongJiang },
     { name: "HeNan", data: response.data.HeNan },
-    { name: "HongKong", data: response.data["Hong Kong"] },
+    { name: "HongKong", data: response.data.HongKong },
     { name: "HuBei", data: response.data.HuBei },
     { name: "HuNan", data: response.data.HuNan },
-    { name: "InnerMongolia", data: response.data["Inner Mongolia"] },
-    { name: "JiangSu", data: response.data["Jiang Su"] },
-    { name: "JiangXi", data: response.data["Jiang Xi"] },
-    { name: "JiLin", data: response.data["Ji Lin"] },
-    { name: "LiaoNing", data: response.data["Liao Ning"] },
-    { name: "Macau", data: response.data["Macau"] },
+    { name: "InnerMongolia", data: response.data.InnerMongolia},
+    { name: "JiangSu", data: response.data.JiangSu },
+    { name: "JiangXi", data: response.data.JiangXi },
+    { name: "JiLin", data: response.data.JiLin },
+    { name: "LiaoNing", data: response.data.LiaoNing },
+    { name: "Macau", data: response.data.Macau },
     { name: "NingXia", data: response.data.NingXia },
     { name: "QingHai", data: response.data.QingHai },
     { name: "ShanXi", data: response.data.ShanXi },
@@ -94,7 +95,7 @@ axios({
     "ZheJiang",
   ];
 
-  let showSeries = ["BeiJing","ShangHai","GuangDong","Hong Kong"];
+  let showSeries = ["BeiJing","ShangHai","GuangDong","HongKong"];
 
   for (series of hiddenSeries) {
     chart1.hideSeries(series);
@@ -131,7 +132,7 @@ let options1 = {
   colors: ["#008FFB", "#00E396", "#CED4DC"],
 
   dataLabels: {
-    enabled: true,
+    enabled: false,
   },
   stroke: {
     curve: "smooth",
@@ -257,13 +258,21 @@ let options3 = {
   },
 };
 
-var chart1 = new ApexCharts(document.querySelector("#chart-province"),options1);
+var chart1 = new ApexCharts(
+  document.querySelector("#chart-province"),
+  options1
+);
 var chart2 = new ApexCharts(document.querySelector("#chart-bar"), options2);
 var chart3 = new ApexCharts(document.querySelector("#chart-cases"), options3);
 
 chart1.render();
 chart2.render();
 chart3.render();
+
+}
+
+loadData()
+
 
 function generateDayWiseTimeSeries(baseval, count, yrange) {
   var i = 0;
