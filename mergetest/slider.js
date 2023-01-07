@@ -5,16 +5,16 @@ day.innerHTML = slide.value;
 
 var date = document.getElementById("date");
 // console.log(date);
-date.innerHTML = dayToDate(slide.value)[1];
+date.innerHTML = dayToDate(slide.value-1)[1];
 
 // method 1: oninput, this one refreshes every action
 slide.oninput = function () {
   day.innerHTML = this.value;
   date.innerHTML = dayToDate(this.value)[1];
-  offset = dayToDate(parseInt(this.value))[0]
-  console.log(offset)
-  plotRiskPoints(offset)
-
+  newDate = dayToDate(parseInt(this.value))[0]
+  console.log("date=",newDate)
+  plotRiskPoints(newDate)
+  plotCase(newDate)
 }
 
 // method 2: event listener, this one only refreshes when the action ended
@@ -45,14 +45,14 @@ function dayToDate(offset) {
   // console.log("offset=",offset)
 
   // let startDate = 1577808000000  // 2020/01/01 00:00:00
-  const startDate = new Date(2020, 7, 29, 12);
-  // var numDate= new Date(startDate);
-  // let convertedDate = new Date(startDate).setDate(offset)
-  let newTimestamp = startDate.setDate(offset)
-  let newTime = new Date(newTimestamp)
+  const startDate = new Date(2020, 7, 28, 12);
+  // const startDate = new Date(1595980800000); // 2020/07/28 00:00:00 GMT
+  // console.log(startDate);
 
-  // console.log("newTimestamp=", newTimestamp)
-  // console.log("newTime=", newTime)
+
+  let newTimestamp = startDate.setDate(offset-1) // temporary fix is to -1
+
+  let newTime = new Date(newTimestamp)
 
   // Convert Time to Date String
   formatDate = formatDate(newTime)

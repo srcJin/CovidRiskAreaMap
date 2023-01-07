@@ -102,7 +102,7 @@ L.control
   .addTo(map);
 
 // two variables to remember if the markers has been added to map
-let firstPush = 0;
+let isPointsDraw = 0;
 let markerClusterLayerHigh = null;
 let markerClusterLayerMiddle = null;
 let highRiskLayer = null;
@@ -137,9 +137,8 @@ async function plotRiskPoints(date) {
   const middleRiskPoints = await axios.get("pointsData/" + date + "_m.geojson");
 
   // console.log("highRiskPoints =", highRiskPoints);
-  
 
-  if (firstPush == 0) {
+  if (isPointsDraw == 0) {
     // create cluster layers
     markerClusterLayerHigh = L.markerClusterGroup(
       // options ref : https://github.com/Leaflet/Leaflet.markercluster#examples
@@ -250,17 +249,16 @@ async function plotRiskPoints(date) {
     //   map.hasLayer(markerClusterLayerHigh)
     // );
 
-    let layerName = {
+    let layerControl1 = {
       "High Risk Area": markerClusterLayerHigh,
       "Middle Risk Area": markerClusterLayerMiddle,
     };
 
-    L.control.layers(null, layerName).addTo(map);
+    L.control.layers(null, layerControl1).addTo(map);
 
-    firstPush = 1;
-
+    isPointsDraw = 1;
   } else {
-    console.log("> 1 push")
+    console.log("> 1 push");
     // cleaer the layer
 
     // plot new points based on date
@@ -270,15 +268,6 @@ async function plotRiskPoints(date) {
 
     markerClusterLayerHigh.clearLayers();
     markerClusterLayerMiddle.clearLayers();
-
-
-    // console.log("markerClusterLayerMiddle=",markerClusterLayerMiddle);
-    
-    // console.log("markerClusterLayerHigh=",markerClusterLayerHigh)
-
-    // console.log("has highRiskLayer 3", map.hasLayer(highRiskLayer));
-    // console.log("has markerClusterLayerHigh 3",map.hasLayer(markerClusterLayerHigh));
-    // console.log("adding layer");
 
     highRiskLayer = L.geoJson(
       highRiskPoints.data,
@@ -321,18 +310,13 @@ async function plotRiskPoints(date) {
       } // end onEachFeature
     ).addTo(markerClusterLayerMiddle); // end L.geoJson
 
-
     map.addLayer(markerClusterLayerHigh);
     map.addLayer(markerClusterLayerMiddle);
 
-
-
-      // map.addLayer(markerClusterLayerHigh);
+    // map.addLayer(markerClusterLayerHigh);
     // map.addLayer(markerClusterLayerMiddle);
-    console.log("has highRiskLayer 4", map.hasLayer(highRiskLayer));
-    console.log("has markerClusterLayerHigh 4",map.hasLayer(markerClusterLayerHigh));
-
-
+    // console.log("has highRiskLayer 4", map.hasLayer(highRiskLayer));
+    // console.log("has markerClusterLayerHigh 4",map.hasLayer(markerClusterLayerHigh));
 
     // console.log("has highRiskLayer 3", map.hasLayer(highRiskLayer));
     // console.log(
@@ -351,18 +335,229 @@ async function plotRiskPoints(date) {
   // ]);
 }
 
-async function plotCase() {
-  // data source: https://github.com/HaoyuA/D3.js-Data-Visualization
+const info = L.control();
+let isCasesDraw = 0;
+let confirmed = null;
+let deaths = null;
+let riskArea = null;
+const emptyLayer = L.tileLayer("");
+let layerControl2
+let control
+let styleMode = 0
+// L.Control.Layers.include({
+//   getOverlays: function() {
+//     // create hash to hold all layers
+//     var control, layers;
+//     layers = {};
+//     control = this;
+
+//     // loop thru all layers in control
+//     control._layers.forEach(function(obj) {
+//       var layerName;
+
+//       // check if layer is an overlay
+//       if (obj.overlay) {
+//         // get name of overlay
+//         layerName = obj.name;
+//         // store whether it's present on the map or not
+//         return layers[layerName] = control._map.hasLayer(obj.layer);
+//       }
+//     });
+
+//     return layers;
+//   }
+// });
+
+
+async function plotCase(date) {
+  // province border data source: https://github.com/HaoyuA/D3.js-Data-Visualization
   // ref : https://leafletjs.com/examples/choropleth/
 
-  let provinceGeoJSON = await axios.get("./data/chinaprovince.geojson");
+  let provinceGeoJSON = await axios.get("./provinceData/" + date + ".geojson");
 
+  riskArea = L.geoJson(provinceGeoJSON.data, {
+    style: function (feature) {
+      return {
+        weight: 1,
+        opacity: 1,
+        color: "white",
+        // dashArray: '3',
+        fillOpacity: 0.7,
+        fillColor: getColor(
+          feature.properties.high + feature.properties.middle,
+          "riskArea"
+        ),
+      };
+    },
+    onEachFeature,
+  });
+
+  confirmed = L.geoJson(provinceGeoJSON.data, {
+    style: function (feature) {
+      return {
+        weight: 1,
+        opacity: 1,
+        color: "white",
+        // dashArray: '3',
+        fillOpacity: 0.7,
+        fillColor: getColor(feature.properties.confirmed, "confirmed"),
+      };
+    },
+    onEachFeature,
+  });
+
+  deaths = L.geoJson(provinceGeoJSON.data, {
+    style: function (feature) {
+      return {
+        weight: 1,
+        opacity: 1,
+        color: "white",
+        // dashArray: '3',
+        fillOpacity: 0.7,
+        fillColor: getColor(feature.properties.deaths, "deaths"),
+      };
+    },
+    onEachFeature,
+  });
+
+  layerControl2 = {
+    Deaths: deaths,
+    "Confirmed Cases": confirmed,
+    "Risk Areas": riskArea,
+    "Turn Off": emptyLayer,
+  };
+
+
+  if (isCasesDraw == 0) {
+    // control = L.control.layers(layerControl2, null).addTo(map);
+
+
+    // deaths.addTo(map);
+    // riskArea.addTo(map);
+    map.addLayer(riskArea);
+    // confirmed.addTo(map);
+    control = L.control.activeLayers(layerControl2, null)
+    control.addTo(map);
+
+    // console.log("activeLayer=",activeLayer)
+
+    isCasesDraw = 1;
+  } else {
+    // Use ActiveLayer plugin to get the active baselayer name
+
+    activeLayer = control.getActiveBaseLayer().name
+    console.log("activeLayer=",activeLayer)
+
+    if (activeLayer == "Risk Areas") {
+      styleMode = 0
+    }
+    if (activeLayer == "Confrimed Cases") {
+      styleMode = 1
+    }
+    if (activeLayer == "Deaths") {
+      styleMode = 2
+    }
+
+    console.log("case > 1 push");
+    console.log("removing layer");
+
+
+    map.removeLayer(deaths);
+    map.removeLayer(riskArea);
+    map.removeLayer(confirmed);
+
+    deaths.clearLayers();
+    confirmed.clearLayers();
+    riskArea.clearLayers();
+    // layerControl2.addBaseLayer(riskArea, "Risk Area")
+    // console.log("control.getOverlays()2",control.getOverlays());
+
+
+    // riskArea = L.geoJson(provinceGeoJSON.data, {
+    //   style: function (feature) {
+    //     return {
+    //       weight: 1,
+    //       opacity: 1,
+    //       color: "white",
+    //       // dashArray: '3',
+    //       fillOpacity: 0.7,
+    //       fillColor: getColor(
+    //         feature.properties.high + feature.properties.middle,
+    //         "riskArea"
+    //       ),
+    //     };
+    //   },
+    //   onEachFeature,
+    // });
+
+    // confirmed = L.geoJson(provinceGeoJSON.data, {
+    //   style: function (feature) {
+    //     return {
+    //       weight: 1,
+    //       opacity: 1,
+    //       color: "white",
+    //       // dashArray: '3',
+    //       fillOpacity: 0.7,
+    //       fillColor: getColor(feature.properties.confirmed, "confirmed"),
+    //     };
+    //   },
+    //   onEachFeature,
+    // });
+
+    // deaths = L.geoJson(provinceGeoJSON.data, {
+    //   style: function (feature) {
+    //     return {
+    //       weight: 1,
+    //       opacity: 1,
+    //       color: "white",
+    //       // dashArray: '3',
+    //       fillOpacity: 0.7,
+    //       fillColor: getColor(feature.properties.deaths, "deaths"),
+    //     };
+    //   },
+    //   onEachFeature,
+    // });
+
+    // let layerControl2 = {
+    //   Deaths: deaths,
+    //   "Confirmed Cases": confirmed,
+    //   "Risk Areas": riskArea,
+    //   "Turn Off": emptyLayer,
+    // };
+    console.log("styleMode=",styleMode);
+
+    if (styleMode = 0) {
+      map.addLayer(riskArea);
+    }
+    if (styleMode = 1) {
+      map.addLayer(confirmed);
+    }
+    if (styleMode = 2) {
+      map.addLayer(deaths);
+    }
+    // map.addLayer(deaths);
+    // map.addLayer(confirmed);
+
+    // https://stackoverflow.com/questions/44322326/how-to-get-selected-layers-in-control-layers
+
+
+
+    // console.log("haslayer1",map.hasLayer(riskArea))
+    // console.log("haslayer2",map.hasLayer(confirmed))
+    // console.log("haslayer3",map.hasLayer(deaths))
+  //   map.on('baselayerchange', function (e) {
+  //     console.log(e.layer);
+  // });
+  }
   // console.log("provinceGeoJSON", provinceGeoJSON.data);
 
   // L.geoJson(provinceGeoJSON.data).addTo(map);
 
   // control that shows state info on hover
-  const info = L.control();
+
+
+
+
 
   info.onAdd = function (map) {
     this._div = L.DomUtil.create("div", "info");
@@ -371,47 +566,81 @@ async function plotCase() {
   };
 
   info.update = function (props) {
+    // console.log("props=",props)
     const contents = props
-      ? `<b>${props.name}</b><br /> size = ${props.size} `
+      ? `<b>${props.name}</b>
+      <br>  ${props.nameeng} 
+      <br>
+      <br> High Risk Area: ${props.high} 
+      <br> Middle Risk Area: ${props.middle} 
+      <br> Confirmed: ${props.confirmed} 
+      <br> Death: ${props.deaths} 
+      <br> Recovered: ${props.recovered} 
+      `
       : "Hover over a province";
 
-    this._div.innerHTML = `<h4></h4>${contents}`;
+    this._div.innerHTML = `<small>${contents}</small>`;
+    // this.leaflet-popup-content.innerHTML = `<small>${contents}</small>`;
   };
 
-  info.addTo(map);
-
   // get color depending on population density value
-  function getColor(d) {
-    return d > 1000
-      ? "#800026"
-      : d > 500
-      ? "#BD0026"
-      : d > 200
-      ? "#E31A1C"
-      : d > 100
-      ? "#FC4E2A"
-      : d > 50
-      ? "#FD8D3C"
-      : d > 20
-      ? "#FEB24C"
-      : d > 10
-      ? "#FED976"
-      : "#FFEDA0";
+  function getColor(d, type) {
+    if (type == "riskArea") {
+      return d > 1000
+        ? "#800026"
+        : d > 500
+        ? "#BD0026"
+        : d > 250
+        ? "#E31A1C"
+        : d > 50
+        ? "#FC4E2A"
+        : d > 25
+        ? "#FD8D3C"
+        : d > 10
+        ? "#FEB24C"
+        : d > 5
+        ? "#FED976"
+        : "#FFEDA0";
+    }
+    if (type == "confirmed") {
+      return d > 1000
+        ? "#344152"
+        : d > 500
+        ? "#506987"
+        : d > 250
+        ? "#325C74"
+        : d > 50
+        ? "#42647F"
+        : d > 25
+        ? "#6996AD"
+        : d > 10
+        ? "#9AC0CD"
+        : d > 5
+        ? "#C3E4ED"
+        : "#E3FFFF";
+    }
+
+    // greyscale https://www.w3schools.com/colors/colors_shades.asp
+    if (type == "deaths") {
+      return d > 1000
+        ? "#000000"
+        : d > 500
+        ? "#282828"
+        : d > 250
+        ? "#484848"
+        : d > 50
+        ? "#696969"
+        : d > 25
+        ? "#808080"
+        : d > 10
+        ? "#A9A9A9"
+        : d > 5
+        ? "#D0D0D0"
+        : "#DADADA";
+    }
   }
 
-  function style(feature) {
-    // console.log(feature.properties)
-    return {
-      weight: 1,
-      opacity: 1,
-      color: "white",
-      // dashArray: '3',
-      fillOpacity: 0.7,
-      fillColor: getColor(feature.properties.size),
-    };
-  }
-
-  function highlightFeature(e) {
+  function highlightFeature_bak(e) {
     const layer = e.target;
 
     layer.setStyle({
@@ -422,18 +651,80 @@ async function plotCase() {
     });
 
     layer.bringToFront();
-
+    info.addTo(map);
     info.update(layer.feature.properties);
   }
 
-  /* global provinceGeoJSON */
-  const geojson = L.geoJson(provinceGeoJSON.data, {
-    style,
-    onEachFeature,
-  }).addTo(map);
+  function highlightFeature(e) {
+    // map.on('mousemove', function(e) {
+    //   // Get the current mouse position
+    //   let latlng = e.latlng;
+    // })
+
+    const layer = e.target;
+    // console.log("layer=",layer);
+    // layer.on('mouseover', function (e) {
+    //   var popup = e.target.getPopup();
+    //   popup.setLatLng(e.latlng).openOn(map);
+    // });
+    layer.setStyle({
+      weight: 2,
+      color: "#fff",
+      dashArray: "",
+      fillOpacity: 0.7,
+    });
+
+    // try to reset highlight,but failed
+    // layer.on("mouseout", function (e) {
+    //   let hideTimeout = setTimeout(function () {
+    //     // layer.resetStyle(e.target)
+    //     layer.setStyle({
+    //       weight: 1,
+    //       color: "#fff",
+    //       dashArray: "",
+    //       fillOpacity: 0.7,
+    //     });
+    //   }, 200);
+    // });
+
+    // added popup
+    // ref: https://stackoverflow.com/questions/41522376/leaflet-open-popup-at-cursor-position-instead-of-linestring-center
+    layer.on("mouseover", function (e) {
+      props = layer.feature.properties;
+      const contents = props
+        ? `<b>${props.name}</b>
+      <br>  ${props.nameeng} 
+      <br>
+      <br> High Risk Area: ${props.high} 
+      <br> Middle Risk Area: ${props.middle} 
+      <br> Confirmed: ${props.confirmed} 
+      <br> Death: ${props.deaths} 
+      <br> Recovered: ${props.recovered} 
+      `
+        : "";
+
+      let timeout = setTimeout(function () {
+        let popup = L.popup()
+          .setLatLng(e.latlng)
+          .setContent(contents)
+          .openOn(map);
+      }, 200);
+    });
+
+    // info.style.left = e.pageX + 'px';
+    // info.style.top = e.pageY + 'px';
+
+    layer.bringToFront();
+    info.addTo(map);
+    info.update(layer.feature.properties);
+  }
 
   function resetHighlight(e) {
-    geojson.resetStyle(e.target);
+    // console.log("e=",e);
+    // confirmed.resetStyle(e.target);
+    // deaths.resetStyle(e.target);
+    riskArea.resetStyle(e.target);
+
     info.update();
   }
 
@@ -447,40 +738,44 @@ async function plotCase() {
       mouseout: resetHighlight,
       click: zoomToFeature,
     });
+    // console.log(layer)
   }
 
-  map.attributionControl.addAttribution(
-    'Data Source <a href="https://github.com/CSSEGISandData">CSSE at Johns Hopkins University</a>'
-  );
+  // map.attributionControl.addAttribution(
+  //   'Data Source <a href="https://github.com/CSSEGISandData">CSSE at Johns Hopkins University</a>'
+  // );
 
-  const legend = L.control({ position: "bottomright" });
+  // only draw legend once
+  if (isCasesDraw == 0) {
+    const legend = L.control({ position: "bottomright" });
 
-  legend.onAdd = function (map) {
-    const div = L.DomUtil.create("div", "info legend");
-    const grades = [0, 10, 20, 50, 100, 200, 500, 1000];
-    const labels = [];
-    let from, to;
+    legend.onAdd = function (map) {
+      const div = L.DomUtil.create("div", "info legend");
+      const grades = [0, 5, 10, 25, 50, 250, 500, 1000];
+      const labels = [];
+      let from, to;
 
-    for (let i = 0; i < grades.length; i++) {
-      from = grades[i];
-      to = grades[i + 1];
+      for (let i = 0; i < grades.length; i++) {
+        from = grades[i];
+        to = grades[i + 1];
 
-      labels.push(
-        `<i style="background:${getColor(from + 1)}"></i> ${from}${
-          to ? `&ndash;${to}` : "+"
-        }`
-      );
-    }
+        labels.push(
+          `<i style="background:${getColor(from + 1)}"></i> ${from}${
+            to ? `&ndash;${to}` : "+"
+          }`
+        );
+      }
 
-    div.innerHTML = labels.join("<br>");
-    return div;
-  };
+      div.innerHTML = labels.join("<br>");
+      return div;
+    };
 
-  legend.addTo(map);
+    legend.addTo(map);
+  }
 }
 
 console.log("Map is running");
 
 plotRiskPoints("20220702");
 
-plotCase();
+plotCase("20220702");

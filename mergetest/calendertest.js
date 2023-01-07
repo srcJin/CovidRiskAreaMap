@@ -57,22 +57,6 @@ function getSelectedDate() {
 }
 
 
-// method 2: event listener, this one only refreshes when the action ended
-elems.addEventListener("change",(evt) => {
-  // get the value
-  // get date
-  // pass date to function (axios => get the file with the correct date)
-  // plot
-  console.log(elems[0].datepicker.dates)
-
-  // 2) plot new layer
-  plotRiskPoints(dayToDate(882+parseInt(slide.value))[0])
-  // console.log("882+slide.value=",882+parseInt(slide.value))
-  // get file using slide.value
-  // plot new layer
-  // add to map
-
-})
 
 
 

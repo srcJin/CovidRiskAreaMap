@@ -218,7 +218,19 @@
               <div class="text-center mt-4">
                 <button type="button" class="btn btn-light" onclick="getSelectedDate()">Update</button>
               </div>
+
             </div>
+          </div>
+          
+          <div class="panel panel-blue">
+          <div> <p class="text-end mt-4">Data Source: 
+            <br>Covid Risk Area: 
+            <br><a href="https://github.com/sunbqxyz/china_covid_riskareas_history">Dataset 1: 20-07-29 - 22-04-15</a>
+            <br><a href="https://github.com/panghaibin/COVID-Risk-Region">Dataset 2: 22-04-16 - 22-12-24 </a> 
+            Infection: 
+            <br><a href="https://github.com/CSSEGISandData">CSSE, Johns Hopkins University</a> 
+          </p>
+
           </div>
         </div>
         <!-- </div> -->
@@ -253,6 +265,7 @@
 
         <!-- Our own script is usually at the bottom -->
         <!-- It's the last because it will make use of all the preceeding JavaScript -->
+        <script src="ActiveLayers.js"></script>
         <script src="map.js"></script>
 
         <!-- end of map scripts -->
@@ -287,12 +300,13 @@
       <!-- section Info  -->
       <div class="container mt-4">
         <div class="panel panel-blue">
-          <p>info</p>
+          <!-- <p>info</p> -->
           <!-- start of info section -->
           <!-- ref: https://getbootstrap.com/docs/5.0/components/card/ -->
 
           <div class="container center">
             <h1>About the Risk Area Policy</h1>
+            <br>
           </div>
           <div class="container">
             <p>In China, when an infected person is identified, all close contacts are required to undergo a 14-day
@@ -306,7 +320,7 @@
               contacts)
               are sometimes required to quarantine at home.<sup id="cite_ref-BMJ-Chen-2021_24-9" class="reference"><a
                   href="#cite_note-BMJ-Chen-2021-24">[23]</a></sup>
-            <p class="text-end"><small>Source: <a href="https://en.wikipedia.org/wiki/Zero-COVID">Wikipedia
+            <p class="text-end mt-4"><small>Source: <a href="https://en.wikipedia.org/wiki/Zero-COVID">Wikipedia
                   Zero-COVID</a></small></p>
 
             </p>
@@ -319,8 +333,7 @@
                   <div class="card-body">
                     <h5 class="card-title center"><b>Low</b> Risk Area</h5>
                     <!-- <p class="card-text">病例和无症状感染者居住地，以及活动频繁且疫情传播风险较高的工作地和活动地等区域。</p> -->
-                    <p class="card-text">Areas where cases and asymptomatic infected persons live, and areas such as
-                      workplaces and activities with high activity and high risk of outbreak transmission.</p>
+                    <p class="card-text">Areas other than risk areas</p>
                   </div>
                 </div>
               </div>
@@ -340,14 +353,15 @@
                   <img src="./images/high.png" class="card-img-top mt-3 mb-1" alt="high risk area icon">
                   <div class="card-body">
                     <h5 class="card-title center"><b>High</b> Risk Area</h5>
-                    <p class="card-text">Areas other than risk areas</p>
+                    <p class="card-text">Areas where cases and asymptomatic infected persons live, and areas such as
+                      workplaces and activities with high activity and high risk of outbreak transmission.</p>
                     <!-- <p class="card-text">除风险区外的其他地区</p> -->
                   </div>
                 </div>
               </div>
             </div>
 
-            <div class="container text-end">
+            <div class="container text-end mt-4">
               <p><small>Reference: <a
                     href="https://www.gov.cn/zhengce/zhengceku/2022-03/15/5679257/files/49854a49c7004f4ea9e622f3f2c568d8.pdf">新型冠状病毒肺炎防控方案（第九版）</a></small>
               </p>
