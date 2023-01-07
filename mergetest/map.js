@@ -101,6 +101,13 @@ L.control
   })
   .addTo(map);
 
+// two variables to remember if the markers has been added to map
+let firstPush = 0;
+let markerClusterLayerHigh = null;
+let markerClusterLayerMiddle = null;
+let highRiskLayer = null;
+let middleRiskLayer = null;
+
 async function plotRiskPoints(date) {
   console.log("plotRiskPoints!");
 
@@ -125,127 +132,224 @@ async function plotRiskPoints(date) {
     // shadowAnchor: [16, 16],
   });
 
-  // create cluster layers
-  let markerClusterLayerHigh = L.markerClusterGroup(
-    // options ref : https://github.com/Leaflet/Leaflet.markercluster#examples
-    // icon ref: https://stackoverflow.com/questions/24258914/leaflet-clustermarker-with-custom-icon
-    // https://leafletjs.com/examples/custom-icons/
-    {
-      maxClusterRadius: 50,
-      disableClusteringAtZoom: 10,
-      showCoverageOnHover: true,
-      zoomToBoundsOnClick: true,
-      singleMarkerMode: false,
-      removeOutsideVisibleBounds: true,
-      animate: true,
-
-      // Define the custom cluster icon
-      iconCreateFunction: function (cluster) {
-        let html =
-          '<div class="iconHighRisk"><p style="color: none ; margin: 0;">' +
-          cluster.getChildCount() +
-          "</p></div>";
-        return L.divIcon({
-          html: html,
-          className: "highRisk",
-          iconSize: [32, 32],
-        });
-      },
-    }
-  );
-
-  let markerClusterLayerMiddle = L.markerClusterGroup(
-    // options ref : https://github.com/Leaflet/Leaflet.markercluster#examples
-    // icon ref: https://stackoverflow.com/questions/24258914/leaflet-clustermarker-with-custom-icon
-    // https://leafletjs.com/examples/custom-icons/
-    {
-      maxClusterRadius: 50,
-      disableClusteringAtZoom: 10,
-      showCoverageOnHover: true,
-      zoomToBoundsOnClick: true,
-      singleMarkerMode: false,
-      removeOutsideVisibleBounds: true,
-      animate: true,
-
-      // Define the custom cluster icon
-      iconCreateFunction: function (cluster) {
-        let html =
-          '<div class="iconMiddleRisk"><p style="color: none ; margin: 0;">' +
-          cluster.getChildCount() +
-          "</p></div>";
-        return L.divIcon({
-          html: html,
-          className: "middleRisk",
-          iconSize: [24, 24],
-        });
-      },
-    }
-  );
-
   // Define the custom marker icon
-  const highRiskPoints = await axios.get("pointsData/20220702_h.geojson");
-  const middleRiskPoints = await axios.get("pointsData/20220702_m.geojson");
+  const highRiskPoints = await axios.get("pointsData/" + date + "_h.geojson");
+  const middleRiskPoints = await axios.get("pointsData/" + date + "_m.geojson");
 
   // console.log("highRiskPoints =", highRiskPoints);
+  
 
-  const highRiskLayer = L.geoJson(
-    highRiskPoints.data,
-    {
-      pointToLayer: function (feature, latlng) {
-        // Use the custom marker icon for each marker
-        return L.marker(latlng, { icon: iconHigh });
-        // Option2: Use the circle marker icon for each marker, has animation bug
-        //   return L.circleMarker(latlng, {
-        //     radius: 10,
-        //     color: 'red',
-        //     weight: 4,
-        //     fillColor: '#f03',
-        //     fillOpacity: 0.5 });
-      },
+  if (firstPush == 0) {
+    // create cluster layers
+    markerClusterLayerHigh = L.markerClusterGroup(
+      // options ref : https://github.com/Leaflet/Leaflet.markercluster#examples
+      // icon ref: https://stackoverflow.com/questions/24258914/leaflet-clustermarker-with-custom-icon
+      // https://leafletjs.com/examples/custom-icons/
+      {
+        maxClusterRadius: 50,
+        disableClusteringAtZoom: 10,
+        showCoverageOnHover: true,
+        zoomToBoundsOnClick: true,
+        singleMarkerMode: false,
+        removeOutsideVisibleBounds: true,
+        animate: true,
 
-      onEachFeature: function (feature, layer) {
-        layer.bindPopup(`<div>
+        // Define the custom cluster icon
+        iconCreateFunction: function (cluster) {
+          let html =
+            '<div class="iconHighRisk"><p style="color: none ; margin: 0;">' +
+            cluster.getChildCount() +
+            "</p></div>";
+          return L.divIcon({
+            html: html,
+            className: "highRisk",
+            iconSize: [32, 32],
+          });
+        },
+      }
+    );
+
+    markerClusterLayerMiddle = L.markerClusterGroup(
+      // options ref : https://github.com/Leaflet/Leaflet.markercluster#examples
+      // icon ref: https://stackoverflow.com/questions/24258914/leaflet-clustermarker-with-custom-icon
+      // https://leafletjs.com/examples/custom-icons/
+      {
+        maxClusterRadius: 50,
+        disableClusteringAtZoom: 10,
+        showCoverageOnHover: true,
+        zoomToBoundsOnClick: true,
+        singleMarkerMode: false,
+        removeOutsideVisibleBounds: true,
+        animate: true,
+
+        // Define the custom cluster icon
+        iconCreateFunction: function (cluster) {
+          let html =
+            '<div class="iconMiddleRisk"><p style="color: none ; margin: 0;">' +
+            cluster.getChildCount() +
+            "</p></div>";
+          return L.divIcon({
+            html: html,
+            className: "middleRisk",
+            iconSize: [24, 24],
+          });
+        },
+      }
+    );
+
+    highRiskLayer = L.geoJson(
+      highRiskPoints.data,
+      {
+        pointToLayer: function (feature, latlng) {
+          // Use the custom marker icon for each marker
+          return L.marker(latlng, { icon: iconHigh });
+          // Option2: Use the circle marker icon for each marker, has animation bug
+          //   return L.circleMarker(latlng, {
+          //     radius: 10,
+          //     color: 'red',
+          //     weight: 4,
+          //     fillColor: '#f03',
+          //     fillOpacity: 0.5 });
+        },
+
+        onEachFeature: function (feature, layer) {
+          layer.bindPopup(`<div>
+              <h5>Level: High Risk</h5>
+              <h5>Address:<br>${feature.properties.full_address}</h5>
+          </div>`);
+        },
+      } // end onEachFeature
+    ).addTo(markerClusterLayerHigh); // end L.geoJson
+
+    middleRiskLayer = L.geoJson(
+      middleRiskPoints.data,
+      {
+        pointToLayer: function (feature, latlng) {
+          // Use the custom marker icon for each marker
+          return L.marker(latlng, { icon: iconMiddle });
+        },
+
+        onEachFeature: function (feature, layer) {
+          layer.bindPopup(`<div>
+              <h5>Level: Middle Risk</h5>
+              <h5>Address: <br>${feature.properties.full_address}</h5>
+          </div>`);
+        },
+      } // end onEachFeature
+    ).addTo(markerClusterLayerMiddle); // end L.geoJson
+
+    // console.log("has highRiskLayer 1", map.hasLayer(highRiskLayer));
+    // console.log("has markerClusterLayerHigh 1",map.hasLayer(markerClusterLayerHigh));
+
+    map.addLayer(markerClusterLayerHigh);
+    map.addLayer(markerClusterLayerMiddle);
+
+    // console.log("has highRiskLayer 2", map.hasLayer(highRiskLayer));
+    // console.log(
+    //   "has markerClusterLayerHigh 2",
+    //   map.hasLayer(markerClusterLayerHigh)
+    // );
+
+    let layerName = {
+      "High Risk Area": markerClusterLayerHigh,
+      "Middle Risk Area": markerClusterLayerMiddle,
+    };
+
+    L.control.layers(null, layerName).addTo(map);
+
+    firstPush = 1;
+
+  } else {
+    console.log("> 1 push")
+    // cleaer the layer
+
+    // plot new points based on date
+    console.log("removing layer");
+    map.removeLayer(markerClusterLayerHigh);
+    map.removeLayer(markerClusterLayerMiddle);
+
+    markerClusterLayerHigh.clearLayers();
+    markerClusterLayerMiddle.clearLayers();
+
+
+    // console.log("markerClusterLayerMiddle=",markerClusterLayerMiddle);
+    
+    // console.log("markerClusterLayerHigh=",markerClusterLayerHigh)
+
+    // console.log("has highRiskLayer 3", map.hasLayer(highRiskLayer));
+    // console.log("has markerClusterLayerHigh 3",map.hasLayer(markerClusterLayerHigh));
+    // console.log("adding layer");
+
+    highRiskLayer = L.geoJson(
+      highRiskPoints.data,
+      {
+        pointToLayer: function (feature, latlng) {
+          // Use the custom marker icon for each marker
+          return L.marker(latlng, { icon: iconHigh });
+          // Option2: Use the circle marker icon for each marker, has animation bug
+          //   return L.circleMarker(latlng, {
+          //     radius: 10,
+          //     color: 'red',
+          //     weight: 4,
+          //     fillColor: '#f03',
+          //     fillOpacity: 0.5 });
+        },
+
+        onEachFeature: function (feature, layer) {
+          layer.bindPopup(`<div>
             <h5>Level: High Risk</h5>
             <h5>Address:<br>${feature.properties.full_address}</h5>
         </div>`);
-      },
-    } // end onEachFeature
-  ).addTo(markerClusterLayerHigh); // end L.geoJson
+        },
+      } // end onEachFeature
+    ).addTo(markerClusterLayerHigh); // end L.geoJson
 
-  const middleRiskLayer = L.geoJson(
-    middleRiskPoints.data,
-    {
-      pointToLayer: function (feature, latlng) {
-        // Use the custom marker icon for each marker
-        return L.marker(latlng, { icon: iconMiddle });
-      },
+    middleRiskLayer = L.geoJson(
+      middleRiskPoints.data,
+      {
+        pointToLayer: function (feature, latlng) {
+          // Use the custom marker icon for each marker
+          return L.marker(latlng, { icon: iconMiddle });
+        },
 
-      onEachFeature: function (feature, layer) {
-        layer.bindPopup(`<div>
+        onEachFeature: function (feature, layer) {
+          layer.bindPopup(`<div>
             <h5>Level: Middle Risk</h5>
             <h5>Address: <br>${feature.properties.full_address}</h5>
         </div>`);
-      },
-    } // end onEachFeature
-  ).addTo(markerClusterLayerMiddle); // end L.geoJson
+        },
+      } // end onEachFeature
+    ).addTo(markerClusterLayerMiddle); // end L.geoJson
 
-  map.addLayer(markerClusterLayerHigh);
-  map.addLayer(markerClusterLayerMiddle);
 
+    map.addLayer(markerClusterLayerHigh);
+    map.addLayer(markerClusterLayerMiddle);
+
+
+
+      // map.addLayer(markerClusterLayerHigh);
+    // map.addLayer(markerClusterLayerMiddle);
+    console.log("has highRiskLayer 4", map.hasLayer(highRiskLayer));
+    console.log("has markerClusterLayerHigh 4",map.hasLayer(markerClusterLayerHigh));
+
+
+
+    // console.log("has highRiskLayer 3", map.hasLayer(highRiskLayer));
+    // console.log(
+    //   "has markerClusterLayerHigh 3",
+    //   map.hasLayer(markerClusterLayerHigh)
+    // );
+
+    // map.addLayer(markerClusterLayerHigh);
+    // map.addLayer(markerClusterLayerMiddle);
+  }
   // markerClusterLayer.addTo(map);
 
-  let layerGroup = L.layerGroup([
-    markerClusterLayerHigh,
-    markerClusterLayerMiddle,
-  ]);
-  let layerName = {
-    "High Risk Area": markerClusterLayerHigh,
-    "Middle Risk Area": markerClusterLayerMiddle,
-  };
-
-  L.control.layers(null, layerName).addTo(map);
+  // let layerGroup = L.layerGroup([
+  //   markerClusterLayerHigh,
+  //   markerClusterLayerMiddle,
+  // ]);
 }
-
 
 async function plotCase() {
   // data source: https://github.com/HaoyuA/D3.js-Data-Visualization
@@ -261,29 +365,38 @@ async function plotCase() {
   const info = L.control();
 
   info.onAdd = function (map) {
-    this._div = L.DomUtil.create('div', 'info');
+    this._div = L.DomUtil.create("div", "info");
     this.update();
     return this._div;
   };
 
   info.update = function (props) {
-    const contents = props ? `<b>${props.name}</b><br /> size = ${props.size} ` : 'Hover over a province';
+    const contents = props
+      ? `<b>${props.name}</b><br /> size = ${props.size} `
+      : "Hover over a province";
 
     this._div.innerHTML = `<h4></h4>${contents}`;
   };
 
   info.addTo(map);
 
-
   // get color depending on population density value
   function getColor(d) {
-    return d > 1000 ? '#800026' :
-      d > 500 ? '#BD0026' :
-        d > 200 ? '#E31A1C' :
-          d > 100 ? '#FC4E2A' :
-            d > 50 ? '#FD8D3C' :
-              d > 20 ? '#FEB24C' :
-                d > 10 ? '#FED976' : '#FFEDA0';
+    return d > 1000
+      ? "#800026"
+      : d > 500
+      ? "#BD0026"
+      : d > 200
+      ? "#E31A1C"
+      : d > 100
+      ? "#FC4E2A"
+      : d > 50
+      ? "#FD8D3C"
+      : d > 20
+      ? "#FEB24C"
+      : d > 10
+      ? "#FED976"
+      : "#FFEDA0";
   }
 
   function style(feature) {
@@ -291,10 +404,10 @@ async function plotCase() {
     return {
       weight: 1,
       opacity: 1,
-      color: 'white',
+      color: "white",
       // dashArray: '3',
       fillOpacity: 0.7,
-      fillColor: getColor(feature.properties.size)
+      fillColor: getColor(feature.properties.size),
     };
   }
 
@@ -303,9 +416,9 @@ async function plotCase() {
 
     layer.setStyle({
       weight: 2,
-      color: '#fff',
-      dashArray: '',
-      fillOpacity: 0.7
+      color: "#fff",
+      dashArray: "",
+      fillOpacity: 0.7,
     });
 
     layer.bringToFront();
@@ -316,7 +429,7 @@ async function plotCase() {
   /* global provinceGeoJSON */
   const geojson = L.geoJson(provinceGeoJSON.data, {
     style,
-    onEachFeature
+    onEachFeature,
   }).addTo(map);
 
   function resetHighlight(e) {
@@ -332,18 +445,18 @@ async function plotCase() {
     layer.on({
       mouseover: highlightFeature,
       mouseout: resetHighlight,
-      click: zoomToFeature
+      click: zoomToFeature,
     });
   }
 
-  map.attributionControl.addAttribution('Data Source <a href="https://github.com/CSSEGISandData">CSSE at Johns Hopkins University</a>');
+  map.attributionControl.addAttribution(
+    'Data Source <a href="https://github.com/CSSEGISandData">CSSE at Johns Hopkins University</a>'
+  );
 
-
-  const legend = L.control({ position: 'bottomright' });
+  const legend = L.control({ position: "bottomright" });
 
   legend.onAdd = function (map) {
-
-    const div = L.DomUtil.create('div', 'info legend');
+    const div = L.DomUtil.create("div", "info legend");
     const grades = [0, 10, 20, 50, 100, 200, 500, 1000];
     const labels = [];
     let from, to;
@@ -352,22 +465,22 @@ async function plotCase() {
       from = grades[i];
       to = grades[i + 1];
 
-      labels.push(`<i style="background:${getColor(from + 1)}"></i> ${from}${to ? `&ndash;${to}` : '+'}`);
+      labels.push(
+        `<i style="background:${getColor(from + 1)}"></i> ${from}${
+          to ? `&ndash;${to}` : "+"
+        }`
+      );
     }
 
-    div.innerHTML = labels.join('<br>');
+    div.innerHTML = labels.join("<br>");
     return div;
   };
 
   legend.addTo(map);
-
-
 }
-
-
 
 console.log("Map is running");
 
-plotRiskPoints();
+plotRiskPoints("20220702");
 
-plotCase()
+plotCase();

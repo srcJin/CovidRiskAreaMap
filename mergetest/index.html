@@ -17,6 +17,13 @@
   <link rel="stylesheet" href="calendertest.css" />
   <link rel="stylesheet" href="map.css" />
   <link rel="stylesheet" href="info.css">
+  <!-- Timeline style start -->
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&family=Poppins:ital,wght@0,400;0,600;0,700;0,800;0,900;1,500&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="timeline.css">
+  <!-- Timeline style end -->
 
 </head>
 
@@ -44,7 +51,7 @@
       <div class="collapse navbar-collapse" id="navbar4">
         <ul class="navbar-nav mr-auto pl-lg-4">
           <li class="nav-item px-lg-2 active"> <a class="nav-link" href="#home"> <span
-            class="d-inline-block d-lg-none icon-width"><i class="fas fa-home"></i></span>Home</a> </li>
+                class="d-inline-block d-lg-none icon-width"><i class="fas fa-home"></i></span>Home</a> </li>
 
           <li class="nav-item px-lg-2 active"> <a class="nav-link" href="#mapPos"> <span
                 class="d-inline-block d-lg-none icon-width"><i class="fas fa-home"></i></span>Map</a> </li>
@@ -94,17 +101,20 @@
     </div>
   </nav>
 
+  <!--section corousell-->
+
   <!--hero corousell-->
   <div id="home"></div>
-  <div class="text-center text-white" >
+  <div class="text-center text-white">
+
     <div class="container-fluid">
       <!-- carousel start -->
       <div id="carouselExampleFade" class="carousel slide carousel-fade" data-bs-ride="carousel">
         <!-- overlay effect defined by css -->
         <div class="overlay">
           <h1 class="display-4 mb-4 "> Three Years in One Map</h1>
-          <p class="lead mb-5">A documentation of the risk level regulation in China from 2020 to 2022. </p> <a href="#mapPos"
-            class="btn btn-lg btn-outline-light mx-1">Show Map</a>
+          <p class="lead mb-5">A documentation of the risk level regulation in China from 2020 to 2022. </p> <a
+            href="#mapPos" class="btn btn-lg btn-outline-light mx-1">Show Map</a>
         </div>
         <div class="carousel-inner">
           <div class="carousel-item active">
@@ -135,287 +145,463 @@
       </div>
       <!-- carousel end -->
 
-
-
     </div>
-  </div>
-  </div>
-
-
-  <div class="container mt-4" id="mapPos">
-    <div class="panel panel-blue"></div>
-  </div>
 
 
 
-  <!-- nested panel ref:  https://codepen.io/cristinaconacel/pen/OBoGZr -->
+    <!-- nested panel ref:  https://codepen.io/cristinaconacel/pen/OBoGZr -->
 
+    <!-- section Map -->
+    <div class="container mt-4" id="mapPos">
+      <div class="panel panel-blue"></div>
+    </div>
+    <!-- map container -->
+    <div class="container mt-4">
+      <div class="row">
+        <div class="col-sm-8">
+          <div class="panel panel-blue">
+            <h1>map</h1>
+            <div class="container">
+              <div id="map"></div>
+            </div>
 
-
-  <!-- map container -->
-  <!-- <div id="mapPos"></div> -->
-  <div class="container mt-4" >
-    <div class="row">
-      <div class="col-sm-8">
-        <div class="panel panel-blue">
-          <h1>map</h1>
-          <div class="container">
-            <div id="map"></div>
           </div>
-
         </div>
-      </div>
 
-      <div class="col-sm-4">
-        <div class="panel panel-blue">date selecter
+        <div class="col-sm-4">
+          <div class="panel panel-blue">date selecter
 
-          <!-- start of date slider -->
-          <div class="container mt-4">
-            <div class="text-center">
-              <h5>Please select a date:<h5>
+            <!-- start of date slider -->
+            <div class="container mt-4">
+              <div class="text-center">
+                <h5>Please select a date:<h5>
+              </div>
+            </div>
+            <div class="slidecontainer mt-4">
+              <input type="range" min="0" max="878" value="0" class="slider" id="mySlider">
+            </div>
+            <div class="container text-center mt-3">
+              <span>Day:</span>
+              <span id="day" style="font-weight:bold;color:red"></span>
+              <span>Date:</span>
+              <span id="date" style="font-weight:bold;color:red"></span>
             </div>
           </div>
-          <div class="slidecontainer mt-4">
-            <input type="range" min="1" max="100" value="0" class="slider" id="mySlider">
-          </div>
-          <div class="container text-center mt-3">
-            <span>Day:</span>
-            <span id="day" style="font-weight:bold;color:red"></span>
-            <span>Date:</span>
-            <span id="date" style="font-weight:bold;color:red"></span>
+          <script src="slider.js"></script>
+
+
+          <div class="panel panel-blue">right below
+            <!-- start of date picker -->
+            <!-- ref: https://mymth.github.io/vanillajs-datepicker/#/ -->
+
+            <!-- Vanilla Datepicker JS -->
+            <!-- ref: https://www.codehim.com/bootstrap/bootstrap-text-input/bootstrap-5-datepicker-with-vanilla-js/ -->
+            <script
+              src="https://cdn.jsdelivr.net/npm/vanillajs-datepicker@1.1.4/dist/js/datepicker-full.min.js"></script>
+            <!-- <script src="datepicker-full.js"></script> -->
+
+            <div class="row">
+              <div class="col-sm-8">
+                <div class="mx-auto mt-5" style="width: 250px">
+                  <div class="input-group ">
+                    <i id="dateSelected" class="bi bi-calendar-date input-group-text"></i>
+                    <input type="text" class="datepicker_input form-control" placeholder="select a date..." required />
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-sm-1">
+                <!-- button: https://getbootstrap.com/docs/4.0/components/buttons/ -->
+                <div class="text-center mt-5">
+                  <button type="button" class="btn btn-light" onclick="getSelectedDate()">Update</button>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-        <script src="slider.js"></script>
 
+      </div>
+      <!-- end of date picker -->
 
-        <div class="panel panel-blue">right below
-          <!-- start of date picker -->
-          <!-- ref: https://mymth.github.io/vanillajs-datepicker/#/ -->
+      <!-- map related scripts -->
+      <div>
+        <script src="calendertest.js"></script>
 
-          <!-- Vanilla Datepicker JS -->
-          <!-- ref: https://www.codehim.com/bootstrap/bootstrap-text-input/bootstrap-5-datepicker-with-vanilla-js/ -->
-          <script src="https://cdn.jsdelivr.net/npm/vanillajs-datepicker@1.1.4/dist/js/datepicker-full.min.js"></script>
-          <!-- <script src="datepicker-full.js"></script> -->
+        <!-- start of map scripts -->
+        <!-- axios -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.1.3/axios.min.js"
+          integrity="sha512-0qU9M9jfqPw6FKkPafM3gy2CBAvUWnYVOfNPDYKVuRTel1PrciTj+a9P3loJB+j0QmN2Y0JYQmkBBS8W+mbezg=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
-          <div class="row">
-            <div class="col-sm-8">
-              <div class="mx-auto mt-5" style="width: 250px">
-                <div class="input-group ">
-                  <i id="dateSelected" class="bi bi-calendar-date input-group-text"></i>
-                  <input type="text" class="datepicker_input form-control" placeholder="select a date..." required />
+        <!-- Leaflet first -->
+        <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
+          integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
+          crossorigin=""></script>
+
+        <!-- import Chinese map provider plugin -->
+        <script src="https://cdn.bootcss.com/proj4js/2.4.3/proj4.js"></script>
+        <script src="https://cdn.bootcss.com/proj4leaflet/1.0.1/proj4leaflet.min.js"></script>
+        <script type="text/javascript" src="./leaflet.ChineseTmsProviders.js"></script>
+
+        <!-- import marker cluster -->
+        <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.Default.css" />
+        <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.css" />
+        <script src="https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster-src.js"></script>
+
+        <!-- Our own script is usually at the bottom -->
+        <!-- It's the last because it will make use of all the preceeding JavaScript -->
+        <script src="map.js"></script>
+
+        <!-- end of map scripts -->
+      </div>
+
+      <!-- section chart , disabled   -->
+      <!-- <div class="container mt-4" id="statistics">
+        <div class="panel panel-blue"></div>
+      </div>
+      <div class="container center mt-4">
+        <div class="panel panel-blue">
+          <h1>Statistics</h1>
+          <div id="wrapper">
+            <div id="chart-bar">
+            </div>
+            <div id="chart-province">
+            </div>
+            <div id="chart-cases">
+            </div>
+          </div>
+
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
+          <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+          <script src="charts.js"></script>
+        </div>
+      </div> -->
+
+      <div class="container mt-4" id="info">
+        <div class="panel panel-blue"></div>
+      </div>
+
+      <!-- section Info  -->
+      <div class="container mt-4">
+        <div class="panel panel-blue">
+          <p>info</p>
+          <!-- start of info section -->
+          <!-- ref: https://getbootstrap.com/docs/5.0/components/card/ -->
+
+          <div class="container center">
+            <h1>About the Risk Area Policy</h1>
+          </div>
+          <div class="container">
+            <p>In China, when an infected person is identified, all close contacts are required to undergo a 14-day
+              quarantine with multiple rounds of PCR testing.<sup id="cite_ref-NatMed-Li-2021_27-1" class="reference"><a
+                  href="#cite_note-NatMed-Li-2021-27">[26]</a></sup> In order to minimize the risk that these close
+              contacts
+              pose for outbreak containment, China has implemented quarantine in centralized facilities for those deemed
+              to
+              be at the highest-risk of infection.<sup id="cite_ref-BMJ-Chen-2021_24-8" class="reference"><a
+                  href="#cite_note-BMJ-Chen-2021-24">[23]</a></sup> Secondary close contacts (contacts of close
+              contacts)
+              are sometimes required to quarantine at home.<sup id="cite_ref-BMJ-Chen-2021_24-9" class="reference"><a
+                  href="#cite_note-BMJ-Chen-2021-24">[23]</a></sup>
+            <p class="text-end"><small>Source: <a href="https://en.wikipedia.org/wiki/Zero-COVID">Wikipedia
+                  Zero-COVID</a></small></p>
+
+            </p>
+          </div>
+          <div class="container">
+            <div class="row row-cols-1 row-cols-md-3 g-4">
+              <div class="col">
+                <div class="card h-100">
+                  <img src="./images/low.png" class="card-img-top mt-3 mb-1" alt="low risk area icon">
+                  <div class="card-body">
+                    <h5 class="card-title center"><b>Low</b> Risk Area</h5>
+                    <!-- <p class="card-text">病例和无症状感染者居住地，以及活动频繁且疫情传播风险较高的工作地和活动地等区域。</p> -->
+                    <p class="card-text">Areas where cases and asymptomatic infected persons live, and areas such as
+                      workplaces and activities with high activity and high risk of outbreak transmission.</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col">
+                <div class="card h-100">
+                  <img src="./images/middle.png" class="card-img-top mt-3 mb-1" alt="middle risk area icon">
+                  <div class="card-body">
+                    <h5 class="card-title center"><b>Middle</b> Risk Area</h5>
+                    <!-- <p class="card-text">高风险区连续7天无新增感染者降为中风险区</p> -->
+                    <p class="card-text">High-risk area without new infections for 7 consecutive days is downgraded to
+                      medium-risk area</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col">
+                <div class="card h-100">
+                  <img src="./images/high.png" class="card-img-top mt-3 mb-1" alt="high risk area icon">
+                  <div class="card-body">
+                    <h5 class="card-title center"><b>High</b> Risk Area</h5>
+                    <p class="card-text">Areas other than risk areas</p>
+                    <!-- <p class="card-text">除风险区外的其他地区</p> -->
+                  </div>
                 </div>
               </div>
             </div>
 
-            <div class="col-sm-1">
-              <!-- button: https://getbootstrap.com/docs/4.0/components/buttons/ -->
-              <div class="text-center mt-5">
-                <button type="button" class="btn btn-light" onclick="getSelectedDate()">Update</button>
-              </div>
+            <div class="container text-end">
+              <p><small>Reference: <a
+                    href="https://www.gov.cn/zhengce/zhengceku/2022-03/15/5679257/files/49854a49c7004f4ea9e622f3f2c568d8.pdf">新型冠状病毒肺炎防控方案（第九版）</a></small>
+              </p>
             </div>
           </div>
-        </div>
-      </div>
-    </div>
 
-    <script src="calendertest.js"></script>
-    <script>
-      function getSelectedDate() {
-        let date = elems[0].datepicker.dates;
-        if (date.length == 0) {
-          console.log("date not selected")
-        }
-        else {
-          console.log("date = ", date)
-        }
-      }
-    </script>
-
-    <!-- end of date picker -->
-
-
-    <!-- start of map scripts -->
-    <!-- axios -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.1.3/axios.min.js"
-      integrity="sha512-0qU9M9jfqPw6FKkPafM3gy2CBAvUWnYVOfNPDYKVuRTel1PrciTj+a9P3loJB+j0QmN2Y0JYQmkBBS8W+mbezg=="
-      crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-
-    <!-- Leaflet first -->
-    <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
-      integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
-      crossorigin=""></script>
-
-    <!-- import Chinese map provider plugin -->
-    <script src="https://cdn.bootcss.com/proj4js/2.4.3/proj4.js"></script>
-    <script src="https://cdn.bootcss.com/proj4leaflet/1.0.1/proj4leaflet.min.js"></script>
-    <script type="text/javascript" src="./leaflet.ChineseTmsProviders.js"></script>
-
-    <!-- import marker cluster -->
-    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.Default.css" />
-    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.css" />
-    <script src="https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster-src.js"></script>
-
-    <!-- Our own script is usually at the bottom -->
-    <!-- It's the last because it will make use of all the preceeding JavaScript -->
-    <script src="map.js"></script>
-
-    <!-- end of map scripts -->
-
-
-
-
-  </div>
-  </div>
-  </div>
-  <!-- <div id="services">
-    <h1> hello </h1>
-  </div> -->
-
-  <!-- chart container -->
-  <div class="container mt-4" id="statistics">
-    <div class="panel panel-blue"></div>
-  </div>
-  <div class="container center mt-4" >
-    <div class="panel panel-blue">
-      <h1>Statistics</h1>
-      <div id="wrapper">
-        <div id="chart-bar">
-        </div>
-        <div id="chart-province">
-        </div>
-        <div id="chart-cases">
+          <!-- end of info section -->
         </div>
       </div>
 
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
-      <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
-      <script src="charts.js"></script>
-    </div>
-  </div>
-
-  <div class="container mt-4" id="info">
-    <div class="panel panel-blue"></div>
-  </div>
-  
-  <div class="container mt-4" >
-    <div class="panel panel-blue">
-      <p>info</p>
-      <!-- start of info section -->
-      <!-- ref: https://getbootstrap.com/docs/5.0/components/card/ -->
-
-      <div class="container center">
-        <h1>About the Risk Area Policy</h1>
+      <!-- bootstrap responsive columns http://bootstrap.themes.guide/how-to-responsive-design-with-bootstrap.html -->
+      <!-- info section 2, disabled-->
+      <!-- <div class="container">
+      <div class="row">
+        <div class="col-sm-4">
+          <div class="panel panel-blue">info</div>
+        </div>
+        <div class="col-sm-4">
+          <div class="panel panel-blue">info</div>
+        </div>
+        <div class="col-sm-4">
+          <div class="panel panel-blue">info</div>
+        </div>
       </div>
-      <div class="container">
-        <p>In China, when an infected person is identified, all close contacts are required to undergo a 14-day
-          quarantine with multiple rounds of PCR testing.<sup id="cite_ref-NatMed-Li-2021_27-1" class="reference"><a
-              href="#cite_note-NatMed-Li-2021-27">[26]</a></sup> In order to minimize the risk that these close contacts
-          pose for outbreak containment, China has implemented quarantine in centralized facilities for those deemed to
-          be at the highest-risk of infection.<sup id="cite_ref-BMJ-Chen-2021_24-8" class="reference"><a
-              href="#cite_note-BMJ-Chen-2021-24">[23]</a></sup> Secondary close contacts (contacts of close contacts)
-          are sometimes required to quarantine at home.<sup id="cite_ref-BMJ-Chen-2021_24-9" class="reference"><a
-              href="#cite_note-BMJ-Chen-2021-24">[23]</a></sup>
-        <p class="text-end"><small>Source: <a href="https://en.wikipedia.org/wiki/Zero-COVID">Wikipedia
-              Zero-COVID</a></small></p>
+    </div> -->
 
-        </p>
+      <!-- section Timeline  -->
+      <div class="container mt-4" id="timeline">
+        <div class="panel panel-blue">
+
+        </div>
       </div>
-      <div class="container">
-        <div class="row row-cols-1 row-cols-md-3 g-4">
-          <div class="col">
-            <div class="card h-100">
-              <img src="./images/low.png" class="card-img-top mt-3 mb-1" alt="low risk area icon">
-              <div class="card-body">
-                <h5 class="card-title center"><b>Low</b> Risk Area</h5>
-                <!-- <p class="card-text">病例和无症状感染者居住地，以及活动频繁且疫情传播风险较高的工作地和活动地等区域。</p> -->
-                <p class="card-text">Areas where cases and asymptomatic infected persons live, and areas such as
-                  workplaces and activities with high activity and high risk of outbreak transmission.</p>
+      <div class="container mt-4">
+        <div class="panel panel-blue">
+          <h3>timeline</h3>
+          <!-- start of timeline -->
+          <div class="container-fluid mb-3">
+            <!-- timeline ref: https://codepen.io/alvarotrigo/pen/MWEgejK -->
+            <section class="about-timeline">
+              <div class="wrapper inner-wrapper-padding ">
+
+                <div class="start-point">
+                  <div class="black-dot"></div>
+                  <!-- <h4>Start</h4> -->
+                </div>
+
+                <div class="timeline-main">
+                  <div class="timeline-row">
+
+                    <div class="timeline-box timeline-content-img logo-timeline-arrow">
+                      <div class="timeline-box-wrap">
+                        <h6>1950</h6>
+                        <div class="timeline-content">
+
+                          <img
+                            src="https://images.unsplash.com/photo-1593941502440-c1b305fb66df?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1952&q=80"
+                            alt="">
+                          <div class="timeline-content-txt">
+                            <p>text1</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="timeline-box timeline-content-img logo-timeline-arrow">
+                      <div class="timeline-box-wrap">
+                        <h6>1955</h6>
+                        <div class="timeline-content">
+                          <div class="timeline-content-txt">
+                            <p>text2 Lorem Ipsum is <br />simply dummy text<br /> of the printing and<br /> typesetting
+                              industry.</p>
+                            <p>&nbsp;</p>
+                          </div>
+                          <img
+                            src="https://images.pexels.com/photos/4913399/pexels-photo-4913399.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=100"
+                            alt="">
+                        </div>
+                      </div>
+                    </div>
+                    <div class="horizontal-line"></div>
+                    <div class="verticle-line"></div>
+                    <div class="corner top"></div>
+                    <div class="corner bottom"></div>
+                  </div>
+
+
+                  <div class="timeline-row">
+                    <div class="timeline-box img-right timeline-content-img">
+                      <div class="timeline-box-wrap">
+                        <h6>1965</h6>
+                        <div class="timeline-content">
+                          <div class="timeline-content-txt">
+                            <p>text3 Lorem Ipsum is simply dummy text of the printing andtypesetting industry.</p>
+                          </div>
+                          <img
+                            src="https://images.unsplash.com/photo-1511022890239-e52f7d3bec4d?ixid=MXwxMjA3fDB8MHxzZWFyY2h8NjR8fHNob3djYXNlfGVufDB8fDB8&ixlib=rb-1.2.1&auto=format&fit=crop&w=180&q=60"
+                            alt="">
+                        </div>
+                      </div>
+                    </div>
+                    <div class="timeline-box ">
+                      <div class="timeline-box-wrap">
+                        <h6>1975</h6>
+                        <div class="timeline-content">
+                          <div class="timeline-content-txt">
+                            <p>text4 Lorem Ipsum is<br /> simply dummy text<br /> of the printing and<br /> typesetting
+                              industry.</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="timeline-box img-right timeline-content-img top-timeline-arrow">
+                      <div class="timeline-box-wrap">
+                        <h6>1985</h6>
+                        <div class="timeline-content">
+                          <div class="timeline-content-txt">
+                            <p>text5 Laoreet nisl. Metus A.<br> Fringilla Donec taciti<br> et euismod malesuada<br>
+                              class
+                            </p>
+                          </div>
+                          <img
+                            src="https://images.unsplash.com/photo-1603143285586-6381819de2cf?ixid=MXwxMjA3fDB8MHxzZWFyY2h8ODh8fHNob3djYXNlfGVufDB8fDB8&ixlib=rb-1.2.1&auto=format&fit=crop&w=150&q=60"
+                            alt="">
+                        </div>
+                      </div>
+                    </div>
+                    <div class="horizontal-line"></div>
+                    <div class="verticle-line"></div>
+                    <div class="corner top"></div>
+                    <div class="corner bottom"></div>
+                  </div>
+                  <div class="timeline-row">
+                    <div class="timeline-box img-left timeline-content-img">
+                      <div class="timeline-box-wrap">
+                        <h6>1995</h6>
+                        <div class="timeline-content">
+                          <div class="timeline-content-txt">
+                            <p>text6 Lorem Ipsum is simply dummy text of the printing and.</p>
+                            <p>text7 Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                          </div>
+                          <img
+                            src="https://images.pexels.com/photos/6044227/pexels-photo-6044227.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=100"
+                            alt="">
+                        </div>
+                      </div>
+                    </div>
+                    <div class="timeline-box timeline-content-img">
+                      <div class="timeline-box-wrap">
+                        <h6>1998</h6>
+                        <div class="timeline-content">
+                          <div class="timeline-content-txt">
+                            <p>text8 Lorem Ipsum is<br />
+                              simply dummy text<br />
+                              of the printing and<br />
+                              typesetting industry.</p>
+                            <p>&nbsp;</p>
+                          </div>
+                          <img
+                            src="https://images.unsplash.com/photo-1615838924642-21e432f30cb2?ixid=MXwxMjA3fDB8MHxzZWFyY2h8OTh8fHNob3djYXNlfGVufDB8fDB8&ixlib=rb-1.2.1&auto=format&fit=crop&w=250&q=60"
+                            alt="">
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="timeline-box img-right timeline-content-img">
+                      <div class="timeline-box-wrap">
+                        <h6>2015</h6>
+                        <div class="timeline-content">
+                          <div class="timeline-content-txt">
+                            <p>text12 Lorem Ipsum is
+                              simply<br /> dummy text
+                              of the<br /> printing and
+                              typesetting<br /> industry.</p>
+                          </div>
+                          <img
+                            src="https://images.pexels.com/photos/4592257/pexels-photo-4592257.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=150"
+                            alt="">
+                        </div>
+                      </div>
+                    </div>
+                    <div class="horizontal-line"></div>
+                    <div class="verticle-line"></div>
+                    <div class="corner top"></div>
+                    <div class="corner bottom"></div>
+                  </div>
+                  <div class="timeline-row">
+                    <div class="timeline-box timeline-content-img">
+                      <div class="timeline-box-wrap">
+                        <h6>2016</h6>
+                        <div class="timeline-content">
+                          <div class="timeline-content-txt">
+                            <p>
+                              text13 Interdum Tincidunt Dictum<br /> Sapien Pellentesque Velit<br /> Vivamus Magnis
+                            </p>
+                          </div>
+                          <img
+                            src="https://images.pexels.com/photos/4732675/pexels-photo-4732675.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=150"
+                            alt="">
+                        </div>
+                      </div>
+                    </div>
+                    <div class="timeline-box ">
+                      <div class="timeline-box-wrap">
+                        <h6>2018</h6>
+                        <div class="timeline-content">
+                          <div class="timeline-content-txt">
+                            <p>text14 Nisl rhoncus montes<br /> Non diam tincidunt.<br /> A est adipiscing<br />
+                              condimentum
+                              penatibus.
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="timeline-box img-left timeline-content-img">
+                      <div class="timeline-box-wrap">
+                        <h6>2020</h6>
+                        <div class="timeline-content">
+                          <div class="timeline-content-txt">
+                            <p>text15: Lorem Ipsum <br />is simply dummy text<br /> of the printing and.</p>
+                          </div>
+                          <img
+                            src="https://images.pexels.com/photos/3762927/pexels-photo-3762927.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=150"
+                            alt="">
+                        </div>
+                      </div>
+                    </div>
+                    <div class="horizontal-line"></div>
+                    <div class="verticle-line"></div>
+                    <div class="corner top"></div>
+                    <div class="corner bottom"></div>
+                    <!-- <div class="start-point end-point">
+          <h4>The end</h4>
+        </div> -->
+                  </div>
+                </div>
               </div>
-            </div>
+            </section>
           </div>
-          <div class="col">
-            <div class="card h-100">
-              <img src="./images/middle.png" class="card-img-top mt-3 mb-1" alt="middle risk area icon">
-              <div class="card-body">
-                <h5 class="card-title center"><b>Middle</b> Risk Area</h5>
-                <!-- <p class="card-text">高风险区连续7天无新增感染者降为中风险区</p> -->
-                <p class="card-text">High-risk area without new infections for 7 consecutive days is downgraded to
-                  medium-risk area</p>
-              </div>
-            </div>
-          </div>
-          <div class="col">
-            <div class="card h-100">
-              <img src="./images/high.png" class="card-img-top mt-3 mb-1" alt="high risk area icon">
-              <div class="card-body">
-                <h5 class="card-title center"><b>High</b> Risk Area</h5>
-                <p class="card-text">Areas other than risk areas</p>
-                <!-- <p class="card-text">除风险区外的其他地区</p> -->
-              </div>
-            </div>
-          </div>
-        </div>
+          <!-- <script src="timeline.js"></script> -->
+          <!-- end of timeline -->
 
-        <div class="container text-end">
-          <p><small>Reference: <a
-                href="https://www.gov.cn/zhengce/zhengceku/2022-03/15/5679257/files/49854a49c7004f4ea9e622f3f2c568d8.pdf">新型冠状病毒肺炎防控方案（第九版）</a></small>
-          </p>
         </div>
       </div>
 
-      <!-- end of info section -->
-    </div>
-  </div>
-
-  <!-- bootstrap responsive columns http://bootstrap.themes.guide/how-to-responsive-design-with-bootstrap.html -->
-  
-  <div class="container">
-    <div class="row">
-      <div class="col-sm-4">
-        <div class="panel panel-blue">info</div>
+      <!-- section About  -->
+      <div class="container mt-4">
+        <div class="panel panel-blue">about</div>
       </div>
-      <div class="col-sm-4">
-        <div class="panel panel-blue">info</div>
-      </div>
-      <div class="col-sm-4">
-        <div class="panel panel-blue">info</div>
-      </div>
-    </div>
-  </div>
-
-  <div class="container mt-4" id="timeline">
-    <div class="panel panel-blue"></div>
-  </div>
-  <div class="container mt-4">
-    <div class="panel panel-blue">timeline</div>
-  </div>
-
-  <div class="container mt-4">
-    <div class="panel panel-blue">about</div>
-  </div>
-
-  <!-- bootstrap non responsive columns https://getbootstrap.com/docs/5.0/layout/columns/ -->
-  <!-- <div class="container">
-    <div class="row align-items-center">
-      <div class="col">
-        <div class="panel panel-blue">left</div>
-      </div>
-      <div class="col">
-        <div class="panel panel-blue">middle</div>
-      </div>
-      <div class="col">
-        <div class="panel panel-blue">right</div>
-      </div>
-    </div>
-  </div> -->
 
 
-  <!-- Footer-->
-  <footer class="bg-light py-5">
-    <div class="container px-4 px-lg-5">
-      <div class="small text-center text-muted">&copy; 2022 - Jin Gao</div>
-    </div>
-  </footer>
+      <!-- section Footer-->
+      <footer class="bg-light py-5">
+        <div class="container px-4 px-lg-5">
+          <div class="small text-center text-muted">&copy; 2022 - Jin Gao</div>
+        </div>
+      </footer>
 </body>
 
 </html>
