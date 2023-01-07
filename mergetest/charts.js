@@ -8,6 +8,7 @@
 //   var chart1 = new ApexCharts(document.querySelector("#chart-area"), options1);
 
 async function loadData() {
+  console.log("loadData() for charts")
   axios({
   method: "GET",
   url: "./data/statistics_preprocessed.json",
@@ -271,7 +272,21 @@ chart3.render();
 
 }
 
-loadData()
+let isChartLoaded = false
+
+// start to load data only when the user scroll to statistics class
+if (!isChartLoaded) {
+window.addEventListener('scroll', function() {
+  var scrollDistance = window.pageYOffset;
+  var element = document.querySelector('#statistics');
+  // console.log("element=",element);
+  if (scrollDistance > element.offsetTop-500) {
+    loadData()
+    isChartLoaded = true
+  }
+}
+);
+}
 
 
 function generateDayWiseTimeSeries(baseval, count, yrange) {

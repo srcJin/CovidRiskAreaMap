@@ -40,13 +40,18 @@ function getSelectedDate() {
   else {
     timestamp = parseInt(timestampString) - 28800000 // convert the timestamp from GMT+8 to GMT
     plotRiskPoints(convertTimestampToYYYYMMDD(timestamp))
+    plotCase(convertTimestampToYYYYMMDD(timestamp))
+
+
     console.log("timestamp = ", timestamp)
     let slide = document.getElementById("mySlider");
+
     slide.value = daysBetween(1595980800000,timestamp)
     console.log("slide.value" ,slide.value);
     var day = document.getElementById("day");
     day.innerHTML = slide.value;
 
+    // provide a feedback for the users
     var date = document.getElementById("date");
     // console.log(date);
     date.innerHTML = dayToDate(slide.value)[1];

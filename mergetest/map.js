@@ -109,7 +109,7 @@ let highRiskLayer = null;
 let middleRiskLayer = null;
 
 async function plotRiskPoints(date) {
-  console.log("plotRiskPoints!");
+  // console.log("plotRiskPoints!");
 
   // Define the custom marker icon
   var iconHigh = L.icon({
@@ -258,11 +258,11 @@ async function plotRiskPoints(date) {
 
     isPointsDraw = 1;
   } else {
-    console.log("> 1 push");
+    // console.log("> 1 push");
     // cleaer the layer
 
     // plot new points based on date
-    console.log("removing layer");
+    // console.log("removing layer");
     map.removeLayer(markerClusterLayerHigh);
     map.removeLayer(markerClusterLayerMiddle);
 
@@ -344,7 +344,8 @@ const emptyLayer = L.tileLayer("");
 let layerControl2
 let control
 let styleMode = 0
-
+let isLegendDraw = 0
+let previousStyleMode
 
 async function plotCase(date) {
   // province border data source: https://github.com/HaoyuA/D3.js-Data-Visualization
@@ -421,7 +422,7 @@ async function plotCase(date) {
     // Use ActiveLayer plugin to get the active baselayer name
 
     activeLayer = control.getActiveBaseLayer().name
-    console.log("activeLayer=",String(activeLayer))
+    // console.log("activeLayer=",String(activeLayer))
     // styleMode = 0
 
     if (activeLayer == "Risk Areas") {
@@ -436,9 +437,9 @@ async function plotCase(date) {
     if (activeLayer == "Turn Off") {
       styleMode = 3
     }
-    console.log("styleMode=",styleMode)
-    console.log("case > 1 push");
-    console.log("removing layer");
+    // console.log("styleMode=",styleMode)
+    // console.log("case > 1 push");
+    // console.log("removing layer");
 
 
     map.removeLayer(deaths);
@@ -450,55 +451,7 @@ async function plotCase(date) {
     // confirmed.clearLayers();
     // riskArea.clearLayers();
     
-    // riskArea = L.geoJson(provinceGeoJSON.data, {
-    //   style: function (feature) {
-    //     return {
-    //       weight: 1,
-    //       opacity: 1,
-    //       color: "white",
-    //       // dashArray: '3',
-    //       fillOpacity: 0.7,
-    //       fillColor: getColor(
-    //         feature.properties.high + feature.properties.middle,
-    //         "riskArea"
-    //       ),
-    //     };
-    //   },
-    //   onEachFeature,
-    // });
-  
-    // confirmed = L.geoJson(provinceGeoJSON.data, {
-    //   style: function (feature) {
-    //     return {
-    //       weight: 1,
-    //       opacity: 1,
-    //       color: "white",
-    //       // dashArray: '3',
-    //       fillOpacity: 0.7,
-    //       fillColor: getColor(feature.properties.confirmed, "confirmed"),
-    //     };
-    //   },
-    //   onEachFeature,
-    // });
-  
-    // deaths = L.geoJson(provinceGeoJSON.data, {
-    //   style: function (feature) {
-    //     return {
-    //       weight: 1,
-    //       opacity: 1,
-    //       color: "white",
-    //       // dashArray: '3',
-    //       fillOpacity: 0.7,
-    //       fillColor: getColor(feature.properties.deaths, "deaths"),
-    //     };
-    //   },
-    //   onEachFeature,
-    // });
-
-    // layerControl2.addBaseLayer(riskArea, "Risk Area")
-    // console.log("control.getOverlays()2",control.getOverlays());
-
-    console.log("styleMode=",styleMode);
+    // console.log("styleMode=",styleMode);
 
     if (styleMode == 0) {
       map.addLayer(riskArea);
@@ -531,10 +484,7 @@ async function plotCase(date) {
   // L.geoJson(provinceGeoJSON.data).addTo(map);
 
   // control that shows state info on hover
-
-
-
-
+ 
 
   info.onAdd = function (map) {
     this._div = L.DomUtil.create("div", "info");
@@ -599,23 +549,25 @@ async function plotCase(date) {
 
     // greyscale https://www.w3schools.com/colors/colors_shades.asp
     if (type == "deaths") {
-      return d > 1000
+      return d > 20
         ? "#000000"
-        : d > 500
+        : d > 15
         ? "#282828"
-        : d > 250
-        ? "#484848"
-        : d > 50
-        ? "#696969"
-        : d > 25
-        ? "#808080"
         : d > 10
-        ? "#A9A9A9"
+        ? "#484848"
+        : d > 8
+        ? "#696969"
         : d > 5
+        ? "#808080"
+        : d > 2
+        ? "#A9A9A9"
+        : d > 1
         ? "#D0D0D0"
         : "#DADADA";
     }
   }
+
+  
 
   function highlightFeature_bak(e) {
     const layer = e.target;
@@ -651,18 +603,6 @@ async function plotCase(date) {
       fillOpacity: 0.7,
     });
 
-    // try to reset highlight,but failed
-    // layer.on("mouseout", function (e) {
-    //   let hideTimeout = setTimeout(function () {
-    //     // layer.resetStyle(e.target)
-    //     layer.setStyle({
-    //       weight: 1,
-    //       color: "#fff",
-    //       dashArray: "",
-    //       fillOpacity: 0.7,
-    //     });
-    //   }, 200);
-    // });
 
     // added popup
     // ref: https://stackoverflow.com/questions/41522376/leaflet-open-popup-at-cursor-position-instead-of-linestring-center
@@ -700,7 +640,18 @@ async function plotCase(date) {
     // console.log("e=",e);
     // confirmed.resetStyle(e.target);
     // deaths.resetStyle(e.target);
-    riskArea.resetStyle(e.target);
+    if (styleMode == 0) {
+      riskArea.resetStyle(e.target);
+    }
+    if (styleMode == 1) {
+      confirmed.resetStyle(e.target);
+    }
+    if (styleMode == 2) {
+      deaths.resetStyle(e.target);
+    }
+    if (styleMode == 3) {
+    }
+    // riskArea.resetStyle(e.target);
 
     info.update();
   }
@@ -718,38 +669,133 @@ async function plotCase(date) {
     // console.log(layer)
   }
 
+  const legend_riskArea = L.control({ position: "bottomleft" });
+  const legend_confirmed = L.control({ position: "bottomleft" });
+  const legend_deaths = L.control({ position: "bottomleft" });
+  
+  legend_riskArea.onAdd = function (map) {
+    const div = L.DomUtil.create("div", "info legend");
+    const grades = [0, 5, 10, 25, 50, 250, 500, 1000];
+    const labels = [];
+    let from, to;
+    let legendType
+    for (let i = 0; i < grades.length; i++) {
+      from = grades[i];
+      to = grades[i + 1];
+      labels.push(
+        `<i style="background:${getColor(from + 1,"riskArea")}"></i> ${from}${
+          to ? `&ndash;${to}` : "+"
+        }`
+      );
+    }
+    div.innerHTML = labels.join("<br>");
+    return div;
+  };
+  legend_deaths.onAdd = function (map) {
+    const div = L.DomUtil.create("div", "info legend");
+    const grades = [0, 2, 5, 8, 10, 15, 20, 25];
+    const labels = [];
+    let from, to;
+    let legendType
+    for (let i = 0; i < grades.length; i++) {
+      from = grades[i];
+      to = grades[i + 1];
+      labels.push(
+        `<i style="background:${getColor(from + 1,"deaths")}"></i> ${from}${
+          to ? `&ndash;${to}` : "+"
+        }`
+      );
+    }
+    div.innerHTML = labels.join("<br>");
+    return div;
+  };
+  legend_confirmed.onAdd = function (map) {
+    const div = L.DomUtil.create("div", "info legend");
+    const grades = [0, 5, 10, 25, 50, 250, 500, 1000];
+    const labels = [];
+    let from, to;
+    let legendType
+    for (let i = 0; i < grades.length; i++) {
+      from = grades[i];
+      to = grades[i + 1];
+      labels.push(
+        `<i style="background:${getColor(from + 1,"confirmed")}"></i> ${from}${
+          to ? `&ndash;${to}` : "+"
+        }`
+      );
+    }
+    div.innerHTML = labels.join("<br>");
+    return div;
+  };
+
+
+  // only draw legend once
+  // auto show/hide legend: https://gis.stackexchange.com/questions/68941/add-remove-legend-with-leaflet-layers-control
+  if (isLegendDraw == 0) {
+    // console.log("drawing legends");
+    legend_riskArea.addTo(map);
+    isLegendDraw = 1
+    previousStyleMode = styleMode
+
+  } else {
+    console.log("stylemode=",styleMode);
+    console.log("previousStyleMode=",previousStyleMode);
+
+    if (styleMode != previousStyleMode) {
+      if (previousStyleMode == 0) {
+      console.log("removing legend riskArea");
+      // map.removeControl(legend_riskArea);
+      legend_riskArea.remove()
+      // map.removeLayer(legend_riskArea)    
+    }
+    else if (previousStyleMode == 1) {
+      console.log("removing legend_confirmed");
+      // map.removeControl(legend_confirmed);
+      legend_confirmed.remove()
+      // map.removeLayer(legend_confirmed)
+    }
+   else if (previousStyleMode == 2) {
+    console.log("removing legend_deaths");
+      // map.removeControl(legend_deaths);
+      legend_deaths.remove()
+
+      // map.removeLayer(legend_deaths)
+    }
+    else if (previousStyleMode == 3) {
+    }
+
+    if (styleMode == 0) {
+
+    legend_riskArea.addTo(map);
+    previousStyleMode = 0
+    } else if (styleMode == 1) {
+    legend_confirmed.addTo(map);
+    previousStyleMode = 1
+  } else if (styleMode == 2) {
+
+    legend_deaths.addTo(map)
+    previousStyleMode = 2
+  } else {
+    previousStyleMode = 3
+  }
+    
+
+  }
+}
+
+
+
+
+
+
+
+
+}
   // map.attributionControl.addAttribution(
   //   'Data Source <a href="https://github.com/CSSEGISandData">CSSE at Johns Hopkins University</a>'
   // );
 
-  // only draw legend once
-  if (isCasesDraw == 0) {
-    const legend = L.control({ position: "bottomright" });
 
-    legend.onAdd = function (map) {
-      const div = L.DomUtil.create("div", "info legend");
-      const grades = [0, 5, 10, 25, 50, 250, 500, 1000];
-      const labels = [];
-      let from, to;
-
-      for (let i = 0; i < grades.length; i++) {
-        from = grades[i];
-        to = grades[i + 1];
-
-        labels.push(
-          `<i style="background:${getColor(from + 1)}"></i> ${from}${
-            to ? `&ndash;${to}` : "+"
-          }`
-        );
-      }
-
-      div.innerHTML = labels.join("<br>");
-      return div;
-    };
-
-    legend.addTo(map);
-  }
-}
 
 console.log("Map is running");
 

@@ -9,16 +9,20 @@ a:focus {outline: none !important;}
 /* font can be edited in the future */
 /* body { font-family: 'Inter', sans-serif; color: #333333; font-weight: 400; font-size: 20px; line-height: 1.5; margin: 0; padding: 0; overflow-x: hidden; -webkit-text-size-adjust: 100%;} */
 img {max-width: 100%;}
-p, li {font-size: 20px; color: #333333; line-height: 1.5;}
-p {margin:0 0 20px 0;}
-ul {margin: 0; padding: 0;}
-h1, h2, h3, h4, h5, h6 {
-  margin: 0;
+p, li {
+  /* font-size: 20px; */
+   /* color: #333333; line-height: 1.5; */
+  }
+
+/* p {margin:0 0 20px 0;}
+ul {margin: 0; padding: 0;} */
+h1, h2, h3, h4, h5, h6,p {
+  /* margin: 0;
   margin-top: 0px;
-  line-height: normal;
+  line-height: normal; */
   font-family: 'Poppins', sans-serif;
-  line-height: 1.1;
-  font-weight: 700;
+  /* line-height: 1.1; */
+  /* font-weight: 700;  */
 }
 .wrapper {
   margin: 0 auto;
