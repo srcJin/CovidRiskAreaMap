@@ -344,29 +344,6 @@ const emptyLayer = L.tileLayer("");
 let layerControl2
 let control
 let styleMode = 0
-// L.Control.Layers.include({
-//   getOverlays: function() {
-//     // create hash to hold all layers
-//     var control, layers;
-//     layers = {};
-//     control = this;
-
-//     // loop thru all layers in control
-//     control._layers.forEach(function(obj) {
-//       var layerName;
-
-//       // check if layer is an overlay
-//       if (obj.overlay) {
-//         // get name of overlay
-//         layerName = obj.name;
-//         // store whether it's present on the map or not
-//         return layers[layerName] = control._map.hasLayer(obj.layer);
-//       }
-//     });
-
-//     return layers;
-//   }
-// });
 
 
 async function plotCase(date) {
@@ -382,7 +359,7 @@ async function plotCase(date) {
         opacity: 1,
         color: "white",
         // dashArray: '3',
-        fillOpacity: 0.7,
+        fillOpacity: 1,
         fillColor: getColor(
           feature.properties.high + feature.properties.middle,
           "riskArea"
@@ -399,7 +376,7 @@ async function plotCase(date) {
         opacity: 1,
         color: "white",
         // dashArray: '3',
-        fillOpacity: 0.7,
+        fillOpacity: 1,
         fillColor: getColor(feature.properties.confirmed, "confirmed"),
       };
     },
@@ -413,7 +390,7 @@ async function plotCase(date) {
         opacity: 1,
         color: "white",
         // dashArray: '3',
-        fillOpacity: 0.7,
+        fillOpacity: 1,
         fillColor: getColor(feature.properties.deaths, "deaths"),
       };
     },
@@ -431,11 +408,9 @@ async function plotCase(date) {
   if (isCasesDraw == 0) {
     // control = L.control.layers(layerControl2, null).addTo(map);
 
-
-    // deaths.addTo(map);
-    // riskArea.addTo(map);
     map.addLayer(riskArea);
     // confirmed.addTo(map);
+
     control = L.control.activeLayers(layerControl2, null)
     control.addTo(map);
 
@@ -446,18 +421,22 @@ async function plotCase(date) {
     // Use ActiveLayer plugin to get the active baselayer name
 
     activeLayer = control.getActiveBaseLayer().name
-    console.log("activeLayer=",activeLayer)
+    console.log("activeLayer=",String(activeLayer))
+    // styleMode = 0
 
     if (activeLayer == "Risk Areas") {
       styleMode = 0
     }
-    if (activeLayer == "Confrimed Cases") {
+    if (activeLayer == "Confirmed Cases") {
       styleMode = 1
     }
     if (activeLayer == "Deaths") {
       styleMode = 2
     }
-
+    if (activeLayer == "Turn Off") {
+      styleMode = 3
+    }
+    console.log("styleMode=",styleMode)
     console.log("case > 1 push");
     console.log("removing layer");
 
@@ -465,14 +444,12 @@ async function plotCase(date) {
     map.removeLayer(deaths);
     map.removeLayer(riskArea);
     map.removeLayer(confirmed);
+    map.removeLayer(emptyLayer);
 
-    deaths.clearLayers();
-    confirmed.clearLayers();
-    riskArea.clearLayers();
-    // layerControl2.addBaseLayer(riskArea, "Risk Area")
-    // console.log("control.getOverlays()2",control.getOverlays());
-
-
+    // deaths.clearLayers();
+    // confirmed.clearLayers();
+    // riskArea.clearLayers();
+    
     // riskArea = L.geoJson(provinceGeoJSON.data, {
     //   style: function (feature) {
     //     return {
@@ -489,7 +466,7 @@ async function plotCase(date) {
     //   },
     //   onEachFeature,
     // });
-
+  
     // confirmed = L.geoJson(provinceGeoJSON.data, {
     //   style: function (feature) {
     //     return {
@@ -503,7 +480,7 @@ async function plotCase(date) {
     //   },
     //   onEachFeature,
     // });
-
+  
     // deaths = L.geoJson(provinceGeoJSON.data, {
     //   style: function (feature) {
     //     return {
@@ -518,22 +495,22 @@ async function plotCase(date) {
     //   onEachFeature,
     // });
 
-    // let layerControl2 = {
-    //   Deaths: deaths,
-    //   "Confirmed Cases": confirmed,
-    //   "Risk Areas": riskArea,
-    //   "Turn Off": emptyLayer,
-    // };
+    // layerControl2.addBaseLayer(riskArea, "Risk Area")
+    // console.log("control.getOverlays()2",control.getOverlays());
+
     console.log("styleMode=",styleMode);
 
-    if (styleMode = 0) {
+    if (styleMode == 0) {
       map.addLayer(riskArea);
     }
-    if (styleMode = 1) {
+    if (styleMode == 1) {
       map.addLayer(confirmed);
     }
-    if (styleMode = 2) {
+    if (styleMode == 2) {
       map.addLayer(deaths);
+    }
+    if (styleMode == 3) {
+      map.addLayer(emptyLayer);
     }
     // map.addLayer(deaths);
     // map.addLayer(confirmed);
