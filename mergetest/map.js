@@ -353,62 +353,62 @@ async function plotCase(date) {
 
   let provinceGeoJSON = await axios.get("./provinceData/" + date + ".geojson");
 
-  riskArea = L.geoJson(provinceGeoJSON.data, {
-    style: function (feature) {
-      return {
-        weight: 1,
-        opacity: 1,
-        color: "white",
-        // dashArray: '3',
-        fillOpacity: 1,
-        fillColor: getColor(
-          feature.properties.high + feature.properties.middle,
-          "riskArea"
-        ),
-      };
-    },
-    onEachFeature,
-  });
 
-  confirmed = L.geoJson(provinceGeoJSON.data, {
-    style: function (feature) {
-      return {
-        weight: 1,
-        opacity: 1,
-        color: "white",
-        // dashArray: '3',
-        fillOpacity: 1,
-        fillColor: getColor(feature.properties.confirmed, "confirmed"),
-      };
-    },
-    onEachFeature,
-  });
-
-  deaths = L.geoJson(provinceGeoJSON.data, {
-    style: function (feature) {
-      return {
-        weight: 1,
-        opacity: 1,
-        color: "white",
-        // dashArray: '3',
-        fillOpacity: 1,
-        fillColor: getColor(feature.properties.deaths, "deaths"),
-      };
-    },
-    onEachFeature,
-  });
-
-  layerControl2 = {
-    Deaths: deaths,
-    "Confirmed Cases": confirmed,
-    "Risk Areas": riskArea,
-    "Turn Off": emptyLayer,
-  };
 
 
   if (isCasesDraw == 0) {
     // control = L.control.layers(layerControl2, null).addTo(map);
-
+    riskArea = L.geoJson(provinceGeoJSON.data, {
+      style: function (feature) {
+        return {
+          weight: 1,
+          opacity: 1,
+          color: "white",
+          // dashArray: '3',
+          fillOpacity: 1,
+          fillColor: getColor(
+            feature.properties.high + feature.properties.middle,
+            "riskArea"
+          ),
+        };
+      },
+      onEachFeature,
+    });
+  
+    confirmed = L.geoJson(provinceGeoJSON.data, {
+      style: function (feature) {
+        return {
+          weight: 1,
+          opacity: 1,
+          color: "white",
+          // dashArray: '3',
+          fillOpacity: 1,
+          fillColor: getColor(feature.properties.confirmed, "confirmed"),
+        };
+      },
+      onEachFeature,
+    });
+  
+    deaths = L.geoJson(provinceGeoJSON.data, {
+      style: function (feature) {
+        return {
+          weight: 1,
+          opacity: 1,
+          color: "white",
+          // dashArray: '3',
+          fillOpacity: 1,
+          fillColor: getColor(feature.properties.deaths, "deaths"),
+        };
+      },
+      onEachFeature,
+    });
+  
+    layerControl2 = {
+      Deaths: deaths,
+      "Confirmed Cases": confirmed,
+      "Risk Areas": riskArea,
+      "Turn Off": emptyLayer,
+    };
     map.addLayer(riskArea);
     // confirmed.addTo(map);
 
@@ -441,15 +441,66 @@ async function plotCase(date) {
     // console.log("case > 1 push");
     // console.log("removing layer");
 
-
     map.removeLayer(deaths);
     map.removeLayer(riskArea);
     map.removeLayer(confirmed);
     map.removeLayer(emptyLayer);
+    deaths.clearLayers();
+    confirmed.clearLayers();
+    riskArea.clearLayers();
 
-    // deaths.clearLayers();
-    // confirmed.clearLayers();
-    // riskArea.clearLayers();
+    riskArea = L.geoJson(provinceGeoJSON.data, {
+      style: function (feature) {
+        return {
+          weight: 1,
+          opacity: 1,
+          color: "white",
+          // dashArray: '3',
+          fillOpacity: 1,
+          fillColor: getColor(
+            feature.properties.high + feature.properties.middle,
+            "riskArea"
+          ),
+        };
+      },
+      onEachFeature,
+    });
+  
+    confirmed = L.geoJson(provinceGeoJSON.data, {
+      style: function (feature) {
+        return {
+          weight: 1,
+          opacity: 1,
+          color: "white",
+          // dashArray: '3',
+          fillOpacity: 1,
+          fillColor: getColor(feature.properties.confirmed, "confirmed"),
+        };
+      },
+      onEachFeature,
+    });
+  
+    deaths = L.geoJson(provinceGeoJSON.data, {
+      style: function (feature) {
+        return {
+          weight: 1,
+          opacity: 1,
+          color: "white",
+          // dashArray: '3',
+          fillOpacity: 1,
+          fillColor: getColor(feature.properties.deaths, "deaths"),
+        };
+      },
+      onEachFeature,
+    });
+  
+    layerControl2 = {
+      Deaths: deaths,
+      "Confirmed Cases": confirmed,
+      "Risk Areas": riskArea,
+      "Turn Off": emptyLayer,
+    };
+
     
     // console.log("styleMode=",styleMode);
 
@@ -465,6 +516,10 @@ async function plotCase(date) {
     if (styleMode == 3) {
       map.addLayer(emptyLayer);
     }
+
+    map.removeControl(control)
+    control = L.control.activeLayers(layerControl2, null)
+    control.addTo(map);
     // map.addLayer(deaths);
     // map.addLayer(confirmed);
 
