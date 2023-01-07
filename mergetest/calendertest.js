@@ -34,13 +34,15 @@ function getSelectedDate() {
   let timestampString = elems[0].datepicker.dates;
   if (timestampString.length == 0) {
     console.log("date not selected")
+    dateFeedback.innerHTML = "Date not selected"
+
   }
   else {
-    timestamp = parseInt(timestampString)
+    timestamp = parseInt(timestampString) - 28800000 // convert the timestamp from GMT+8 to GMT
     plotRiskPoints(convertTimestampToYYYYMMDD(timestamp))
-    // console.log("date = ", date)
+    console.log("timestamp = ", timestamp)
     let slide = document.getElementById("mySlider");
-    slide.value = daysBetween( 1595980800, parseInt(timestamp))
+    slide.value = daysBetween(1595980800000,timestamp)
     console.log("slide.value" ,slide.value);
     var day = document.getElementById("day");
     day.innerHTML = slide.value;
@@ -48,6 +50,8 @@ function getSelectedDate() {
     var date = document.getElementById("date");
     // console.log(date);
     date.innerHTML = dayToDate(slide.value)[1];
+    let dateFeedback = document.getElementById("dateFeedback");
+    dateFeedback.innerHTML = ""
 
   }
 }

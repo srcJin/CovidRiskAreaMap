@@ -200,25 +200,28 @@
               src="https://cdn.jsdelivr.net/npm/vanillajs-datepicker@1.1.4/dist/js/datepicker-full.min.js"></script>
             <!-- <script src="datepicker-full.js"></script> -->
 
-            <div class="row">
-              <div class="col-sm-8">
-                <div class="mx-auto mt-5" style="width: 250px">
-                  <div class="input-group ">
-                    <i id="dateSelected" class="bi bi-calendar-date input-group-text"></i>
-                    <input type="text" class="datepicker_input form-control" placeholder="select a date..." required />
-                  </div>
-                </div>
-              </div>
+            <!-- <div class="row"> -->
+            <!-- <div class="col-sm-8"> -->
+              <div class="container center mt-4" style="width: 100%">
+                <div class="input-group ">
+                  <i id="dateSelected" class="bi bi-calendar-date input-group-text"></i>
+                  <input type="text" class="datepicker_input form-control" placeholder="select a date..." required />
 
-              <div class="col-sm-1">
-                <!-- button: https://getbootstrap.com/docs/4.0/components/buttons/ -->
-                <div class="text-center mt-5">
-                  <button type="button" class="btn btn-light" onclick="getSelectedDate()">Update</button>
                 </div>
+                <span id="dateFeedback" style="font-weight:bold;color:red"></span>
+
+              </div>
+            <!-- </div> -->
+
+            <div class="container center">
+              <!-- button: https://getbootstrap.com/docs/4.0/components/buttons/ -->
+              <div class="text-center mt-4">
+                <button type="button" class="btn btn-light" onclick="getSelectedDate()">Update</button>
               </div>
             </div>
           </div>
         </div>
+        <!-- </div> -->
 
       </div>
       <!-- end of date picker -->
