@@ -15,7 +15,7 @@ h4 {
 }
 .panel.panel-blue {
     /* border: 1px solid #0087ff; */
-    background-color: #ffffff;
+    background-color: #ddedff;
     color: #000000;
     box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
 }
@@ -33,12 +33,6 @@ h4 {
     border: 1px solid #7f51f4;
     background-color: #dfccff;
     color: #7f51f4;
-}
-
-.panel.panel-transparent {
-  /* border: 1px solid #7f51f4;
-  background-color: #dfccff; */
-  color: #7f51f4;
 }
 
 /* header */

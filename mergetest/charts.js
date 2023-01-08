@@ -26,40 +26,40 @@ async function loadData() {
   ]);
 
   chart1.updateSeries([
-    { name: "AnHui", data: response.data.AnHui },
+    // { name: "AnHui", data: response.data.AnHui },
     { name: "BeiJing", data: response.data.BeiJing },
-    { name: "ChongQing", data: response.data.ChongQing },
-    { name: "FuJian", data: response.data.FuJian },
-    { name: "GanSu", data: response.data.GanSu },
+    // { name: "ChongQing", data: response.data.ChongQing },
+    // { name: "FuJian", data: response.data.FuJian },
+    // { name: "GanSu", data: response.data.GanSu },
     { name: "GuangDong", data: response.data.GuangDong },
-    { name: "GuangXi", data: response.data.GuangXi },
-    { name: "GuiZhou", data: response.data.GuiZhou },
-    { name: "HaiNan", data: response.data.HaiNan },
-    { name: "HeBei", data: response.data.HeBei },
-    { name: "HeiLongJiang", data: response.data.HeiLongJiang },
+    // { name: "GuangXi", data: response.data.GuangXi },
+    // { name: "GuiZhou", data: response.data.GuiZhou },
+    // { name: "HaiNan", data: response.data.HaiNan },
+    // { name: "HeBei", data: response.data.HeBei },
+    // { name: "HeiLongJiang", data: response.data.HeiLongJiang },
     { name: "HeNan", data: response.data.HeNan },
-    { name: "HongKong", data: response.data.HongKong },
-    { name: "HuBei", data: response.data.HuBei },
-    { name: "HuNan", data: response.data.HuNan },
-    { name: "InnerMongolia", data: response.data.InnerMongolia},
-    { name: "JiangSu", data: response.data.JiangSu },
-    { name: "JiangXi", data: response.data.JiangXi },
-    { name: "JiLin", data: response.data.JiLin },
-    { name: "LiaoNing", data: response.data.LiaoNing },
-    { name: "Macau", data: response.data.Macau },
-    { name: "NingXia", data: response.data.NingXia },
-    { name: "QingHai", data: response.data.QingHai },
-    { name: "ShanXi", data: response.data.ShanXi },
-    { name: "ShanDong", data: response.data.ShanDong },
+    // { name: "HongKong", data: response.data.HongKong },
+    // { name: "HuBei", data: response.data.HuBei },
+    // { name: "HuNan", data: response.data.HuNan },
+    // { name: "InnerMongolia", data: response.data.InnerMongolia},
+    // { name: "JiangSu", data: response.data.JiangSu },
+    // { name: "JiangXi", data: response.data.JiangXi },
+    // { name: "JiLin", data: response.data.JiLin },
+    // { name: "LiaoNing", data: response.data.LiaoNing },
+    // { name: "Macau", data: response.data.Macau },
+    // { name: "NingXia", data: response.data.NingXia },
+    // { name: "QingHai", data: response.data.QingHai },
+    // { name: "ShanXi", data: response.data.ShanXi },
+    // { name: "ShanDong", data: response.data.ShanDong },
     { name: "ShangHai", data: response.data.ShangHai },
-    { name: "ShanXi", data: response.data.ShanXi },
-    { name: "SiChuan", data: response.data.SiChuan },
-    { name: "Taiwan", data: response.data.Taiwan },
-    { name: "TianJin", data: response.data.TianJin },
-    { name: "Tibet", data: response.data.Tibet },
+    // { name: "ShanXi", data: response.data.ShanXi },
+    // { name: "SiChuan", data: response.data.SiChuan },
+    // { name: "Taiwan", data: response.data.Taiwan },
+    // { name: "TianJin", data: response.data.TianJin },
+    // { name: "Tibet", data: response.data.Tibet },
     { name: "XinJiang", data: response.data.XinJiang },
-    { name: "YunNan", data: response.data.YunNan },
-    { name: "ZheJiang", data: response.data.ZheJiang },
+    // { name: "YunNan", data: response.data.YunNan },
+    // { name: "ZheJiang", data: response.data.ZheJiang },
   ]);
 
   let hiddenSeries = [
@@ -98,9 +98,9 @@ async function loadData() {
 
   let showSeries = ["BeiJing","ShangHai","GuangDong","HongKong"];
 
-  for (series of hiddenSeries) {
-    chart1.hideSeries(series);
-  }
+  // for (series of hiddenSeries) {
+  //   chart1.hideSeries(series);
+  // }
 
   // console.log(response.data.ZheJiang);
   // console.log(response.data.new_confirmed);
@@ -275,12 +275,12 @@ chart3.render();
 let isChartLoaded = false
 
 // start to load data only when the user scroll to statistics class
-if (!isChartLoaded) {
+if (isChartLoaded == false) {
 window.addEventListener('scroll', function() {
   var scrollDistance = window.pageYOffset;
   var element = document.querySelector('#statistics');
   // console.log("element=",element);
-  if (scrollDistance > element.offsetTop-500) {
+  if (scrollDistance > element.offsetTop-500 && isChartLoaded == false) {
     loadData()
     isChartLoaded = true
   }
