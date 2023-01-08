@@ -92,15 +92,15 @@ h1, h2, h3, h4, h5, h6,p {
 /*==============Responsive==============*/
 
 
-@media screen and (max-width: 1800px) {
+/* @media screen and (max-width: 1800px) {
 
 .timeline-box {max-width: 400px;}
 .timeline-box.img-right .timeline-content img, .timeline-box.img-left .timeline-content img {max-width: 180px; max-height: 180px;}
 .timeline-box-wrap .timeline-content img {max-width: 100%;}
-}
+} */
 
 
-@media screen and (max-width: 1600px){
+@media screen and (max-width: 2000px){
 
 .timeline-row:first-child .timeline-box:first-child {width: 38%;}
 .timeline-box {max-width: 380px;}
