@@ -9,11 +9,12 @@ a:focus {outline: none !important;}
 /* font can be edited in the future */
 /* body { font-family: 'Inter', sans-serif; color: #333333; font-weight: 400; font-size: 20px; line-height: 1.5; margin: 0; padding: 0; overflow-x: hidden; -webkit-text-size-adjust: 100%;} */
 img {max-width: 100%;}
-p, li {
+/* p, li { */
   /* font-size: 20px; */
    /* color: #333333; line-height: 1.5; */
-  }
-
+  /* } */
+t1 {font-size: 15px; color: #333333; line-height: 0.5; font-weight: 700;}
+t2 {font-size: 13px; color: #333333; line-height: 0.5;}
 /* p {margin:0 0 20px 0;}
 ul {margin: 0; padding: 0;} */
 h1, h2, h3, h4, h5, h6,p {
@@ -30,18 +31,18 @@ h1, h2, h3, h4, h5, h6,p {
   max-width: 1642px;
 }
 .inner-wrapper-padding {
-  padding: 0 80px;
+  padding: 0 50px;
 }
 
 /* .about-timeline{background-color:#f3f3f3; padding: 140px 0 125px;} */
 
 /* removed background-color: #f3f3f3; */
-.timeline-box h6{font-size: 55px; line-height: 1; color: #d21e1e; font-weight: 700; font-family: 'Poppins', sans-serif;position: relative; z-index: 1; display: inline-block; width: auto; padding: 0 10px;margin-top: 0; transform: translate(0,-50%);} 
-.timeline-box p{font-size: 18px; line-height: 27px; color: #000000; font-weight: 400;margin-bottom: 26px;font-family: 'Inter', sans-serif;} 
-.timeline-box p:last-of-type{margin-bottom:15px;} 
-.start-point h4{font-size: 17px; line-height: 23px; color: #ffffff; font-weight: 600;text-transform: uppercase;background-color: #d21e1e;border-radius: 16px;display: block; width: auto; text-align: center; padding: 5px 25px;position: relative;margin-bottom: 45px;font-family: 'Inter',sans-serif;} 
+.timeline-box h6{font-size: 30px; line-height: 1; color: #d21e1e; font-weight: 700; font-family: 'Poppins', sans-serif;position: relative; z-index: 1; display: inline-block; width: auto; padding: 0 10px;margin-top: 0; transform: translate(0,-50%);} 
+/* .timeline-box p{font-size: 18px; line-height: 20px; color: #000000; font-weight: 400;margin-bottom: 26px;font-family: 'Inter', sans-serif;} 
+.timeline-box p:last-of-type{margin-bottom:15px;}  */
+/* .start-point h4{font-size: 17px; line-height: 23px; color: #ffffff; font-weight: 600;text-transform: uppercase;background-color: #d21e1e;border-radius: 16px;display: block; width: auto; text-align: center; padding: 5px 25px;position: relative;margin-bottom: 45px;font-family: 'Inter',sans-serif;}  */
 /* .black-dot{width: 20px;height: 20px;background-color: #000;border-radius: 50%;display: block;margin: 0 auto -10px;z-index: 1;}  */
-.start-point{position: relative;display: flex; justify-content: center; flex-direction: column; align-items: center} 
+/* .start-point{position: relative;display: flex; justify-content: center; flex-direction: column; align-items: center}  */
 /* .start-point:before{content:'';position: absolute;left: 0;height: 100%;width: 0px;background-color: #aaa;left: 50%;top: 0;transform: translate(-50%,0%);-webkit-transform: translate(-50%,0%);-moz-transform: translate(-50%,0%); border-left: 1px solid #aaa;}  */
 .timeline-row .horizontal-line {border-top: 1px solid #aaa; width: calc(100% - 150px); margin: 0 auto; position: absolute; top: 0; left: 50%; z-index: 0; transform: translate(-50%,0%); }
 .timeline-row .verticle-line { margin: 0; padding: 0; width: 2px; border-right: 1px solid #aaa; height: calc(100% - 150px); position: absolute; top: 0; right: 0; margin: auto 0; bottom: 0; } 
@@ -54,7 +55,7 @@ h1, h2, h3, h4, h5, h6,p {
 .timeline-row:nth-child(2n+2) { justify-content: space-around;text-align: right; padding:  0 2%; } 
 .timeline-row:nth-child(2n+2) { flex-direction: row-reverse; } 
 
-.timeline-row:first-child {margin: 0 0px 0 auto; max-width: 50%; justify-content: space-between; padding: 0 0 0 120px; }
+/* .timeline-row:first-child {margin: 0 0px 0 auto; max-width: 50%; justify-content: space-between; padding: 0 0 0 120px; } */
 .corner.bl{bottom: 0;left: 0;border-left: 1px solid #aaa; border-bottom: 1px solid #aaa; border-radius: 0 0 0px 100%; border-right: none; border-top: none; height: 76px; width: 76px;} .start-point .corner.bl{left: 50%; bottom: 0px; transform: translateY(100%); top: unset;} 
 .timeline-box:before{content: '';position: absolute;left: 0;top: 27.5px;height: 1px;width: 100%;} 
 /* removed */
@@ -92,8 +93,8 @@ h1, h2, h3, h4, h5, h6,p {
 
 @media screen and (max-width: 1800px) {
 
-.timeline-box {max-width: 460px;}
-.timeline-box.img-right .timeline-content img, .timeline-box.img-left .timeline-content img {max-width: 220px; max-height: 230px;}
+.timeline-box {max-width: 400px;}
+.timeline-box.img-right .timeline-content img, .timeline-box.img-left .timeline-content img {max-width: 180px; max-height: 180px;}
 .timeline-box-wrap .timeline-content img {max-width: 100%;}
 }
 
@@ -103,7 +104,7 @@ h1, h2, h3, h4, h5, h6,p {
 .timeline-row:first-child .timeline-box:first-child {width: 38%;}
 .timeline-box {max-width: 380px;}
 .timeline-box.img-right .timeline-content img, .timeline-box.img-left .timeline-content img {max-width: 180px; max-height: 190px;}
-.timeline-box h6 {font-size: 50px;}
+/* .timeline-box h6 {font-size: 30px;} */
 .about-timeline {padding: 120px 0 100px;}
 .timeline-box p {font-size: 16px;}
 }
@@ -112,7 +113,7 @@ h1, h2, h3, h4, h5, h6,p {
 
 .about-timeline {padding: 100px 0 80px;}
 .start-point h4 {font-size: 15px; letter-spacing: 0;}
-.timeline-box h6 {font-size: 40px;}
+/* .timeline-box h6 {font-size: 40px;} */
 .timeline-row:first-child .timeline-box:first-child {width: 45%;}
 .timeline-box p {font-size: 15px; line-height: 1.4;}
 .timeline-box {max-width: 300px;}
@@ -124,7 +125,7 @@ h1, h2, h3, h4, h5, h6,p {
 
 @media screen and (max-width: 1199px) {
 .about-timeline {padding: 90px 0 60px;}
-.timeline-box h6 {font-size: 34px;}
+/* .timeline-box h6 {font-size: 34px;} */
 .timeline-box {max-width: 240px;}
 .timeline-row:first-child {padding: 0 0 0 60px;}
 .timeline-row:first-child .timeline-box:first-child {width: 42%;}
@@ -171,7 +172,7 @@ h1, h2, h3, h4, h5, h6,p {
 @media screen and (max-width: 640px) {
 
 .about-timeline {padding: 50px 0;}
-.timeline-box h6 {font-size: 27px;}
+/* .timeline-box h6 {font-size: 27px;} */
 .timeline-box p {font-size: 14px; line-height: 1.4;}
 .timeline-box-wrap {margin: 30px 0 0 0;}
 .timeline-row .timeline-box:nth-child(2n) .timeline-box-wrap {margin: 30px 0 0 auto;}

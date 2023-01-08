@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>China Covid Risk Area Map</title>
+  <!-- import bootstrap css -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous" />
+  <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/vanillajs-datepicker@1.1.4/dist/css/datepicker.min.css'>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
+    integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+    crossorigin="" />
+
+  <link rel="stylesheet" href="layouttest.css" />
+  <link rel="stylesheet" href="calendertest.css" />
+  <link rel="stylesheet" href="map.css" />
+  <link rel="stylesheet" href="info.css">
+  <!-- Timeline style start -->
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&family=Poppins:ital,wght@0,400;0,600;0,700;0,800;0,900;1,500&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="timeline.css">
+  <!-- Timeline style end -->
+
+</head>
+
+<body class="header-background">
+  <!-- import bootstrap js -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+    crossorigin="anonymous"></script>
+
+  <!-- navbar start ref: https://codepen.io/ceomaverick/pen/PooZevQ-->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="navbar.js"></script>
+
+  <nav class="navbar navbar-expand-lg navbar-light shadow-sm bg-light fixed-top">
+    <div class="container"> <a class="navbar-brand d-flex align-items-center" href="#">
+        <img src="images/navbaricon.png" alt="covid icon" class="navbar-icon">
+        <span class="ml-3 font-weight-bold">China Covid Risk Area Historic Map</apan>
+      </a> <button class="navbar-toggler navbar-toggler-right border-0" type="button" data-toggle="collapse"
+        data-target="#navbar4">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+
+      <div class="collapse navbar-collapse" id="navbar4">
+        <ul class="navbar-nav mr-auto pl-lg-4">
+          <li class="nav-item px-lg-2 active"> <a class="nav-link" href="#home"> <span
+                class="d-inline-block d-lg-none icon-width"><i class="fas fa-home"></i></span>Home</a> </li>
+
+          <li class="nav-item px-lg-2 active"> <a class="nav-link" href="#mapPos"> <span
+                class="d-inline-block d-lg-none icon-width"><i class="fas fa-home"></i></span>Map</a> </li>
+
+          <li class="nav-item px-lg-2"> <a class="nav-link" href="#statistics"><span
+                class="d-inline-block d-lg-none icon-width"><i class="fas fa-spa"></i></span>Statistics</a> </li>
+
+          <li class="nav-item px-lg-2"> <a class="nav-link" href="#info"><span
+                class="d-inline-block d-lg-none icon-width"><i class="far fa-user"></i></i></span>Info</a> </li>
+
+          <li class="nav-item px-lg-2"> <a class="nav-link" href="#timeline"><span
+                class="d-inline-block d-lg-none icon-width"><i class="far fa-user"></i></i></span>Timeline</a> </li>
+
+          <li class="nav-item px-lg-2 dropdown d-menu">
+            <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true"
+              aria-expanded="false"><span class="d-inline-block d-lg-none icon-width"><i
+                  class="far fa-caret-square-down"></i></span>Other
+              <svg id="arrow" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="6 9 12 15 18 9"></polyline>
+              </svg>
+            </a>
+            <div class="dropdown-menu shadow-sm sm-menu" aria-labelledby="dropdown01">
+              <a class="dropdown-item" href="#">Data Processing Notes</a>
+              <a class="dropdown-item" href="#">Reference</a>
+            </div>
+          </li>
+
+          <li class="nav-item px-lg-2"> <a class="nav-link" href="#about"><span
+                class="d-inline-block d-lg-none icon-width"><i class="far fa-envelope"></i></span>About</a> </li>
+        </ul>
+        <ul class="navbar-nav ml-auto mt-3 mt-lg-0">
+          <li class="nav-item"> <a class="nav-link" href="#">
+              <i class="fab fa-twitter"></i><span class="d-lg-none ml-3">Twitter</span>
+            </a> </li>
+          <li class="nav-item"> <a class="nav-link" href="#">
+              <i class="fab fa-facebook"></i><span class="d-lg-none ml-3">Facebook</span>
+            </a> </li>
+          <li class="nav-item"> <a class="nav-link" href="#">
+              <i class="fab fa-instagram"></i><span class="d-lg-none ml-3">Instagram</span>
+            </a> </li>
+          <li class="nav-item"> <a class="nav-link" href="#">
+              <i class="fab fa-linkedin"></i><span class="d-lg-none ml-3">Linkedin</span>
+            </a> </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!--section corousell-->
+
+  <!--hero corousell-->
+  <div id="home"></div>
+  <div class="text-center text-white">
+
+    <div class="container-fluid">
+      <!-- carousel start -->
+      <div id="carouselExampleFade" class="carousel slide carousel-fade" data-bs-ride="carousel">
+        <!-- overlay effect defined by css -->
+        <div class="overlay">
+          <h1 class="display-4 mb-4 "> Three Years in One Map</h1>
+          <p class="lead mb-5">A documentation of the risk level regulation in China from 2020 to 2022. </p> <a
+            href="#mapPos" class="btn btn-lg btn-outline-light mx-1">Show Map</a>
+        </div>
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <img src="images/hero1.jpg" class="d-block w-100" alt="title image">
+          </div>
+          <div class="carousel-item">
+            <img src="images/hero2.jpg" class="d-block w-100" alt="title image">
+          </div>
+          <div class="carousel-item">
+            <img src="images/hero3.jpg" class="d-block w-100" alt="title image">
+          </div>
+          <div class="carousel-item">
+            <img src="images/hero4.jpg" class="d-block w-100" alt="title image">
+          </div>
+          <div class="carousel-item">
+            <img src="images/hero5.jpg" class="d-block w-100" alt="title image">
+          </div>
+
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
+      <!-- carousel end -->
+
+    </div>
+
+
+
+    <!-- nested panel ref:  https://codepen.io/cristinaconacel/pen/OBoGZr -->
+
+    <!-- section Map -->
+    <div class="container mt-4" id="mapPos">
+      <div class="panel panel-blue"></div>
+    </div>
+    <!-- map container -->
+    <div class="container mt-4">
+      <div class="row">
+        <div class="col-sm-8">
+          <div class="panel panel-blue">
+            <h1>map</h1>
+            <div class="container">
+              <div id="map"></div>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="col-sm-4">
+          <div class="panel panel-blue">date selecter
+
+            <!-- start of date slider -->
+            <div class="container mt-4">
+              <div class="text-center">
+                <h5>Please select a date:<h5>
+              </div>
+            </div>
+            <div class="slidecontainer mt-4">
+              <input type="range" min="0" max="878" value="0" class="slider" id="mySlider">
+            </div>
+            <div class="container text-center mt-3">
+              <span>Day:</span>
+              <span id="day" style="font-weight:bold;color:red"></span>
+              <span>Date:</span>
+              <span id="date" style="font-weight:bold;color:red"></span>
+              <button onclick="startAnimation()"" class = "mt-4 btn btn-light" >Start Animation</button>
+              <script>
+                var slide = document.getElementById("mySlider");
+    
+                animate = function (input) {
+                  slide.value = input
+                  day.innerHTML = slide.value;
+                  date.innerHTML = dayToDate(slide.value)[1];
+                  let newDate = dayToDate(parseInt(slide.value))[0]
+                  // console.log("date=",newDate)
+                  plotRiskPoints(newDate)
+                  plotCase(newDate)
+                }
+                
+                // setInterval ref https://www.w3schools.com/jsref/met_win_setinterval.asp
+                function startAnimation() {
+                  // Set up the animation
+                  var i = 400;
+                  var interval = setInterval(function() {
+                    // Output the current number
+                    // console.log("i=",i);
+                    animate(i)
+                    i++;
+                    // End the animation after 10 iterations
+                    if (i > 800) {
+                      clearInterval(interval);
+                    }
+                  }, 100);
+                }
+                </script>
+            </div>
+          </div>
+          <script src="slider.js"></script>
+
+
+
+          <div class="panel panel-blue">
+            <!-- <h5>Please select a date:</h5> -->
+            <!-- start of date picker -->
+            <!-- ref: https://mymth.github.io/vanillajs-datepicker/#/ -->
+
+            <!-- Vanilla Datepicker JS -->
+            <!-- ref: https://www.codehim.com/bootstrap/bootstrap-text-input/bootstrap-5-datepicker-with-vanilla-js/ -->
+            <script
+              src="https://cdn.jsdelivr.net/npm/vanillajs-datepicker@1.1.4/dist/js/datepicker-full.min.js"></script>
+            <!-- <script src="datepicker-full.js"></script> -->
+
+            <!-- <div class="row"> -->
+            <!-- <div class="col-sm-8"> -->
+            <div class="container center mt-4" style="width: 100%">
+              <div class="input-group ">
+                <i id="dateSelected" class="bi bi-calendar-date input-group-text"></i>
+                <input type="text" class="datepicker_input form-control" placeholder="select a date..." required />
+
+              </div>
+              <span id="dateFeedback" style="font-weight:bold;color:red"></span>
+
+            </div>
+            <!-- </div> -->
+
+            <div class="container center">
+              <!-- button: https://getbootstrap.com/docs/4.0/components/buttons/ -->
+              <div class="text-center mt-4">
+                <button type="button" class="btn btn-light" onclick="getSelectedDate()">Update</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="panel panel-blue ">
+            <div>
+              <p class="text-end mt-4">
+                Data Source:
+                <br>Covid Risk Area:
+                <br><a href="https://github.com/sunbqxyz/china_covid_riskareas_history">Dataset 1: 20-07-29 -
+                  22-04-15</a>
+                <br><a href="https://github.com/panghaibin/COVID-Risk-Region">Dataset 2: 22-04-16 - 22-12-24 </a>
+                <br>Infection:
+                <br><a href="https://github.com/CSSEGISandData">CSSE, Johns Hopkins University</a>
+              </p>
+            </div>
+          </div>
+          <!-- </div> -->
+
+        </div>
+        <!-- end of date picker -->
+
+        <!-- map related scripts -->
+        <div>
+          <script src="calendertest.js"></script>
+
+          <!-- start of map scripts -->
+          <!-- axios -->
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.1.3/axios.min.js"
+            integrity="sha512-0qU9M9jfqPw6FKkPafM3gy2CBAvUWnYVOfNPDYKVuRTel1PrciTj+a9P3loJB+j0QmN2Y0JYQmkBBS8W+mbezg=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+          <!-- Leaflet first -->
+          <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
+            integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
+            crossorigin=""></script>
+
+          <!-- import Chinese map provider plugin -->
+          <script src="https://cdn.bootcss.com/proj4js/2.4.3/proj4.js"></script>
+          <script src="https://cdn.bootcss.com/proj4leaflet/1.0.1/proj4leaflet.min.js"></script>
+          <script type="text/javascript" src="./leaflet.ChineseTmsProviders.js"></script>
+
+          <!-- import marker cluster -->
+          <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.Default.css" />
+          <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.css" />
+          <script src="https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster-src.js"></script>
+
+          <!-- Our own script is usually at the bottom -->
+          <!-- It's the last because it will make use of all the preceeding JavaScript -->
+          <!-- <script src="leaflet-heat.js"></script> -->
+
+          <!-- <script src="webgl-heatmap.js"></script>
+          <script src="leaflet-webgl-heatmap.min.js"></script> -->
+          <script src="ActiveLayers.js"></script>
+          <script src="map.js"></script>
+
+          <!-- end of map scripts -->
+        </div>
+
+        <!-- section chart , disabled   -->
+        <div class="container mt-4" id="statistics">
+        <div class="panel panel-blue"></div>
+      </div>
+      <div class="container center mt-4">
+        <div class="panel panel-blue">
+          <h1>Statistics</h1>
+          <div id="wrapper">
+            <div id="chart-bar">
+            </div>
+            <div id="chart-province">
+            </div>
+            <div id="chart-cases">
+            </div>
+          </div>
+
+          <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+          <script src="charts.js"></script>
+        </div>
+      </div>
+
+        <div class="container mt-4" id="info">
+          <div class="panel panel-blue"></div>
+        </div>
+
+        <!-- section Info  -->
+        <div class="container mt-4">
+          <div class="panel panel-blue">
+            <!-- <p>info</p> -->
+            <!-- start of info section -->
+            <!-- ref: https://getbootstrap.com/docs/5.0/components/card/ -->
+
+            <div class="container center">
+              <h1>About the Risk Area Policy</h1>
+              <br>
+            </div>
+            <div class="container">
+              <p>In China, when an infected person is identified, all close contacts are required to undergo a 14-day
+                quarantine with multiple rounds of PCR testing.<sup id="cite_ref-NatMed-Li-2021_27-1"
+                  class="reference"><a href="#cite_note-NatMed-Li-2021-27">[26]</a></sup> In order to minimize the risk
+                that these close
+                contacts
+                pose for outbreak containment, China has implemented quarantine in centralized facilities for those
+                deemed
+                to
+                be at the highest-risk of infection.<sup id="cite_ref-BMJ-Chen-2021_24-8" class="reference"><a
+                    href="#cite_note-BMJ-Chen-2021-24">[23]</a></sup> Secondary close contacts (contacts of close
+                contacts)
+                are sometimes required to quarantine at home.<sup id="cite_ref-BMJ-Chen-2021_24-9" class="reference"><a
+                    href="#cite_note-BMJ-Chen-2021-24">[23]</a></sup>
+              <p class="text-end mt-4"><small>Source: <a href="https://en.wikipedia.org/wiki/Zero-COVID">Wikipedia
+                    Zero-COVID</a></small></p>
+
+              </p>
+            </div>
+            <div class="container">
+              <div class="row row-cols-1 row-cols-md-3 g-4">
+                <div class="col">
+                  <div class="card h-100">
+                    <img src="./images/low.png" class="card-img-top mt-3 mb-1" alt="low risk area icon">
+                    <div class="card-body">
+                      <h5 class="card-title center"><b>Low</b> Risk Area</h5>
+                      <!-- <p class="card-text">病例和无症状感染者居住地，以及活动频繁且疫情传播风险较高的工作地和活动地等区域。</p> -->
+                      <p class="card-text">Areas other than risk areas</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="card h-100">
+                    <img src="./images/middle.png" class="card-img-top mt-3 mb-1" alt="middle risk area icon">
+                    <div class="card-body">
+                      <h5 class="card-title center"><b>Middle</b> Risk Area</h5>
+                      <!-- <p class="card-text">高风险区连续7天无新增感染者降为中风险区</p> -->
+                      <p class="card-text">High-risk area without new infections for 7 consecutive days is downgraded to
+                        medium-risk area</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="card h-100">
+                    <img src="./images/high.png" class="card-img-top mt-3 mb-1" alt="high risk area icon">
+                    <div class="card-body">
+                      <h5 class="card-title center"><b>High</b> Risk Area</h5>
+                      <p class="card-text">Areas where cases and asymptomatic infected persons live, and areas such as
+                        workplaces and activities with high activity and high risk of outbreak transmission.</p>
+                      <!-- <p class="card-text">除风险区外的其他地区</p> -->
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="container text-end mt-4">
+                <p><small>Reference: <a
+                      href="https://www.gov.cn/zhengce/zhengceku/2022-03/15/5679257/files/49854a49c7004f4ea9e622f3f2c568d8.pdf">新型冠状病毒肺炎防控方案（第九版）</a></small>
+                </p>
+              </div>
+            </div>
+
+            <!-- end of info section -->
+          </div>
+        </div>
+
+        <!-- bootstrap responsive columns http://bootstrap.themes.guide/how-to-responsive-design-with-bootstrap.html -->
+        <!-- info section 2, disabled-->
+        <!-- <div class="container">
+      <div class="row">
+        <div class="col-sm-4">
+          <div class="panel panel-blue">info</div>
+        </div>
+        <div class="col-sm-4">
+          <div class="panel panel-blue">info</div>
+        </div>
+        <div class="col-sm-4">
+          <div class="panel panel-blue">info</div>
+        </div>
+      </div>
+    </div> -->
+
+        <!-- section Timeline  -->
+        <div class="container mt-4" id="timeline">
+          <div class="panel panel-blue">
+
+          </div>
+        </div>
+        <div class="container ">
+          <div class="panel panel-blue">
+            <h1>Timeline</h1>
+            <!-- start of timeline -->
+            <div class="container-fluid mb-3 mt-5">
+              <!-- timeline ref: https://codepen.io/alvarotrigo/pen/MWEgejK -->
+              <section class="about-timeline">
+                <div class="wrapper inner-wrapper-padding ">
+
+                  <div class="start-point">
+                    <div class="black-dot"></div>
+                    <!-- <h4>Start</h4> -->
+                  </div>
+
+                  <div class="timeline-main">
+                    <div class="timeline-row">
+
+                      <div class="timeline-box timeline-content-img logo-timeline-arrow">
+                        <div class="timeline-box-wrap">
+                          <h6>1950</h6>
+                          <div class="timeline-content">
+
+                            <img
+                              src="https://images.unsplash.com/photo-1593941502440-c1b305fb66df?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1952&q=80"
+                              alt="">
+                            <div class="timeline-content-txt">
+                              <p>text1</p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="timeline-box timeline-content-img logo-timeline-arrow">
+                        <div class="timeline-box-wrap">
+                          <h6>1955</h6>
+                          <div class="timeline-content">
+                            <div class="timeline-content-txt">
+                              <p>text2 Lorem Ipsum is <br />simply dummy text<br /> of the printing and<br />
+                                typesetting
+                                industry.</p>
+                              <p>&nbsp;</p>
+                            </div>
+                            <img
+                              src="https://images.pexels.com/photos/4913399/pexels-photo-4913399.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=100"
+                              alt="">
+                          </div>
+                        </div>
+                      </div>
+                      <div class="horizontal-line"></div>
+                      <div class="verticle-line"></div>
+                      <div class="corner top"></div>
+                      <div class="corner bottom"></div>
+                    </div>
+
+
+                    <div class="timeline-row">
+                      <div class="timeline-box img-right timeline-content-img">
+                        <div class="timeline-box-wrap">
+                          <h6>1965</h6>
+                          <div class="timeline-content">
+                            <div class="timeline-content-txt">
+                              <p>text3 Lorem Ipsum is simply dummy text of the printing andtypesetting industry.</p>
+                            </div>
+                            <img
+                              src="https://images.unsplash.com/photo-1511022890239-e52f7d3bec4d?ixid=MXwxMjA3fDB8MHxzZWFyY2h8NjR8fHNob3djYXNlfGVufDB8fDB8&ixlib=rb-1.2.1&auto=format&fit=crop&w=180&q=60"
+                              alt="">
+                          </div>
+                        </div>
+                      </div>
+                      <div class="timeline-box ">
+                        <div class="timeline-box-wrap">
+                          <h6>1975</h6>
+                          <div class="timeline-content">
+                            <div class="timeline-content-txt">
+                              <p>text4 Lorem Ipsum is<br /> simply dummy text<br /> of the printing and<br />
+                                typesetting
+                                industry.</p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="timeline-box img-right timeline-content-img top-timeline-arrow">
+                        <div class="timeline-box-wrap">
+                          <h6>1985</h6>
+                          <div class="timeline-content">
+                            <div class="timeline-content-txt">
+                              <p>text5 Laoreet nisl. Metus A.<br> Fringilla Donec taciti<br> et euismod malesuada<br>
+                                class
+                              </p>
+                            </div>
+                            <img
+                              src="https://images.unsplash.com/photo-1603143285586-6381819de2cf?ixid=MXwxMjA3fDB8MHxzZWFyY2h8ODh8fHNob3djYXNlfGVufDB8fDB8&ixlib=rb-1.2.1&auto=format&fit=crop&w=150&q=60"
+                              alt="">
+                          </div>
+                        </div>
+                      </div>
+                      <div class="horizontal-line"></div>
+                      <div class="verticle-line"></div>
+                      <div class="corner top"></div>
+                      <div class="corner bottom"></div>
+                    </div>
+                    <div class="timeline-row">
+                      <div class="timeline-box img-left timeline-content-img">
+                        <div class="timeline-box-wrap">
+                          <h6>1995</h6>
+                          <div class="timeline-content">
+                            <div class="timeline-content-txt">
+                              <p>text6 Lorem Ipsum is simply dummy text of the printing and.</p>
+                              <p>text7 Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                            </div>
+                            <img
+                              src="https://images.pexels.com/photos/6044227/pexels-photo-6044227.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=100"
+                              alt="">
+                          </div>
+                        </div>
+                      </div>
+                      <div class="timeline-box timeline-content-img">
+                        <div class="timeline-box-wrap">
+                          <h6>1998</h6>
+                          <div class="timeline-content">
+                            <div class="timeline-content-txt">
+                              <p>text8 Lorem Ipsum is<br />
+                                simply dummy text<br />
+                                of the printing and<br />
+                                typesetting industry.</p>
+                              <p>&nbsp;</p>
+                            </div>
+                            <img
+                              src="https://images.unsplash.com/photo-1615838924642-21e432f30cb2?ixid=MXwxMjA3fDB8MHxzZWFyY2h8OTh8fHNob3djYXNlfGVufDB8fDB8&ixlib=rb-1.2.1&auto=format&fit=crop&w=250&q=60"
+                              alt="">
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="timeline-box img-right timeline-content-img">
+                        <div class="timeline-box-wrap">
+                          <h6>2015</h6>
+                          <div class="timeline-content">
+                            <div class="timeline-content-txt">
+                              <p>text12 Lorem Ipsum is
+                                simply<br /> dummy text
+                                of the<br /> printing and
+                                typesetting<br /> industry.</p>
+                            </div>
+                            <img
+                              src="https://images.pexels.com/photos/4592257/pexels-photo-4592257.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=150"
+                              alt="">
+                          </div>
+                        </div>
+                      </div>
+                      <div class="horizontal-line"></div>
+                      <div class="verticle-line"></div>
+                      <div class="corner top"></div>
+                      <div class="corner bottom"></div>
+                    </div>
+                    <div class="timeline-row">
+                      <div class="timeline-box timeline-content-img">
+                        <div class="timeline-box-wrap">
+                          <h6>2016</h6>
+                          <div class="timeline-content">
+                            <div class="timeline-content-txt">
+                              <p>
+                                text13 Interdum Tincidunt Dictum<br /> Sapien Pellentesque Velit<br /> Vivamus Magnis
+                              </p>
+                            </div>
+                            <img
+                              src="https://images.pexels.com/photos/4732675/pexels-photo-4732675.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=150"
+                              alt="">
+                          </div>
+                        </div>
+                      </div>
+                      <div class="timeline-box ">
+                        <div class="timeline-box-wrap">
+                          <h6>2018</h6>
+                          <div class="timeline-content">
+                            <div class="timeline-content-txt">
+                              <p>text14 Nisl rhoncus montes<br /> Non diam tincidunt.<br /> A est adipiscing<br />
+                                condimentum
+                                penatibus.
+                              </p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="timeline-box img-left timeline-content-img">
+                        <div class="timeline-box-wrap">
+                          <h6>2020</h6>
+                          <div class="timeline-content">
+                            <div class="timeline-content-txt">
+                              <p>text15: Lorem Ipsum <br />is simply dummy text<br /> of the printing and.</p>
+                            </div>
+                            <img
+                              src="https://images.pexels.com/photos/3762927/pexels-photo-3762927.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=150"
+                              alt="">
+                          </div>
+                        </div>
+                      </div>
+                      <div class="horizontal-line"></div>
+                      <div class="verticle-line"></div>
+                      <div class="corner top"></div>
+                      <div class="corner bottom"></div>
+                      <!-- <div class="start-point end-point">
+          <h4>The end</h4>
+        </div> -->
+                    </div>
+                  </div>
+                </div>
+              </section>
+            </div>
+            <!-- <script src="timeline.js"></script> -->
+            <!-- end of timeline -->
+
+          </div>
+        </div>
+
+        <!-- section About  -->
+        <div class="container mt-4">
+          <div class="panel panel-blue">about</div>
+        </div>
+
+
+        <!-- section Footer-->
+        <footer class="bg-light py-5">
+          <div class="container px-4 px-lg-5">
+            <div class="small text-center text-muted">&copy; 2022 - Jin Gao</div>
+          </div>
+        </footer>
+</body>
+
+</html>

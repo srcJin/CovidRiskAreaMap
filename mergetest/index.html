@@ -178,17 +178,19 @@
               </div>
             </div>
             <div class="slidecontainer mt-4">
-              <input type="range" min="0" max="878" value="0" class="slider" id="mySlider">
+              <input type="range" min="0" max="892" value="0" class="slider" id="mySlider">
             </div>
             <div class="container text-center mt-3">
               <span>Day:</span>
               <span id="day" style="font-weight:bold;color:red"></span>
               <span>Date:</span>
               <span id="date" style="font-weight:bold;color:red"></span>
-              <button onclick="startAnimation()"" class = "mt-4 btn btn-light" >Start Animation</button>
+              <div class="text-center mt-3">
+                <button onclick="startAnimation()"" class = " btn btn-light">Start Animation</button>
+              </div>
               <script>
                 var slide = document.getElementById("mySlider");
-    
+
                 animate = function (input) {
                   slide.value = input
                   day.innerHTML = slide.value;
@@ -198,12 +200,12 @@
                   plotRiskPoints(newDate)
                   plotCase(newDate)
                 }
-                
+
                 // setInterval ref https://www.w3schools.com/jsref/met_win_setinterval.asp
                 function startAnimation() {
                   // Set up the animation
                   var i = 400;
-                  var interval = setInterval(function() {
+                  var interval = setInterval(function () {
                     // Output the current number
                     // console.log("i=",i);
                     animate(i)
@@ -214,7 +216,7 @@
                     }
                   }, 100);
                 }
-                </script>
+              </script>
             </div>
           </div>
           <script src="slider.js"></script>
@@ -255,14 +257,23 @@
 
           <div class="panel panel-blue ">
             <div>
-              <p class="text-end mt-4">
+              <h5>Key Events:</h5>
+              <p class="news">
+              </p>
+            </div>
+          </div>
+
+          <div class="panel panel-blue ">
+            <div>
+              <p class="text-end">
                 Data Source:
-                <br>Covid Risk Area:
-                <br><a href="https://github.com/sunbqxyz/china_covid_riskareas_history">Dataset 1: 20-07-29 -
-                  22-04-15</a>
-                <br><a href="https://github.com/panghaibin/COVID-Risk-Region">Dataset 2: 22-04-16 - 22-12-24 </a>
-                <br>Infection:
-                <br><a href="https://github.com/CSSEGISandData">CSSE, Johns Hopkins University</a>
+                <small><br>Covid Risk Area:
+                  <br><a href="https://github.com/sunbqxyz/china_covid_riskareas_history">Dataset 1: 20-07-29 -
+                    22-04-15</a>
+                  <br><a href="https://github.com/panghaibin/COVID-Risk-Region">Dataset 2: 22-04-16 - 22-12-24 </a>
+                  <br>Infection:
+                  <br><a href="https://github.com/CSSEGISandData">CSSE, Johns Hopkins University</a>
+                </small>
               </p>
             </div>
           </div>
@@ -310,9 +321,9 @@
 
         <!-- section chart , disabled   -->
         <div class="container mt-4" id="statistics">
-        <div class="panel panel-blue"></div>
-      </div>
-      <div class="container center mt-4">
+          <div class="panel panel-blue"></div>
+        </div>
+        <!-- <div class="container center mt-4">
         <div class="panel panel-blue">
           <h1>Statistics</h1>
           <div id="wrapper">
@@ -327,7 +338,7 @@
           <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
           <script src="charts.js"></script>
         </div>
-      </div>
+      </div> -->
 
         <div class="container mt-4" id="info">
           <div class="panel panel-blue"></div>
@@ -441,42 +452,42 @@
               <section class="about-timeline">
                 <div class="wrapper inner-wrapper-padding ">
 
-                  <div class="start-point">
+                  <!-- <div class="start-point">
                     <div class="black-dot"></div>
-                    <!-- <h4>Start</h4> -->
-                  </div>
+                    <h4>Start</h4> 
+                   </div> -->
 
                   <div class="timeline-main">
                     <div class="timeline-row">
 
-                      <div class="timeline-box timeline-content-img logo-timeline-arrow">
+                      <div class="timeline-box timeline-content-img">
                         <div class="timeline-box-wrap">
-                          <h6>1950</h6>
+                          <h6>2019.12.31</h6>
                           <div class="timeline-content">
-
                             <img
-                              src="https://images.unsplash.com/photo-1593941502440-c1b305fb66df?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1952&q=80"
+                              src="./images/timeline01.jpg"
                               alt="">
                             <div class="timeline-content-txt">
-                              <p>text1</p>
+                              <t1>武汉市卫健委首次向社会披露已有27例确诊病例</t1>
+                              <t2><br>Wuhan Municipal Health and Health Commission disclosed to the public for the
+                                first time that 27 confirmed cases</t2>
                             </div>
                           </div>
                         </div>
                       </div>
 
-                      <div class="timeline-box timeline-content-img logo-timeline-arrow">
+                      <div class="timeline-box timeline-content-img">
                         <div class="timeline-box-wrap">
-                          <h6>1955</h6>
+                          <h6>2020.01.08</h6>
                           <div class="timeline-content">
-                            <div class="timeline-content-txt">
-                              <p>text2 Lorem Ipsum is <br />simply dummy text<br /> of the printing and<br />
-                                typesetting
-                                industry.</p>
-                              <p>&nbsp;</p>
-                            </div>
                             <img
-                              src="https://images.pexels.com/photos/4913399/pexels-photo-4913399.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=100"
+                              src="./images/timeline02.jpg"
                               alt="">
+                            <div class="timeline-content-txt">
+                              <t1>中国官方宣布发生新型冠状病毒感染的肺炎疫情</t1>
+                              <t2><br>A new coronavirus was announced by Chinese scientists as the cause of the new
+                                disease</t2>
+                            </div>
                           </div>
                         </div>
                       </div>
@@ -490,40 +501,46 @@
                     <div class="timeline-row">
                       <div class="timeline-box img-right timeline-content-img">
                         <div class="timeline-box-wrap">
-                          <h6>1965</h6>
+                          <h6>2020.01.23</h6>
                           <div class="timeline-content">
                             <div class="timeline-content-txt">
-                              <p>text3 Lorem Ipsum is simply dummy text of the printing andtypesetting industry.</p>
+                              <t1>武汉宣布封城</t1>
+                              <t2><br>Wuhan announces lockdown</t2>
                             </div>
                             <img
-                              src="https://images.unsplash.com/photo-1511022890239-e52f7d3bec4d?ixid=MXwxMjA3fDB8MHxzZWFyY2h8NjR8fHNob3djYXNlfGVufDB8fDB8&ixlib=rb-1.2.1&auto=format&fit=crop&w=180&q=60"
+                              src="./images/timeline03.jpg"
                               alt="">
                           </div>
                         </div>
                       </div>
+
                       <div class="timeline-box ">
                         <div class="timeline-box-wrap">
-                          <h6>1975</h6>
+                          <h6>2020.02.04</h6>
                           <div class="timeline-content">
                             <div class="timeline-content-txt">
-                              <p>text4 Lorem Ipsum is<br /> simply dummy text<br /> of the printing and<br />
-                                typesetting
-                                industry.</p>
+                              <t1>湖北疫情感染高峰</t1>
+                              <t2><br>Epidemic infection peak in Hubei</t2>
                             </div>
+                            <img
+                            src="./images/timeline04.jpg"
+                            alt="">
                           </div>
                         </div>
                       </div>
+
                       <div class="timeline-box img-right timeline-content-img top-timeline-arrow">
                         <div class="timeline-box-wrap">
-                          <h6>1985</h6>
+                          <h6>2020.07.01</h6>
                           <div class="timeline-content">
                             <div class="timeline-content-txt">
-                              <p>text5 Laoreet nisl. Metus A.<br> Fringilla Donec taciti<br> et euismod malesuada<br>
-                                class
-                              </p>
+                              <t1>《抗击新冠肺炎疫情的中国行动》白皮书发布</t1>
+                              <t2><br>China's Actions to Combat the New Coronary Pneumonia Epidemic" White Paper
+                                Released</t2>
+
                             </div>
                             <img
-                              src="https://images.unsplash.com/photo-1603143285586-6381819de2cf?ixid=MXwxMjA3fDB8MHxzZWFyY2h8ODh8fHNob3djYXNlfGVufDB8fDB8&ixlib=rb-1.2.1&auto=format&fit=crop&w=150&q=60"
+                              src="./images/timeline05.jpg"
                               alt="">
                           </div>
                         </div>
@@ -533,132 +550,675 @@
                       <div class="corner top"></div>
                       <div class="corner bottom"></div>
                     </div>
+
                     <div class="timeline-row">
                       <div class="timeline-box img-left timeline-content-img">
                         <div class="timeline-box-wrap">
-                          <h6>1995</h6>
+                          <h6>2020.07.17-2020.09.01</h6>
                           <div class="timeline-content">
                             <div class="timeline-content-txt">
-                              <p>text6 Lorem Ipsum is simply dummy text of the printing and.</p>
-                              <p>text7 Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                              <t1>新疆乌鲁木齐封城</t1>
+                              <t2><br>Lockdown of Urumqi, Xinjiang</t2>
                             </div>
                             <img
-                              src="https://images.pexels.com/photos/6044227/pexels-photo-6044227.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=100"
+                              src="./images/timeline06.jpg"
                               alt="">
                           </div>
                         </div>
                       </div>
+
                       <div class="timeline-box timeline-content-img">
                         <div class="timeline-box-wrap">
-                          <h6>1998</h6>
+                          <h6>2020.11.24-2020.11.17</h6>
                           <div class="timeline-content">
                             <div class="timeline-content-txt">
-                              <p>text8 Lorem Ipsum is<br />
-                                simply dummy text<br />
-                                of the printing and<br />
-                                typesetting industry.</p>
-                              <p>&nbsp;</p>
+                              <t1>新疆喀什封城</t1>
+                              <t2><br>Lockdown of Kashgar, Xinjiang</t2>
                             </div>
                             <img
-                              src="https://images.unsplash.com/photo-1615838924642-21e432f30cb2?ixid=MXwxMjA3fDB8MHxzZWFyY2h8OTh8fHNob3djYXNlfGVufDB8fDB8&ixlib=rb-1.2.1&auto=format&fit=crop&w=250&q=60"
-                              alt="">
+                            src="./images/timeline07.jpg"                              alt="">
                           </div>
                         </div>
                       </div>
+
 
                       <div class="timeline-box img-right timeline-content-img">
                         <div class="timeline-box-wrap">
-                          <h6>2015</h6>
+                          <h6>2020.10.15</h6>
                           <div class="timeline-content">
                             <div class="timeline-content-txt">
-                              <p>text12 Lorem Ipsum is
-                                simply<br /> dummy text
-                                of the<br /> printing and
-                                typesetting<br /> industry.</p>
+                              <t1>全国抗击新冠肺炎疫情表彰大会开幕</t1>
+                              <t2><br>The opening of the National Commendation Conference for Fighting the New Coronary
+                                Pneumonia Epidemic</t2>
                             </div>
                             <img
-                              src="https://images.pexels.com/photos/4592257/pexels-photo-4592257.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=150"
+                            src="./images/timeline08.jpg"                              alt="">
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="horizontal-line"></div>
+                      <div class="verticle-line"></div>
+                      <div class="corner top"></div>
+                      <div class="corner bottom"></div>
+                    </div>
+
+
+                    <div class="timeline-row">
+                      <div class="timeline-box timeline-content-img">
+                        <div class="timeline-box-wrap">
+                          <h6>2021.01.03-2021.02.19</h6>
+                          <div class="timeline-content">
+                            <div class="timeline-content-txt">
+                              <t1>河北石家庄、邢台市、廊坊市先后封闭管理</t1>
+                              <t2><br>Shijiazhuang, Xingtai, and Langfang in Hebei have been closed for management</t2>
+                            </div>
+                            <img
+                            src="./images/timeline09.jpg"                              alt="">
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="timeline-box ">
+                        <div class="timeline-box-wrap">
+                          <h6>2021.05.14</h6>
+                          <div class="timeline-content">
+                            <div class="timeline-content-txt">
+                              <t1>新型冠状病毒肺炎防控方案（第八版）发布</t1>
+                              <t2><br>New Coronavirus Pneumonia Prevention and Control Plan (Eighth Edition) Released
+                              </t2>
+                            </div>
+                            <!-- <img
+                            src="./images/timeline10.jpg"                              alt=""> -->
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="timeline-box img-left timeline-content-img">
+                        <div class="timeline-box-wrap">
+                          <h6>2021.08.01</h6>
+                          <div class="timeline-content">
+                            <div class="timeline-content-txt">
+                              <t1>湖南省张家界市封闭式管理</t1>
+                              <t2><br>Closed management in Zhangjiajie City, Hunan Province</t2>
+                            </div>
+                            <img
+                              src="./images/timeline11.jpg"
                               alt="">
                           </div>
                         </div>
                       </div>
+
                       <div class="horizontal-line"></div>
                       <div class="verticle-line"></div>
                       <div class="corner top"></div>
                       <div class="corner bottom"></div>
                     </div>
                     <div class="timeline-row">
-                      <div class="timeline-box timeline-content-img">
-                        <div class="timeline-box-wrap">
-                          <h6>2016</h6>
-                          <div class="timeline-content">
-                            <div class="timeline-content-txt">
-                              <p>
-                                text13 Interdum Tincidunt Dictum<br /> Sapien Pellentesque Velit<br /> Vivamus Magnis
-                              </p>
-                            </div>
-                            <img
-                              src="https://images.pexels.com/photos/4732675/pexels-photo-4732675.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=150"
-                              alt="">
+                    <div class="timeline-box img-left timeline-content-img">
+                      <div class="timeline-box-wrap">
+                        <h6>2021.03.30-2021.04.26</h6>
+                        <div class="timeline-content">
+                          <div class="timeline-content-txt">
+                            <t1>云南省瑞丽市封闭式管理</t1>
+                            <t2><br>Closed management in Ruili City, Yunnan Province</t2>
                           </div>
+                          <img
+                            src="./images/timeline12.jpg"
+                            alt="">
                         </div>
                       </div>
-                      <div class="timeline-box ">
-                        <div class="timeline-box-wrap">
-                          <h6>2018</h6>
-                          <div class="timeline-content">
-                            <div class="timeline-content-txt">
-                              <p>text14 Nisl rhoncus montes<br /> Non diam tincidunt.<br /> A est adipiscing<br />
-                                condimentum
-                                penatibus.
-                              </p>
-                            </div>
+                    </div>
+
+                    <div class="timeline-box img-left timeline-content-img">
+                      <div class="timeline-box-wrap">
+                        <h6>2021.07.07-2021.08.18</h6>
+                        <div class="timeline-content">
+                          <div class="timeline-content-txt">
+                            <t1>云南省瑞丽市再次封闭式管理</t1>
+                            <t2><br>Closed management in Zhangjiajie City, Hunan Province</t2>
                           </div>
+                          <img
+                            src="./images/timeline13.jpg"
+                            alt="">
                         </div>
                       </div>
-                      <div class="timeline-box img-left timeline-content-img">
-                        <div class="timeline-box-wrap">
-                          <h6>2020</h6>
-                          <div class="timeline-content">
-                            <div class="timeline-content-txt">
-                              <p>text15: Lorem Ipsum <br />is simply dummy text<br /> of the printing and.</p>
-                            </div>
-                            <img
-                              src="https://images.pexels.com/photos/3762927/pexels-photo-3762927.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=150"
-                              alt="">
+                    </div>
+
+                    <div class="timeline-box img-left timeline-content-img">
+                      <div class="timeline-box-wrap">
+                        <h6>2021.08.03-2021.09.09</h6>
+                        <div class="timeline-content">
+                          <div class="timeline-content-txt">
+                            <t1>江苏省扬州市主城区封闭式管理</t1>
+                            <t2><br>Closed management in the main urban area of Yangzhou City, Jiangsu Province</t2>
                           </div>
+                          <!-- <img
+                            src="./images/timeline14.jpg"
+                            alt=""> -->
                         </div>
                       </div>
-                      <div class="horizontal-line"></div>
-                      <div class="verticle-line"></div>
-                      <div class="corner top"></div>
-                      <div class="corner bottom"></div>
-                      <!-- <div class="start-point end-point">
+                    </div>
+                    <div class="horizontal-line"></div>
+                    <div class="verticle-line"></div>
+                    <div class="corner top"></div>
+                    <div class="corner bottom"></div>
+                  </div>
+
+
+                  <div class="timeline-row">
+                    <div class="timeline-box img-left timeline-content-img">
+                      <div class="timeline-box-wrap">
+                        <h6>2021.08.05-2021.08.28</h6>
+                        <div class="timeline-content">
+                          <div class="timeline-content-txt">
+                            <t1>河南省郑州市部分区域封闭式管理</t1>
+                            <t2><br>Closed management in some areas of Zhengzhou City, Henan Province</t2>
+                          </div>
+                          <!-- <img
+                            src="./images/timeline15.jpg"
+                            alt=""> -->
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="timeline-box img-left timeline-content-img">
+                      <div class="timeline-box-wrap">
+                        <h6>2021.12.23-2022.01.24</h6>
+                        <div class="timeline-content">
+                          <div class="timeline-content-txt">
+                            <t1>西安封闭式管理</t1>
+                            <t2><br>Closed management in Xi'an</t2>
+                          </div>
+                          <img
+                            src="./images/timeline16.jpg"
+                            alt="">
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="timeline-box img-left timeline-content-img">
+                      <div class="timeline-box-wrap">
+                        <h6>2022.01.07</h6>
+                        <div class="timeline-content">
+                          <div class="timeline-content-txt">
+                            <t1>西安孕妇流产事件</t1>
+                            <t2><br>Xi'an pregnant woman miscarriage incident</t2>
+                          </div>
+                          <img
+                            src="./images/timeline17.jpg"
+                            alt="">
+                        </div>
+                      </div>
+                    </div>
+                    <div class="horizontal-line"></div>
+                    <div class="verticle-line"></div>
+                    <div class="corner top"></div>
+                    <div class="corner bottom"></div>
+                  </div>
+
+                  <div class="timeline-row">
+                    <div class="timeline-box img-left timeline-content-img">
+                      <div class="timeline-box-wrap">
+                        <h6>2022.02.04</h6>
+                        <div class="timeline-content">
+                          <div class="timeline-content-txt">
+                            <t1>北京冬奥会开幕，实施闭环管理政策</t1>
+                            <t2><br>The opening of the Beijing Winter Olympics, the implementation of closed-oop
+                              management policy</t2>
+                          </div>
+                          <img
+                            src="./images/timeline18.jpg"
+                            alt="">
+                        </div>
+                      </div>
+                    </div>
+
+
+                    <div class="timeline-box img-left timeline-content-img">
+                      <div class="timeline-box-wrap">
+                        <h6>2022.03.11-2022.04.28</h6>
+                        <div class="timeline-content">
+                          <div class="timeline-content-txt">
+                            <t1>吉林省长春市封闭式管理</t1>
+                            <t2><br>Closed management in Changchun City, Jilin Province</t2>
+                          </div>
+                          <!-- <img
+                            src="./images/timeline19.jpg"
+                            alt=""> -->
+                        </div>
+                      </div>
+                    </div>
+
+
+
+                    <div class="timeline-box img-left timeline-content-img">
+                      <div class="timeline-box-wrap">
+                        <h6>2022.03.14-2022.03.20</h6>
+                        <div class="timeline-content">
+                          <div class="timeline-content-txt">
+                            <t1>广东省深圳市、东莞市封闭式管理</t1>
+                            <t2><br>Closed management in Shenzhen City and Dongguan City, Guangdong Province</t2>
+                          </div>
+                          <!-- <img
+                            src="./images/timeline20.jpg"
+                            alt=""> -->
+                        </div>
+                      </div>
+                    </div>
+                    <div class="horizontal-line"></div>
+                    <div class="verticle-line"></div>
+                    <div class="corner top"></div>
+                    <div class="corner bottom"></div>
+                  </div>
+
+
+                  <div class="timeline-row">
+                    <div class="timeline-box img-left timeline-content-img">
+                      <div class="timeline-box-wrap">
+                        <h6>2022.03.27-2022.6.11</h6>
+                        <div class="timeline-content">
+                          <div class="timeline-content-txt">
+                            <t1>上海开始实施分批封控</t1>
+                            <t2><br>Shanghai began to implement batch-wise blockade and control</t2>
+                          </div>
+                          <img
+                            src="./images/timeline21.jpg"
+                            alt="">
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="timeline-box img-left timeline-content-img">
+                      <div class="timeline-box-wrap">
+                        <h6>2022.04.16-2022.04.20</h6>
+                        <div class="timeline-content">
+                          <div class="timeline-content-txt">
+                            <t1>陕西省西安市封闭式管理</t1>
+                            <t2><br>Closed management in Xi'an City, Shaanxi Province</t2>
+                          </div>
+                          <!-- <img
+                            src="./images/timeline22.jpg"
+                            alt=""> -->
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="timeline-box img-left timeline-content-img">
+                      <div class="timeline-box-wrap">
+                        <h6>2022.05.10</h6>
+                        <div class="timeline-content">
+                          <div class="timeline-content-txt">
+                            <t1>世界卫生组织总干事谭德塞在记者会上公开表示不认为中国大陆推行的清零政策可以“持久进行”</t1>
+                            <t2><br>Tedros Adhanom Ghebreyesusa stated not believe that the zero-covid policy
+                              implemented by mainland China can be "sustainable”</t2>
+                          </div>
+                          <img
+                            src="./images/timeline23.jpg"
+                            alt="">
+                        </div>
+                      </div>
+                    </div>
+                    <div class="horizontal-line"></div>
+                    <div class="verticle-line"></div>
+                    <div class="corner top"></div>
+                    <div class="corner bottom"></div>
+                  </div>
+
+                  <div class="timeline-row">
+                    <div class="timeline-box img-left timeline-content-img">
+                      <div class="timeline-box-wrap">
+                        <h6>2022.05</h6>
+                        <div class="timeline-content">
+                          <div class="timeline-content-txt">
+                            <t1>上海、杭州、深圳等城市正在积极开展“步行核酸采样圈”的工作，部署永久性方舱医院。</t1>
+                            <t2><br>Major cities are actively carrying out the work of "walking nucleic acid sampling
+                              circles" and deploying permanent shelter hospitals</t2>
+                          </div>
+                          <img
+                            src="./images/timeline24.jpg"
+                            alt="">
+                        </div>
+                      </div>
+                    </div>
+
+
+                    <div class="timeline-box img-left timeline-content-img">
+                      <div class="timeline-box-wrap">
+                        <h6>2022.06.29</h6>
+                        <div class="timeline-content">
+                          <div class="timeline-content-txt">
+                            <t1>新型冠状病毒感染防控方案（第九版）发布</t1>
+                            <t2><br>New Coronavirus Infection Prevention and Control Plan (Ninth Edition) Released</t2>
+                          </div>
+                          <img
+                            src="./images/timeline25.jpg"
+                            alt="">
+                        </div>
+                      </div>
+                    </div>
+                    <div class="horizontal-line"></div>
+                    <div class="verticle-line"></div>
+                    <div class="corner top"></div>
+                    <div class="corner bottom"></div>
+                  </div>
+
+                  <div class="timeline-row">
+                    <div class="timeline-box img-left timeline-content-img">
+                      <div class="timeline-box-wrap">
+                        <h6>2022.07.30-2022.11.25</h6>
+                        <div class="timeline-content">
+                          <div class="timeline-content-txt">
+                            <t1>新疆地区封控</t1>
+                            <t2><br>Xinjiang region closed</t2>
+                          </div>
+                          <img
+                            src="./images/timeline26.jpg"
+                            alt="">
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="timeline-box img-left timeline-content-img">
+                      <div class="timeline-box-wrap">
+                        <h6>2022.09.01-2022.09.19</h6>
+                        <div class="timeline-content">
+                          <div class="timeline-content-txt">
+                            <t1>成都市宣布开始实施原则居家政策</t1>
+                            <t2><br>Chengdu announced the implementation of the principled home policy</t2>
+                          </div>
+                          <img
+                            src="./images/timeline27.jpg"
+                            alt="">
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="timeline-box img-left timeline-content-img">
+                      <div class="timeline-box-wrap">
+                        <h6>2022.9.19</h6>
+                        <div class="timeline-content">
+                          <div class="timeline-content-txt">
+                            <t1>贵州隔离转运大巴侧翻，27人死亡</t1>
+                            <t2><br>Guizhou quarantine transfer bus rollover, 27 dead</t2>
+                          </div>
+                          <img
+                            src="./images/timeline28.jpg"
+                            alt="">
+                        </div>
+                      </div>
+                    </div>
+                    <div class="horizontal-line"></div>
+                    <div class="verticle-line"></div>
+                    <div class="corner top"></div>
+                    <div class="corner bottom"></div>
+                  </div>
+
+
+                <div class="timeline-row">
+                    <div class="timeline-box img-left timeline-content-img">
+                      <div class="timeline-box-wrap">
+                        <h6>2022.10.16</h6>
+                        <div class="timeline-content">
+                          <div class="timeline-content-txt">
+                            <t1>中共二十大召开，二十大报告中提出坚持“动态清零"不动摇</t1>
+                            <t2><br>Shanghai began to implement batch-wise blockade and control</t2>
+                          </div>
+                          <img
+                            src="./images/timeline29.jpg"
+                            alt="">
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="timeline-box img-left timeline-content-img">
+                      <div class="timeline-box-wrap">
+                        <h6>2022.11.02</h6>
+                        <div class="timeline-content">
+                          <div class="timeline-content-txt">
+                            <t1>因抢救不及时，一兰州三岁儿童因煤气中毒去世</t1>
+                            <t2><br>A three.year.old child in Lanzhou died of gas poisoning due to untimely rescue</t2>
+                          </div>
+                          <img
+                            src="./images/timeline30.jpg"
+                            alt="">
+                        </div>
+                      </div>
+                    </div>
+                    <div class="horizontal-line"></div>
+                    <div class="verticle-line"></div>
+                    <div class="corner top"></div>
+                    <div class="corner bottom"></div>
+                  </div>
+
+                  <div class="timeline-row">
+                    <div class="timeline-box img-left timeline-content-img">
+                      <div class="timeline-box-wrap">
+                        <h6>2022.11.04</h6>
+                        <div class="timeline-content">
+                          <div class="timeline-content-txt">
+                            <t1>河南郑州富士康工人徒步逃离厂区</t1>
+                            <t2><br>Foxconn workers in Zhengzhou, Henan fled the factory on foot</t2>
+                          </div>
+                          <img
+                            src="./images/timeline31.jpg"
+                            alt="">
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="timeline-box img-left timeline-content-img">
+                      <div class="timeline-box-wrap">
+                        <h6>2022.11.10</h6>
+                        <div class="timeline-content">
+                          <div class="timeline-content-txt">
+                            <t1>中共中央政治局常委会继续强调坚定不移贯彻“动态清零”总方针，要完整、准确、全面贯彻落实党中央决策部署。</t1>
+                            <t2><br>The Standing Committee of the Political Bureau of the Central Committee of the
+                              Communist Party of China continues to emphasize the unswerving implementation of the
+                              general policy of "dynamic clearing" and the complete, accurate and comprehensive
+                              implementation of the decision.making and deployment of the Party Central Committee</t2>
+                          </div>
+                          <img
+                            src="./images/timeline32.jpg"
+                            alt="">
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="timeline-box img-left timeline-content-img">
+                      <div class="timeline-box-wrap">
+                        <h6>2022.11.11</h6>
+                        <div class="timeline-content">
+                          <div class="timeline-content-txt">
+                            <t1>《关于进一步优化新冠肺炎疫情防控措施　科学精准做好防控工作的通知》发布,宣布入境与封控缩短为隔离5天，国际航班熔断也告结束。</t1>
+                            <t2><br>The "Notice on Further Optimizing the Prevention and Control Measures of the New
+                              Coronary Pneumonia Epidemic and Doing a Scientific and Accurate Prevention and Control
+                              Work" was released. It was announced that the entry and quarantine were shortened to 5
+                              days of quarantine, and the circuit breaker for international flights was over</t2>
+                          </div>
+                          <img
+                            src="./images/timeline33.jpg"
+                            alt="">
+                        </div>
+                      </div>
+                    </div>
+                    <div class="horizontal-line"></div>
+                    <div class="verticle-line"></div>
+                    <div class="corner top"></div>
+                    <div class="corner bottom"></div>
+                  </div>
+
+                  <div class="timeline-row">
+                    <div class="timeline-box img-left timeline-content-img">
+                      <div class="timeline-box-wrap">
+                        <h6>2022.11.22</h6>
+                        <div class="timeline-content">
+                          <div class="timeline-content-txt">
+                            <t1>鸿海科技集团违约导致郑州富士康工人再次抗议</t1>
+                            <t2><br>Foxconn workers in Zhengzhou protest again over Hon Hai breach of contract</t2>
+                          </div>
+                          <img
+                            src="./images/timeline34.jpg"
+                            alt="">
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="timeline-box img-left timeline-content-img">
+                      <div class="timeline-box-wrap">
+                        <h6>2022.10.24</h6>
+                        <div class="timeline-content">
+                          <div class="timeline-content-txt">
+                            <t1>乌鲁木齐大火致10人死亡</t1>
+                            <t2><br>A fire in a building in Ürümqi killed 10 people and wounded 9 in a residential area
+                              under lockdown.</t2>
+                          </div>
+                          <img
+                            src="./images/timeline35.jpg"
+                            alt="">
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="timeline-box img-left timeline-content-img">
+                      <div class="timeline-box-wrap">
+                        <h6>2022.12.07</h6>
+                        <div class="timeline-content">
+                          <div class="timeline-content-txt">
+                            <t1>国务院联防联控机制发布了《关于进一步优化落实新冠肺炎疫情防控措施的通知》（“新十条”），取消了大部分防疫限制</t1>
+                            <t2><br>The joint prevention and control mechanism of the State Council issued the "Notice
+                              on Further Optimizing and Implementing the Prevention and Control Measures for the New
+                              Coronary Pneumonia Epidemic" ("New Ten Measures"), canceling most of the epidemic
+                              prevention restrictions</t2>
+                          </div>
+                          <!-- <img
+                            src="./images/timeline36.jpg"
+                            alt=""> -->
+                        </div>
+                      </div>
+                    </div>
+                    <div class="horizontal-line"></div>
+                    <div class="verticle-line"></div>
+                    <div class="corner top"></div>
+                    <div class="corner bottom"></div>
+                  </div>
+
+                  <div class="timeline-row">
+                    <div class="timeline-box img-left timeline-content-img">
+                      <div class="timeline-box-wrap">
+                        <h6>2022.12.12</h6>
+                        <div class="timeline-content">
+                          <div class="timeline-content-txt">
+                            <t1>通信大数据行程卡下线</t1>
+                            <t2><br>Communication big data trip card taken down</t2>
+                          </div>
+                          <img
+                            src="./images/timeline37.jpg"
+                            alt="">
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="timeline-box img-left timeline-content-img">
+                      <div class="timeline-box-wrap">
+                        <h6>2022.12.25</h6>
+                        <div class="timeline-content">
+                          <div class="timeline-content-txt">
+                            <t1>中国国家卫健委宣布，不再发布每日疫情信息</t1>
+                            <t2><br>China's National Health Commission announces it will no longer publish daily
+                              epidemic information</t2>
+                          </div>
+                          <!-- <img
+                            src="./images/timeline38.jpg"
+                            alt=""> -->
+                        </div>
+                      </div>
+                    </div>
+                    <div class="timeline-box img-left timeline-content-img">
+                      <div class="timeline-box-wrap">
+                        <h6>2022.12.26</h6>
+                        <div class="timeline-content">
+                          <div class="timeline-content-txt">
+                            <t1>发布"对新型冠状病毒感染实施“乙类乙管”通知"，将“新型冠状病毒肺炎”更名为“新型冠状病毒感染”</t1>
+                            <t2><br>Issued the notice of implementing "Class B and B management" for new coronavirus
+                              infection, and renamed "new coronavirus pneumonia" to "new coronavirus infection”</t2>
+                          </div>
+                          <!-- <img
+                            src="./images/timeline39.jpg"
+                            alt=""> -->
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="horizontal-line"></div>
+                    <div class="verticle-line"></div>
+                    <div class="corner top"></div>
+                    <div class="corner bottom"></div>
+                  </div>
+
+                  <div class="timeline-row">
+                    <div class="timeline-box img-left timeline-content-img">
+                      <div class="timeline-box-wrap">
+                        <h6>2023.01.07</h6>
+                        <div class="timeline-content">
+                          <div class="timeline-content-txt">
+                            <t1>新型冠状病毒感染防控方案（第十版）发布</t1>
+                            <t2><br>New Coronavirus Infection Prevention and Control Plan (Tenth Edition) Released</t2>
+                          </div>
+                          <img
+                            src="./images/timeline40.jpg"
+                            alt="">
+                        </div>
+                      </div>
+                    </div>
+                    <div class="timeline-box img-left timeline-content-img">
+                      <div class="timeline-box-wrap">
+                        <h6>2023.01.08</h6>
+                        <div class="timeline-content">
+                          <div class="timeline-content-txt">
+                            <t1>正式将新型冠状病毒感染从“乙类甲管”调整为“乙类乙管”，进一步优化入境策略</t1>
+                            <t2><br>Officially adjusted the new coronavirus infection from "Class B and A management" to
+                              "Class B and B management", further optimizing the entry strategy</t2>
+                          </div>
+                          <img
+                            src="./images/timeline41.jpg"
+                            alt="">
+                        </div>
+                      </div>
+                    </div>
+
+
+                    <div class="horizontal-line"></div>
+                    <div class="verticle-line"></div>
+                    <div class="corner top"></div>
+                    <div class="corner bottom"></div>
+                  </div>
+                    <!-- <div class="start-point end-point">
           <h4>The end</h4>
         </div> -->
-                    </div>
                   </div>
                 </div>
-              </section>
             </div>
-            <!-- <script src="timeline.js"></script> -->
-            <!-- end of timeline -->
-
+            </section>
           </div>
+          <!-- <script src="timeline.js"></script> -->
+          <!-- end of timeline -->
+
         </div>
+      </div>
 
-        <!-- section About  -->
-        <div class="container mt-4">
-          <div class="panel panel-blue">about</div>
+      <!-- section About  -->
+      <div class="container mt-4">
+        <div class="panel panel-blue">about</div>
+      </div>
+
+
+      <!-- section Footer-->
+      <footer class="bg-light py-5">
+        <div class="container px-4 px-lg-5">
+          <div class="small text-center text-muted">&copy; 2022 - Jin Gao</div>
         </div>
-
-
-        <!-- section Footer-->
-        <footer class="bg-light py-5">
-          <div class="container px-4 px-lg-5">
-            <div class="small text-center text-muted">&copy; 2022 - Jin Gao</div>
-          </div>
-        </footer>
+      </footer>
 </body>
 
 </html>
