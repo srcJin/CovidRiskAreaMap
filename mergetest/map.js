@@ -354,7 +354,28 @@ async function plotCase(date) {
   let provinceGeoJSON = await axios.get("./provinceData/" + date + ".geojson");
 
 
+  // let heatMapCoordinates = []
+  // provinceGeoJSON.data.features.forEach(function (feature) {
+  //   for (let i in feature.geometry.coordinates.flat()) {
 
+  //     // console.log(L.latLng(feature.geometry.coordinates.flat()[i]));
+  //     heatMapCoordinates.push(L.latLng(feature.geometry.coordinates.flat()[i]))
+  //   }
+   
+  //   heatMapCoordinates = heatMapCoordinates.concat(L.latLng(feature.geometry.coordinates.flat()))
+  // });
+  // console.log(heatMapCoordinates);
+  
+  // var heat = L.heatLayer([
+  //   heatMapCoordinates
+  // ], {radius: 25}).addTo(map);
+
+  // var heatmap = new L.webGLHeatmap({
+  //   size: 1000
+  // });
+  // heatmap.setData(heatMapCoordinates)
+
+  // map.addLayer(heatmap);
 
   if (isCasesDraw == 0) {
     // control = L.control.layers(layerControl2, null).addTo(map);
@@ -374,7 +395,7 @@ async function plotCase(date) {
       },
       onEachFeature,
     });
-  
+
     confirmed = L.geoJson(provinceGeoJSON.data, {
       style: function (feature) {
         return {
@@ -388,7 +409,7 @@ async function plotCase(date) {
       },
       onEachFeature,
     });
-  
+
     deaths = L.geoJson(provinceGeoJSON.data, {
       style: function (feature) {
         return {
@@ -402,7 +423,7 @@ async function plotCase(date) {
       },
       onEachFeature,
     });
-  
+
     layerControl2 = {
       Deaths: deaths,
       "Confirmed Cases": confirmed,
@@ -465,7 +486,7 @@ async function plotCase(date) {
       },
       onEachFeature,
     });
-  
+
     confirmed = L.geoJson(provinceGeoJSON.data, {
       style: function (feature) {
         return {
@@ -479,7 +500,7 @@ async function plotCase(date) {
       },
       onEachFeature,
     });
-  
+
     deaths = L.geoJson(provinceGeoJSON.data, {
       style: function (feature) {
         return {
@@ -493,7 +514,7 @@ async function plotCase(date) {
       },
       onEachFeature,
     });
-  
+
     layerControl2 = {
       Deaths: deaths,
       "Confirmed Cases": confirmed,
@@ -501,7 +522,7 @@ async function plotCase(date) {
       "Turn Off": emptyLayer,
     };
 
-    
+
     // console.log("styleMode=",styleMode);
 
     if (styleMode == 0) {
@@ -530,16 +551,16 @@ async function plotCase(date) {
     // console.log("haslayer1",map.hasLayer(riskArea))
     // console.log("haslayer2",map.hasLayer(confirmed))
     // console.log("haslayer3",map.hasLayer(deaths))
-  //   map.on('baselayerchange', function (e) {
-  //     console.log(e.layer);
-  // });
+    //   map.on('baselayerchange', function (e) {
+    //     console.log(e.layer);
+    // });
   }
   // console.log("provinceGeoJSON", provinceGeoJSON.data);
 
   // L.geoJson(provinceGeoJSON.data).addTo(map);
 
   // control that shows state info on hover
- 
+
 
   info.onAdd = function (map) {
     this._div = L.DomUtil.create("div", "info");
@@ -571,35 +592,35 @@ async function plotCase(date) {
       return d > 1000
         ? "#800026"
         : d > 500
-        ? "#BD0026"
-        : d > 250
-        ? "#E31A1C"
-        : d > 50
-        ? "#FC4E2A"
-        : d > 25
-        ? "#FD8D3C"
-        : d > 10
-        ? "#FEB24C"
-        : d > 5
-        ? "#FED976"
-        : "#FFEDA0";
+          ? "#BD0026"
+          : d > 250
+            ? "#E31A1C"
+            : d > 50
+              ? "#FC4E2A"
+              : d > 25
+                ? "#FD8D3C"
+                : d > 10
+                  ? "#FEB24C"
+                  : d > 5
+                    ? "#FED976"
+                    : "#FFEDA0";
     }
     if (type == "confirmed") {
       return d > 1000
         ? "#344152"
         : d > 500
-        ? "#506987"
-        : d > 250
-        ? "#325C74"
-        : d > 50
-        ? "#42647F"
-        : d > 25
-        ? "#6996AD"
-        : d > 10
-        ? "#9AC0CD"
-        : d > 5
-        ? "#C3E4ED"
-        : "#E3FFFF";
+          ? "#506987"
+          : d > 250
+            ? "#325C74"
+            : d > 50
+              ? "#42647F"
+              : d > 25
+                ? "#6996AD"
+                : d > 10
+                  ? "#9AC0CD"
+                  : d > 5
+                    ? "#C3E4ED"
+                    : "#E3FFFF";
     }
 
     // greyscale https://www.w3schools.com/colors/colors_shades.asp
@@ -607,22 +628,22 @@ async function plotCase(date) {
       return d > 20
         ? "#000000"
         : d > 15
-        ? "#282828"
-        : d > 10
-        ? "#484848"
-        : d > 8
-        ? "#696969"
-        : d > 5
-        ? "#808080"
-        : d > 2
-        ? "#A9A9A9"
-        : d > 1
-        ? "#D0D0D0"
-        : "#DADADA";
+          ? "#282828"
+          : d > 10
+            ? "#484848"
+            : d > 8
+              ? "#696969"
+              : d > 5
+                ? "#808080"
+                : d > 2
+                  ? "#A9A9A9"
+                  : d > 1
+                    ? "#D0D0D0"
+                    : "#DADADA";
     }
   }
 
-  
+
 
   function highlightFeature_bak(e) {
     const layer = e.target;
@@ -675,12 +696,14 @@ async function plotCase(date) {
       `
         : "";
 
-      let timeout = setTimeout(function () {
-        let popup = L.popup()
-          .setLatLng(e.latlng)
-          .setContent(contents)
-          .openOn(map);
-      }, 200);
+      // display popup on the mouse position after 1.5s, not working very well
+      // disable for now
+      // let timeout = setTimeout(function () {
+      //   let popup = L.popup()
+      //     .setLatLng(e.latlng)
+      //     .setContent(contents)
+      //     .openOn(map);
+      // }, 1500);
     });
 
     // info.style.left = e.pageX + 'px';
@@ -727,7 +750,7 @@ async function plotCase(date) {
   const legend_riskArea = L.control({ position: "bottomleft" });
   const legend_confirmed = L.control({ position: "bottomleft" });
   const legend_deaths = L.control({ position: "bottomleft" });
-  
+
   legend_riskArea.onAdd = function (map) {
     const div = L.DomUtil.create("div", "info legend");
     const grades = [0, 5, 10, 25, 50, 250, 500, 1000];
@@ -738,8 +761,7 @@ async function plotCase(date) {
       from = grades[i];
       to = grades[i + 1];
       labels.push(
-        `<i style="background:${getColor(from + 1,"riskArea")}"></i> ${from}${
-          to ? `&ndash;${to}` : "+"
+        `<i style="background:${getColor(from + 1, "riskArea")}"></i> ${from}${to ? `&ndash;${to}` : "+"
         }`
       );
     }
@@ -756,8 +778,7 @@ async function plotCase(date) {
       from = grades[i];
       to = grades[i + 1];
       labels.push(
-        `<i style="background:${getColor(from + 1,"deaths")}"></i> ${from}${
-          to ? `&ndash;${to}` : "+"
+        `<i style="background:${getColor(from + 1, "deaths")}"></i> ${from}${to ? `&ndash;${to}` : "+"
         }`
       );
     }
@@ -774,8 +795,7 @@ async function plotCase(date) {
       from = grades[i];
       to = grades[i + 1];
       labels.push(
-        `<i style="background:${getColor(from + 1,"confirmed")}"></i> ${from}${
-          to ? `&ndash;${to}` : "+"
+        `<i style="background:${getColor(from + 1, "confirmed")}"></i> ${from}${to ? `&ndash;${to}` : "+"
         }`
       );
     }
@@ -793,62 +813,55 @@ async function plotCase(date) {
     previousStyleMode = styleMode
 
   } else {
-    console.log("stylemode=",styleMode);
-    console.log("previousStyleMode=",previousStyleMode);
+    console.log("stylemode=", styleMode);
+    console.log("previousStyleMode=", previousStyleMode);
 
     if (styleMode != previousStyleMode) {
       if (previousStyleMode == 0) {
-      console.log("removing legend riskArea");
-      // map.removeControl(legend_riskArea);
-      legend_riskArea.remove()
-      // map.removeLayer(legend_riskArea)    
-    }
-    else if (previousStyleMode == 1) {
-      console.log("removing legend_confirmed");
-      // map.removeControl(legend_confirmed);
-      legend_confirmed.remove()
-      // map.removeLayer(legend_confirmed)
-    }
-   else if (previousStyleMode == 2) {
-    console.log("removing legend_deaths");
-      // map.removeControl(legend_deaths);
-      legend_deaths.remove()
+        console.log("removing legend riskArea");
+        // map.removeControl(legend_riskArea);
+        legend_riskArea.remove()
+        // map.removeLayer(legend_riskArea)    
+      }
+      else if (previousStyleMode == 1) {
+        console.log("removing legend_confirmed");
+        // map.removeControl(legend_confirmed);
+        legend_confirmed.remove()
+        // map.removeLayer(legend_confirmed)
+      }
+      else if (previousStyleMode == 2) {
+        console.log("removing legend_deaths");
+        // map.removeControl(legend_deaths);
+        legend_deaths.remove()
 
-      // map.removeLayer(legend_deaths)
+        // map.removeLayer(legend_deaths)
+      }
+      else if (previousStyleMode == 3) {
+      }
+
+      if (styleMode == 0) {
+
+        legend_riskArea.addTo(map);
+        previousStyleMode = 0
+      } else if (styleMode == 1) {
+        legend_confirmed.addTo(map);
+        previousStyleMode = 1
+      } else if (styleMode == 2) {
+
+        legend_deaths.addTo(map)
+        previousStyleMode = 2
+      } else {
+        previousStyleMode = 3
+      }
+
+
     }
-    else if (previousStyleMode == 3) {
-    }
-
-    if (styleMode == 0) {
-
-    legend_riskArea.addTo(map);
-    previousStyleMode = 0
-    } else if (styleMode == 1) {
-    legend_confirmed.addTo(map);
-    previousStyleMode = 1
-  } else if (styleMode == 2) {
-
-    legend_deaths.addTo(map)
-    previousStyleMode = 2
-  } else {
-    previousStyleMode = 3
   }
-    
-
-  }
-}
-
-
-
-
-
-
-
 
 }
-  // map.attributionControl.addAttribution(
-  //   'Data Source <a href="https://github.com/CSSEGISandData">CSSE at Johns Hopkins University</a>'
-  // );
+// map.attributionControl.addAttribution(
+//   'Data Source <a href="https://github.com/CSSEGISandData">CSSE at Johns Hopkins University</a>'
+// );
 
 
 
@@ -857,3 +870,4 @@ console.log("Map is running");
 plotRiskPoints("20220702");
 
 plotCase("20220702");
+
