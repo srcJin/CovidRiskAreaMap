@@ -89,11 +89,3 @@ async function pushEventsToHTML(date) {
   }
 }
 
-
-async function pushEvents() {
-  axios
-
-  var day = document.getElementById("day");
-
-
-}

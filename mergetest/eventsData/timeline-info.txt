@@ -10,7 +10,7 @@ Wuhan Municipal Health and Health Commission disclosed to the public for the fir
 
 A new coronavirus was announced by Chinese scientists as the cause of the new disease
 
-2020.01.23
+2020.01.23 - 2020.04.08
 
 武汉宣布封城
 
@@ -21,6 +21,12 @@ Wuhan announces lockdown
 湖北疫情感染高峰
 
 Epidemic infection peak in Hubei
+
+2020.02.07
+
+李文亮医生去世
+
+Dr. Li Wenliang dies
 
 2020.07.01
 
@@ -58,7 +64,7 @@ Shijiazhuang, Xingtai, and Langfang in Hebei have been closed for management
 
 New Coronavirus Pneumonia Prevention and Control Plan (Eighth Edition) Released
 
-2021.08.01
+2021.08.01-2021.08.25
 
 湖南省张家界市封闭式管理
 
@@ -100,7 +106,7 @@ Closed management in Xi'an
 
 Xi'an pregnant woman miscarriage incident
 
-2022.02.04
+2022.02.04 - 2020.02.20
 
 北京冬奥会开幕，实施闭环管理政策
 
@@ -116,13 +122,13 @@ Closed management in Changchun City, Jilin Province
 
 广东省深圳市、东莞市封闭式管理
 
-Closed management in Shenzhen City and Dongguan City, Guangdong Province
+Closed management in Shenzhen and Dongguan, Guangdong
 
-2022.03.27-2022.6.11
+2022.03.27-2022.6.01
 
 上海开始实施分批封控
 
-Shanghai began to implement batch-wise blockade and control
+Shanghai began to implement batch-wise control
 
 2022.04.16-2022.04.20
 
@@ -132,7 +138,7 @@ Closed management in Xi'an City, Shaanxi Province
 
 2022.05.10
 
-世界卫生组织总干事谭德塞在记者会上公开表示不认为中国大陆推行的清零政策可以“持久进行”
+世界卫生组织总干事谭德塞表示不认为中国大陆推行的清零政策可以“持久进行”
 
 On May 10, 2022, Tedros Adhanom Ghebreyesus, Director.General of the World Health Organization, publicly stated at a press conference that he does not believe that the zero.clearing policy implemented by mainland China can be "sustainable”
 
@@ -156,9 +162,9 @@ Xinjiang region closed
 
 2022.09.01-2022.09.19
 
-成都市宣布开始实施原则居家政策
+成都市宣布实施原则居家政策
 
-Chengdu announced the implementation of the principled home policy
+Chengdu announced principled home policy
 
 2022.9.19
 
@@ -168,7 +174,7 @@ Guizhou quarantine transfer bus rollover, 27 dead
 
 2022.10.16
 
-中共二十大召开，二十大报告中提出坚持“动态清零"不动摇
+中共二十大召开，报告中提出坚持“动态清零"不动摇
 
 The 20th National Congress of the Communist Party of China was held, and it was proposed to insist on "dynamic clearing”
 
@@ -176,7 +182,7 @@ The 20th National Congress of the Communist Party of China was held, and it was 
 
 因抢救不及时，一兰州三岁儿童因煤气中毒去世
 
-A three.year.old child in Lanzhou died of gas poisoning due to untimely rescue
+A three-year-old child in Lanzhou died of gas poisoning due to untimely rescue
 
 2022.11.04
 
@@ -202,7 +208,7 @@ The "Notice on Further Optimizing the Prevention and Control Measures of the New
 
 Foxconn workers in Zhengzhou protest again over Hon Hai breach of contract
 
-2022.10.24
+2022.11.24
 
 乌鲁木齐大火致10人死亡
 
@@ -210,7 +216,7 @@ A fire in a building in Ürümqi killed 10 people and wounded 9 in a residenti
 
 2022.12.07
 
-国务院联防联控机制发布了《关于进一步优化落实新冠肺炎疫情防控措施的通知》（“新十条”），取消了大部分防疫限制
+发布《关于进一步优化落实新冠肺炎疫情防控措施的通知》（“新十条”），取消了大部分防疫限制
 
 The joint prevention and control mechanism of the State Council issued the "Notice on Further Optimizing and Implementing the Prevention and Control Measures for the New Coronary Pneumonia Epidemic" ("New Ten Measures"), canceling most of the epidemic prevention restrictions
 
