@@ -13,8 +13,9 @@ slide.oninput = function () {
   date.innerHTML = dayToDate(this.value)[1];
   newDate = dayToDate(parseInt(this.value))[0]
   console.log("date=",newDate)
-  plotRiskPoints(newDate)
-  plotCase(newDate)
+  plotRiskPoints(newDate)  // in map.js
+  plotCase(newDate)   // in charts.js
+  pushEventsToHTML(newDate)
 }
 
 // method 2: event listener, this one only refreshes when the action ended
@@ -69,4 +70,30 @@ function dayToDate(offset) {
 
     return [`${year}${month}${day}`, `${year}-${month}-${day}`];
   }
+}
+
+
+async function pushEventsToHTML(date) {
+  console.log("pushEvents",date);
+  try {
+    const response = await axios.get('eventsData/events.json');
+    // console.log("response.data",response.data);
+    // Display the event in the HTML class "event"
+    let eventCNObj = document.getElementById("eventCN");
+    let eventENObj = document.getElementById("eventEN");
+    eventCNObj.innerHTML = response.data[date].eventCN;
+    eventENObj.innerHTML = response.data[date].eventEN;
+
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+
+async function pushEvents() {
+  axios
+
+  var day = document.getElementById("day");
+
+
 }

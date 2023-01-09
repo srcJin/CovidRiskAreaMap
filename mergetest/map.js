@@ -813,8 +813,8 @@ async function plotCase(date) {
     previousStyleMode = styleMode
 
   } else {
-    console.log("stylemode=", styleMode);
-    console.log("previousStyleMode=", previousStyleMode);
+    // console.log("stylemode=", styleMode);
+    // console.log("previousStyleMode=", previousStyleMode);
 
     if (styleMode != previousStyleMode) {
       if (previousStyleMode == 0) {

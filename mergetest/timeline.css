@@ -99,7 +99,7 @@ h1, h2, h3, h4, h5, h6,p {
 .timeline-box-wrap .timeline-content img {max-width: 100%;}
 } */
 
-
+/* modified from 1600 to 2000 for bug fixing */
 @media screen and (max-width: 2000px){
 
 .timeline-row:first-child .timeline-box:first-child {width: 38%;}

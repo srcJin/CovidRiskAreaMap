@@ -41,6 +41,16 @@ h4 {
   color: #000000;
 }
 
+
+/* specify the panels heights */
+/* select by id */
+
+#sliderPanel {height: 23%;}
+#calenderPanel {height: 17%;}
+#eventsPanel {height: 33%;}
+#sourcePanel {height: 20%;}
+
+
 /* header */
 .dropdown-toggle::after {
     display: none;
