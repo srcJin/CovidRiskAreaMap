@@ -4,6 +4,8 @@
 let china = [35.0, 107.0];
 let singapore = [1.29, 103.85];
 
+
+
 // L is provided by leaflet.js
 // L is the leaflet object and it allows
 // us to features from Leaflet
@@ -75,6 +77,10 @@ let map = L.map("map", {
   zoom: 4,
   layers: [osm_light],
   zoomControl: false,
+    fullscreenControl: true,
+    fullscreenControlOptions: {
+      position: 'topleft'
+    }
 });
 
 let baseLayers = {
@@ -91,7 +97,7 @@ let baseLayers = {
 
 // }
 
-L.control.layers(baseLayers).addTo(map);
+L.control.layers(baseLayers,null,{togglerClassName: 'layers-provider'}).addTo(map);
 // L.control.layers(osmLayers).addTo(map);
 
 L.control
@@ -145,7 +151,7 @@ async function plotRiskPoints(date) {
       // icon ref: https://stackoverflow.com/questions/24258914/leaflet-clustermarker-with-custom-icon
       // https://leafletjs.com/examples/custom-icons/
       {
-        maxClusterRadius: 50,
+        maxClusterRadius: 5,
         disableClusteringAtZoom: 10,
         showCoverageOnHover: true,
         zoomToBoundsOnClick: true,
@@ -173,7 +179,7 @@ async function plotRiskPoints(date) {
       // icon ref: https://stackoverflow.com/questions/24258914/leaflet-clustermarker-with-custom-icon
       // https://leafletjs.com/examples/custom-icons/
       {
-        maxClusterRadius: 50,
+        maxClusterRadius: 5,
         disableClusteringAtZoom: 10,
         showCoverageOnHover: true,
         zoomToBoundsOnClick: true,
@@ -254,7 +260,7 @@ async function plotRiskPoints(date) {
       "Middle Risk Area": markerClusterLayerMiddle,
     };
 
-    L.control.layers(null, layerControl1).addTo(map);
+    L.control.layers(null, layerControl1,{togglerClassName: 'layers-point'}).addTo(map);
 
     isPointsDraw = 1;
   } else {
@@ -433,7 +439,7 @@ async function plotCase(date) {
     map.addLayer(riskArea);
     // confirmed.addTo(map);
 
-    control = L.control.activeLayers(layerControl2, null)
+    control = L.control.activeLayers(layerControl2, null,{togglerClassName: 'layers-cases'})
     control.addTo(map);
 
     // console.log("activeLayer=",activeLayer)
@@ -539,7 +545,7 @@ async function plotCase(date) {
     }
 
     map.removeControl(control)
-    control = L.control.activeLayers(layerControl2, null)
+    control = L.control.activeLayers(layerControl2, null,{togglerClassName: 'layers-cases'})
     control.addTo(map);
     // map.addLayer(deaths);
     // map.addLayer(confirmed);
@@ -742,6 +748,7 @@ async function plotCase(date) {
     layer.on({
       mouseover: highlightFeature,
       mouseout: resetHighlight,
+      // click works for both touch screen and 
       click: zoomToFeature,
     });
     // console.log(layer)
@@ -862,6 +869,7 @@ async function plotCase(date) {
 // map.attributionControl.addAttribution(
 //   'Data Source <a href="https://github.com/CSSEGISandData">CSSE at Johns Hopkins University</a>'
 // );
+
 
 
 

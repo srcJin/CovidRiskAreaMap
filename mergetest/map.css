@@ -1,6 +1,18 @@
+/* mediaquery ref: https://www.w3schools.com/css/css_rwd_mediaqueries.asp */
+
+/* for desktop */
+@media only screen and (min-width: 768px) {
 #map {
-    height: 85vh;
+    height: 845px;
 }
+}
+
+/* for mobile */
+@media only screen and (max-width: 768px) {
+    #map {
+        height: 500px;
+    }
+    }
 
 /* body {
     padding: 0;
@@ -59,4 +71,26 @@
     float: left;
     margin-right: 8px;
     opacity: 0.7;
+}
+
+
+/* customize the map icons */
+
+.leaflet-top.leaflet-right .leaflet-control-layers:nth-child(1) .leaflet-control-layers-toggle {
+    background-image: url("images/layers-provider.png");
+    width: 32px;
+    height: 32px;
+}
+
+.leaflet-top.leaflet-right .leaflet-control-layers:nth-child(2) .leaflet-control-layers-toggle {
+    background-image: url("images/layers-cases.png");
+    width: 32px;
+    height: 32px;
+}
+
+
+.leaflet-top.leaflet-right .leaflet-control-layers:nth-child(3) .leaflet-control-layers-toggle {
+    background-image: url("images/layers-point.png");
+    width: 32px;
+    height: 32px;
 }

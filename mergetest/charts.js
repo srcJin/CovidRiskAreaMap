@@ -114,21 +114,22 @@ async function loadData() {
 
 let options1 = {
   series: [],
-
+// sync charts: https://apexcharts.com/docs/chart-types/synchronized-charts/
   chart: {
     id: "chart2",
     type: "area",
     height: 350,
     stacked: true,
+    group: 'sync',
     toolbar: {
       autoSelected: "pan",
       show: true,
     },
-    events: {
-      selection: function (chart, e) {
-        console.log(new Date(e.xaxis.min));
-      },
-    },
+    // events: {
+    //   selection: function (chart, e) {
+    //     console.log(new Date(e.xaxis.min));
+    //   },
+    // },
   },
   colors: ["#008FFB", "#00E396", "#CED4DC"],
 
@@ -153,6 +154,12 @@ let options1 = {
   xaxis: {
     type: "datetime",
   },
+  yaxis: {
+    labels: {
+      tickAmount: 4,
+      minWidth: 40
+    }
+  },
   noData: {
     text: "Loading...",
   },
@@ -165,6 +172,7 @@ let options2 = {
     type: "area",
     foreColor: "#ccc",
     stacked: true,
+    group: 'sync',
     brush: {
       targets: ["chart2","chart3"],
       enabled: true,
@@ -206,7 +214,10 @@ let options2 = {
     },
   },
   yaxis: {
-    tickAmount: 4,
+    labels: {
+      tickAmount: 4,
+      minWidth: 40
+    }
   },
   noData: {
     text: "Loading...",
@@ -221,15 +232,16 @@ let options3 = {
     type: "area",
     height: 350,
     stacked: true,
+    group: 'sync',
     toolbar: {
       autoSelected: "pan",
       show: true,
     },
-    events: {
-      selection: function (chart, e) {
-        console.log(new Date(e.xaxis.min));
-      },
-    },
+    // events: {
+    //   selection: function (chart, e) {
+    //     console.log(new Date(e.xaxis.min));
+    //   },
+    // },
   },
   colors: ["#008FFB", "#00E396"],
 
@@ -253,6 +265,12 @@ let options3 = {
   },
   xaxis: {
     type: "datetime",
+  },
+  yaxis: {
+    labels: {
+      tickAmount: 4,
+      minWidth: 40
+    }
   },
   noData: {
     text: "Loading...",

@@ -5,6 +5,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>China Covid Risk Area Map</title>
+  <link rel="icon" type="image/x-icon" href="images/favicon.ico">
   <!-- import bootstrap css -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous" />
@@ -17,6 +18,8 @@
   <link rel="stylesheet" href="calendertest.css" />
   <link rel="stylesheet" href="map.css" />
   <link rel="stylesheet" href="info.css">
+  <link rel="stylesheet" href="Control.FullScreen.css" />
+
   <!-- Timeline style start -->
   <link rel="preconnect" href="https://fonts.gstatic.com">
   <link
@@ -41,14 +44,26 @@
   <nav class="navbar navbar-expand-lg navbar-light shadow-sm bg-light fixed-top">
     <div class="container"> <a class="navbar-brand d-flex align-items-center" href="#home">
         <img src="images/navbaricon.png" alt="covid icon" class="navbar-icon">
-        <span class="ml-3 font-weight-bold">China Covid Risk Area Historic Map</apan>
-      </a> <button class="navbar-toggler navbar-toggler-right border-0" type="button" data-toggle="collapse"
-        data-target="#navbar4">
-        <span class="navbar-toggler-icon"></span>
-      </button>
+        <!-- hidden when the screen is small, ref: https://getbootstrap.com/docs/4.0/utilities/display/ -->
+        <span class=" font-weight-bold">
+          <div class ="d-none d-md-block ">China Covid Risk Area Historic Map
+          </div>
+        </apan>
+      </a> 
+      <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+    <span class="navbar-toggler-icon"></span>
+  </button>
+</div>
 
-
-      <div class="collapse navbar-collapse" id="navbar4">
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto pl-lg-4">
           <!-- <li class="nav-item px-lg-2 active"> <a class="nav-link" href="#home"> <span
                 class="d-inline-block d-lg-none icon-width"><i class="fas fa-home"></i></span>Home</a> </li> -->
@@ -83,54 +98,38 @@
           <li class="nav-item px-lg-2"> <a class="nav-link" href="#about"><span
                 class="d-inline-block d-lg-none icon-width"><i class="far fa-envelope"></i></span>About</a> </li>
         </ul>
-        <ul class="navbar-nav ml-auto mt-3 mt-lg-0">
-          <li class="nav-item"> <a class="nav-link" href="#">
-              <i class="fab fa-twitter"></i><span class="d-lg-none ml-3">Twitter</span>
-            </a> </li>
-          <li class="nav-item"> <a class="nav-link" href="#">
-              <i class="fab fa-facebook"></i><span class="d-lg-none ml-3">Facebook</span>
-            </a> </li>
-          <li class="nav-item"> <a class="nav-link" href="#">
-              <i class="fab fa-instagram"></i><span class="d-lg-none ml-3">Instagram</span>
-            </a> </li>
-          <li class="nav-item"> <a class="nav-link" href="#">
-              <i class="fab fa-linkedin"></i><span class="d-lg-none ml-3">Linkedin</span>
-            </a> </li>
-        </ul>
+
       </div>
-    </div>
   </nav>
 
-  <!--section corousell-->
 
+  <!--section corousell-->
   <!--hero corousell-->
   <div id="home"></div>
-  <div class="text-center text-white">
-
     <div class="container-fluid">
       <!-- carousel start -->
       <div id="carouselExampleFade" class="carousel slide carousel-fade" data-bs-ride="carousel">
         <!-- overlay effect defined by css -->
         <div class="overlay">
-          <h1 class="display-4 mb-4 "> Three Years in One Map</h1>
-          <p class="lead mb-5">A documentation of the risk level regulation in China from 2020 to 2022. </p> <a
+          <h1 class="display-4 mb-4 ">Three Years in One Map</h1>
+          <p class="lead mb-5">A documentation of the risk level regulation in China from 2020 to 2022</p> <a
             href="#mapPos" class="btn btn-lg btn-outline-light mx-1">Show Map</a>
         </div>
         <div class="carousel-inner">
           <div class="carousel-item active">
-            <img src="images/hero1.jpg" class="d-block w-100" alt="title image">
+            <img src="images/hero1.jpg" class="carouselImage d-block w-100 " alt="title image">
           </div>
           <div class="carousel-item">
-            <img src="images/hero2.jpg" class="d-block w-100" alt="title image">
+            <img src="images/hero2.jpg" class="carouselImage d-block w-100" alt="title image">
           </div>
           <div class="carousel-item">
-            <img src="images/hero3.jpg" class="d-block w-100" alt="title image">
+            <img src="images/hero3.jpg" class="carouselImage d-block w-100" alt="title image">
           </div>
           <div class="carousel-item">
-            <img src="images/hero4.jpg" class="d-block w-100" alt="title image">
+            <img src="images/hero4.jpg" class="carouselImage d-block w-100" alt="title image">
           </div>
           <div class="carousel-item">
-            <img src="images/hero5.jpg" class="d-block w-100" alt="title image">
+            <img src="images/hero5.jpg" class="carouselImage d-block w-100" alt="title image">
           </div>
 
         </div>
@@ -146,9 +145,7 @@
       <!-- carousel end -->
 
     </div>
-
-
-
+    
     <!-- nested panel ref:  https://codepen.io/cristinaconacel/pen/OBoGZr -->
 
     <!-- section Map -->
@@ -157,20 +154,25 @@
       <div class="panel panel-transparent"></div>
 
     </div>
+
+    <!-- <div class="container" class="row">
+      <div class='col-sm-8 ' style="height：50px;background-color:red">Box</div>
+      <div class='col-sm-4 ' style="height：50px;background-color:blue">Box</div>
+    </div> -->
     <!-- map container -->
     <div class="container mt-4">
       <div class="row">
-        <div class="col-sm-8">
+        <div class="col-lg-8">
           <div class="panel panel-blue">
             <!-- <h1>map</h1> -->
             <div class="container">
               <div id="map"></div>
             </div>
-
           </div>
         </div>
 
-        <div class="col-sm-4">
+        <!-- control panels on the right -->
+        <div class="col-lg-4">
           <div class="panel panel-blue" id="sliderPanel">
 
             <!-- start of date slider -->
@@ -197,10 +199,9 @@
           <script src="slider.js"></script>
           <script src="animate.js"></script>
 
-
+            <!-- start of date picker -->
           <div class="panel panel-blue" id="calenderPanel">
             <!-- <h5>Please select a date:</h5> -->
-            <!-- start of date picker -->
             <!-- ref: https://mymth.github.io/vanillajs-datepicker/#/ -->
 
             <!-- Vanilla Datepicker JS -->
@@ -214,7 +215,7 @@
             <div class="container center mt-3" style="width: 100%">
               <div class="input-group ">
                 <i id="dateSelected" class="bi bi-calendar-date input-group-text"></i>
-                <input type="text" class="datepicker_input form-control" placeholder="or by calender..." required />
+                <input type="text" class="datepicker_input form-control" placeholder="or by calendar..." required />
 
               </div>
               <span id="dateFeedback" style="font-weight:bold;color:red"></span>
@@ -229,7 +230,7 @@
               </div>
             </div>
           </div>
-
+            <!-- start of events panel -->
           <div class="panel panel-blue" id="eventsPanel">
             <div class = "mt-2">
               <h5><b>Key Events</b></h5>
@@ -241,7 +242,7 @@
             </div>
             </div>
           </div>
-
+            <!-- start of data source panel -->
           <div class="panel panel-blue"  id="sourcePanel">
             <div>
               <p class="text-end">
@@ -256,10 +257,10 @@
               </p>
             </div>
           </div>
-          <!-- </div> -->
+
 
         </div>
-        <!-- end of date picker -->
+        <!-- control panels end -->
 
         <!-- map related scripts -->
         <div>
@@ -293,12 +294,14 @@
           <!-- <script src="webgl-heatmap.js"></script>
           <script src="leaflet-webgl-heatmap.min.js"></script> -->
           <script src="ActiveLayers.js"></script>
+          <!-- leaflet full screen plugin https://github.com/brunob/leaflet.fullscreen -->
+          <script src="Control.FullScreen.js"></script>
           <script src="map.js"></script>
 
           <!-- end of map scripts -->
         </div>
 
-        <!-- section chart , disabled   -->
+        <!-- section chart  -->
         <div class="container mt-4" id="statistics">
           <div class="panel panel-transparent"></div>
         </div>
@@ -306,18 +309,21 @@
         <div class="panel panel-blue">
           <h1>Statistics</h1>
           <div id="wrapper">
-            <div id="chart-bar">
-            </div>
-            <div id="chart-province">
-            </div>
-            <div id="chart-cases">
+            <!-- synced charts ref: https://apexcharts.com/docs/chart-types/synchronized-charts/ -->
+            <div id="synced-charts">
+              <div id="chart-bar">
+              </div>
+              <div id="chart-province">
+              </div>
+              <div id="chart-cases">
+              </div>
             </div>
           </div>
 
           <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
           <script src="charts.js"></script>
         </div>
-      </div>
+      
 
         <div class="container mt-4" id="info">
           <div class="panel panel-transparent"></div>
@@ -1184,15 +1190,14 @@
           <!-- end of timeline -->
 
         </div>
-      </div>
+        </div>
 
       <!-- section About  -->
-      <div class="container mt-4">
-        <div class="panel panel-transparent">
+      <div class="container mt-4" id = "about">
+        <div class="panel panel-transparent text-center">
           <p>All contents are created only for academic use.</p>
         </div>
       </div>
-
 
       <!-- section Footer-->
       <footer class="bg-light py-5">

@@ -74,7 +74,7 @@ function dayToDate(offset) {
 
 
 async function pushEventsToHTML(date) {
-  console.log("pushEvents",date);
+  // console.log("pushEvents",date);
   try {
     const response = await axios.get('eventsData/events.json');
     // console.log("response.data",response.data);
