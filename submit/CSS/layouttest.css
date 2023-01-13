@@ -1,0 +1,126 @@
+/* body {
+    margin: 4rem 0;
+}
+h4 {
+    margin-bottom: 2rem;
+    margin-top: 3rem;
+} */
+
+/* panel for layout test, can delete later */
+.panel {
+  border-radius: 0.3rem;
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+.panel.panel-blue {
+  /* border: 1px solid #0087ff; */
+  background-color: #ffffff;
+  color: #000000;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+}
+.panel.panel-yellow {
+  border: 1px solid #ffbd00;
+  background-color: #fef0b2;
+  color: #ffbd00;
+}
+.panel.panel-pink {
+  border: 1px solid #f84f7f;
+  background-color: #fad2e1;
+  color: #f84f7f;
+}
+.panel.panel-purple {
+  border: 1px solid #7f51f4;
+  background-color: #dfccff;
+  color: #7f51f4;
+}
+
+.panel.panel-transparent {
+  /* border: 1px solid #7f51f4;
+  background-color: #dfccff; */
+  color: #000000;
+}
+
+/* specify the panels heights */
+/* select by id */
+
+#sliderPanel {
+  height: 200px;
+}
+#calenderPanel {
+  height: 150px;
+}
+#eventsPanel {
+  height: 300px;
+}
+#sourcePanel {
+  height: 180px;
+}
+
+/* header */
+.dropdown-toggle::after {
+  display: none;
+}
+.text-decoration-none {
+  text-decoration: none !important;
+}
+
+/* Font Awesome Icons have variable width. Added fixed width to fix that.*/
+.icon-width {
+  width: 2rem;
+}
+
+/* navbar */
+.navbar-icon {
+  margin: 0 15px;
+  width: 40px;
+  height: 40px;
+}
+
+/* image fit : https://www.w3schools.com/css/css3_object-fit.asp */
+/* for desktop */
+@media only screen and (min-width: 768px) {
+  .carouselImage {
+    height: 100vh;
+    /* width: 500px; */
+    object-fit: cover;
+  }
+}
+
+/* for mobile */
+@media only screen and (max-width: 768px) {
+  .carouselImage {
+    height: 100vh;
+    /* width: 500px; */
+    object-fit: cover;
+  }
+}
+
+.dropdown-toggle::after {
+  display: none;
+}
+.text-decoration-none {
+  text-decoration: none !important;
+}
+
+/* Font Awesome Icons have variable width. Added fixed width to fix that.*/
+.icon-width {
+  width: 2rem;
+}
+
+/* overlay text */
+.overlay {
+  color: #fff;
+  position: absolute;
+  z-index: 12;
+  top: 60%;
+  left: 0;
+  width: 100%;
+  text-align: center;
+}
+
+/* header background */
+.header-background {
+  /* background-color:rgb(255, 223, 223) */
+  /* gradient */
+  background: linear-gradient(#ffe3e5, #ffffff);
+}
