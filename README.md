@@ -244,40 +244,11 @@ Lastly, users may scroll down to trace the key events happened in the 3-year pro
 ### TEST CASES
 | Test Case # | Test Case Description | Test Steps | Expected Result |
 | --- | --- | --- | --- |
-|  | Prerequisite: The user is at the top of the page |  |  |
-| 1 | Navbar session | 1) Click each session title
-2) Mouse click dropdown menu
-3) Shrink the screen size | 1) the page changed to the expected position
-2) dropdown menu appears
-the title texts should 
-3) disappear when the screen is below a certain width |
-| 2 | Header session | 1) Click the left and right button
-2) Click the Show Map button
-3) change the screen size | 1) The images changes and has fade effect
-2) the page should be at map session
-3) the height of the carousel image should fill the whole screen height |
-| 3 | Map session | 1) switch on and off different layers
-2) click the provinces, and markers
-3) click the +/-/full screen button
-4) move the handle of the slider
-5) click Start Animation button
-6) click Pause button
-7) select a date by calendar and click Update button
-8) make the display smaller | 1) the contents of the map should change accordingly, and when switching between mapping layer, a corresponding legend should appear
-2) a popup marker should be displayed
-3) zoom in and out and fullscreen
-4) the date changes and the map and the events should update accordingly
-5) the date should change automatically
-6) the date stops changing
-7) the map and the slider dates should both updated, as well as the events panel
-8) the slider should be moved to the bottom of the map when the screen width is small |
-| 4 | Chart session | 1) scroll down the page
-2) change the brush region
-3) hang mouse over
-4) switch on and off labels | 1) the chart should be loaded only when scrolled down below map session
-2) the two charts below should be updated accordingly by the updated range of x-axis
-3) a pop-up info panel should display
-4) the data should show or hide |
+| 0 | Prerequisite: The user is at the top of the page | NA | NA |
+| 1 | Navbar session | 1) Click each session title 2) Mouse click dropdown menu 3) Shrink the screen size | 1) the page changed to the expected position 2) dropdown menu appears 3) disappear when the screen is below a certain width |
+| 2 | Header session | 1) Click the left and right button 2) Click the Show Map button 3) change the screen size | 1) The images changes and has fade effect 2) the page should be at map session 3) the height of the carousel image should fill the whole screen height |
+| 3 | Map session | 1) switch on and off different layers 2) click the provinces, and markers 3) click the +/-/full screen button 4) move the handle of the slider 5) click Start Animation button 6) click Pause button 7) select a date by calendar and click Update button 8) make the display smaller | 1) the contents of the map should change accordingly, and when switching between mapping layer, a corresponding legend should appear 2) a popup marker should be displayed 3) zoom in and out and fullscreen 4) the date changes and the map and the events should update accordingly 5) the date should change automatically 6) the date stops changing 7) the map and the slider dates should both updated, as well as the events panel 8) the slider should be moved to the bottom of the map when the screen width is small |
+| 4 | Chart session | 1) scroll down the page 2) change the brush region 3) hang mouse over 4) switch on and off labels | 1) the chart should be loaded only when scrolled down below map session 2) the two charts below should be updated accordingly by the updated range of x-axis 3) a pop-up info panel should display 4) the data should show or hide |
 | 5 | Info session | 1) change the screen size | 1) the layout should change when the screen becomes larger or smaller |
 | 6 | Timeline session | 1) change the screen size | 1) the layout should change when the screen becomes larger or smaller |
 |  |  |  |  |
