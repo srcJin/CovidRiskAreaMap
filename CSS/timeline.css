@@ -100,7 +100,7 @@ h1, h2, h3, h4, h5, h6,p {
 } */
 
 /* modified from 1600 to 2000 for bug fixing */
-@media screen and (max-width: 2000px){
+@media screen and (max-width: 5000px){
 
 .timeline-row:first-child .timeline-box:first-child {width: 38%;}
 .timeline-box {max-width: 380px;}

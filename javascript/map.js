@@ -151,7 +151,7 @@ async function plotRiskPoints(date) {
       // icon ref: https://stackoverflow.com/questions/24258914/leaflet-clustermarker-with-custom-icon
       // https://leafletjs.com/examples/custom-icons/
       {
-        maxClusterRadius: 5,
+        maxClusterRadius: 25,
         disableClusteringAtZoom: 10,
         showCoverageOnHover: true,
         zoomToBoundsOnClick: true,
@@ -179,7 +179,7 @@ async function plotRiskPoints(date) {
       // icon ref: https://stackoverflow.com/questions/24258914/leaflet-clustermarker-with-custom-icon
       // https://leafletjs.com/examples/custom-icons/
       {
-        maxClusterRadius: 5,
+        maxClusterRadius: 25,
         disableClusteringAtZoom: 10,
         showCoverageOnHover: true,
         zoomToBoundsOnClick: true,
