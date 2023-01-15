@@ -1,1 +1,1 @@
-{"type":"FeatureCollection","features":[{"type":"Feature","geometry":{"type":"Point","coordinates":[122.955128,39.683003]},"properties":{"province":"辽宁省","city":"大连市","county":"庄河市","community":"新华街道小寺社区","full_address":"辽宁省大连市庄河市新华街道小寺社区","info":""}}]}
+{"type":"FeatureCollection","features":[{"type":"Feature","geometry":{"type":"Point","coordinates":[122.955128,39.683003]},"properties":{"full_address":"辽宁省大连市庄河市新华街道小寺社区"}}]}

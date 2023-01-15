@@ -1,1 +1,1 @@
-{"type":"FeatureCollection","features":[{"type":"Feature","geometry":{"type":"Point","coordinates":[116.380637,40.173894]},"properties":{"province":"北京市","city":"昌平区","county":"小汤山镇","community":"大汤山村双兴苑小区","full_address":"北京市昌平区小汤山镇大汤山村双兴苑小区","info":""}}]}
+{"type":"FeatureCollection","features":[{"type":"Feature","geometry":{"type":"Point","coordinates":[116.380637,40.173894]},"properties":{"full_address":"北京市昌平区小汤山镇大汤山村双兴苑小区"}}]}

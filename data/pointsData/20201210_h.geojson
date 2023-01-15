@@ -1,1 +1,1 @@
-{"type":"FeatureCollection","features":[{"type":"Feature","geometry":{"type":"Point","coordinates":[117.477144,49.588341]},"properties":{"province":"内蒙古自治区","city":"呼伦贝尔市","county":"满洲里市","community":"东山街道","full_address":"内蒙古自治区呼伦贝尔市满洲里市东山街道","info":""}}]}
+{"type":"FeatureCollection","features":[{"type":"Feature","geometry":{"type":"Point","coordinates":[117.477144,49.588341]},"properties":{"full_address":"内蒙古自治区呼伦贝尔市满洲里市东山街道"}}]}

@@ -1,1 +1,1 @@
-{"type":"FeatureCollection","features":[{"type":"Feature","geometry":{"type":"Point","coordinates":[116.085285,39.721999]},"properties":{"province":"北京市","city":"房山区","county":"阎村镇","community":"北京理工大学房山分校","full_address":"北京市房山区阎村镇北京理工大学房山分校","info":""}}]}
+{"type":"FeatureCollection","features":[{"type":"Feature","geometry":{"type":"Point","coordinates":[116.085285,39.721999]},"properties":{"full_address":"北京市房山区阎村镇北京理工大学房山分校"}}]}
