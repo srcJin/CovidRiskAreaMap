@@ -26,7 +26,7 @@ function startAnimation() {
     if (i > 892) {
       clearInterval(interval);
     }
-  }, 100);}
+  }, 2000);}
 
 function pauseAnimation() {
   clearInterval(interval)

@@ -120,9 +120,9 @@ async function plotRiskPoints(date) {
   // Define the custom marker icon
   var iconHigh = L.icon({
     iconUrl: "./images/high.png",
-    iconSize: [24, 24],
-    iconAnchor: [16, 16],
-    popupAnchor: [0, -16],
+    iconSize: [10, 10],
+    iconAnchor: [10, 10],
+    popupAnchor: [0, -10],
     // shadowUrl: "my-icon-shadow.png",
     // shadowSize: [32, 32],
     // shadowAnchor: [16, 16],
@@ -130,9 +130,9 @@ async function plotRiskPoints(date) {
 
   var iconMiddle = L.icon({
     iconUrl: "./images/middle.png",
-    iconSize: [18, 18],
-    iconAnchor: [12, 12],
-    popupAnchor: [0, -12],
+    iconSize: [10, 10],
+    iconAnchor: [10, 10],
+    popupAnchor: [0, -10],
     // shadowUrl: "my-icon-shadow.png",
     // shadowSize: [32, 32],
     // shadowAnchor: [16, 16],
@@ -168,7 +168,7 @@ async function plotRiskPoints(date) {
           return L.divIcon({
             html: html,
             className: "highRisk",
-            iconSize: [32, 32],
+            iconSize: [16, 16],
           });
         },
       }
@@ -196,7 +196,7 @@ async function plotRiskPoints(date) {
           return L.divIcon({
             html: html,
             className: "middleRisk",
-            iconSize: [24, 24],
+            iconSize: [16, 16],
           });
         },
       }
@@ -316,8 +316,8 @@ async function plotRiskPoints(date) {
       } // end onEachFeature
     ).addTo(markerClusterLayerMiddle); // end L.geoJson
 
-    map.addLayer(markerClusterLayerHigh);
     map.addLayer(markerClusterLayerMiddle);
+    map.addLayer(markerClusterLayerHigh);
 
     // map.addLayer(markerClusterLayerHigh);
     // map.addLayer(markerClusterLayerMiddle);
@@ -389,10 +389,10 @@ async function plotCase(date) {
       style: function (feature) {
         return {
           weight: 1,
-          opacity: 1,
+          opacity: 0.5,
           color: "white",
           // dashArray: '3',
-          fillOpacity: 1,
+          fillOpacity: 0.5,
           fillColor: getColor(
             feature.properties.high + feature.properties.middle,
             "riskArea"
@@ -480,10 +480,10 @@ async function plotCase(date) {
       style: function (feature) {
         return {
           weight: 1,
-          opacity: 1,
+          opacity: 0.5,
           color: "white",
           // dashArray: '3',
-          fillOpacity: 1,
+          fillOpacity: 0.5,
           fillColor: getColor(
             feature.properties.high + feature.properties.middle,
             "riskArea"
@@ -609,7 +609,7 @@ async function plotCase(date) {
                   ? "#FEB24C"
                   : d > 5
                     ? "#FED976"
-                    : "#FFEDA0";
+                    : "#FFFFFF";
     }
     if (type == "confirmed") {
       return d > 1000

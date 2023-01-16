@@ -20,15 +20,16 @@
 } */
 
 .iconHighRisk {
-    width: 32px;
-    height: 32px;
-    line-height: 32px;
+    width: 24px;
+    height: 24px;
+    line-height: 24px;
     border-radius: 50%;
     /* background-image: url('markericon.png'); */
-    background-color: rgb(255, 185, 185);
+    background-color: rgb(241, 76, 76);
     border: 0px solid rgb(145, 0, 0);
     text-align: center;
-    box-shadow: 0 0 10px rgba(145, 0, 0, 0.2);
+    /* box-shadow: 0 0 10px rgba(145, 0, 0, 0.2); */
+    color: white;
 }
 
 .iconMiddleRisk {
@@ -37,11 +38,11 @@
     line-height: 24px;
     border-radius: 50%;
     /* background-image: url('markericon.png'); */
-    background-color: rgb(245, 234, 178);
+    background-color: rgb(248, 207, 120);
     border: 0px solid rgb(145, 128, 0);
     text-align: center;
-    box-shadow: 0 0 10px rgba(92, 77, 0, 0.25);
-
+    /* box-shadow: 0 0 10px rgba(92, 77, 0, 0.25); */
+    color: white;
 }
 
 
